@@ -1,9 +1,9 @@
-enum Direction {
-  Up,
-  Down,
-  Left,
-  Right,
-}
+// enum Direction {
+//   Up,
+//   Down,
+//   Left,
+//   Right,
+// }
 
 function move(direction: Direction): void {
   switch (direction) {
