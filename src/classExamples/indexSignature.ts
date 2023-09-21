@@ -1,16 +1,50 @@
-// ---- Index Signatures ----
-class MyClass {
-  [s: string]: boolean | ((s: string) => boolean);
-
-  check(s: string) {
-    return this[s] as boolean;
-  }
+interface Goods {
+  milk: number;
+  coca: number;
 }
 
-const instance = new MyClass();
-instance["property1"] = true;
-instance["property2"] = (s: string) => s.length > 5;
+const todayCart: Goods = {
+  milk: 10,
+  coca: 5,
+};
 
-console.log(instance.check("property1")); // Result: true
-console.log(instance.check("property2")); // Result: true or false depending on the length of the input string
-console.log(instance.check("property3")); // Result: undefined, because this property is not defined
+console.log(todayCart["milk"]);
+
+let prop: string = "milk";
+
+// ERROR
+// Case 1: No index signature with a parameter of type
+console.log(todayCart[prop]);
+
+// Case 2: used in a loop
+const sumCart = (todayCart: Goods): number => {
+  let total = 0;
+  for (const item in todayCart) {
+    // ERROR: No index signature with a parameter of type
+    total += todayCart[item];
+  }
+  return total;
+};
+
+// Use index signature
+
+interface GoodsSecond {
+  [index: string]: number;
+}
+
+const carts: GoodsSecond = {
+  milk: 10,
+  coca: 5,
+};
+
+let prop2: string = "milk";
+
+console.log(carts[prop2]);
+
+const sumCarts = (carts: GoodsSecond): number => {
+  let total = 0;
+  for (const item in carts) {
+    total += carts[item];
+  }
+  return total;
+};
