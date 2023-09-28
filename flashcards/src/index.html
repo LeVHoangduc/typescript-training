@@ -1,1 +1,61 @@
-<!-- TODO: implement main page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Flashcards</title>
+  </head>
+  <body>
+    <main class="main-content">
+      <form class="login-form" novalidate>
+        <div class="login-form__wrapper">
+          <div class="login-form__header">
+            <p class="text text--dark text--extrabold text--center">Welcome Back!</p>
+          </div>
+        </div>
+        <div class="login-form__body">
+          <div class="login-form__inputs">
+            <label for="email" class="text text--input">Username:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="text text--input login-form__input border-primary"
+            />
+            <p>error</p>
+          </div>
+          <div class="login-form__inputs">
+            <label for="password" class="text text--input">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="text text--input login-form__input border-primary"
+            />
+            <p>error</p>
+          </div>
+          <button type="submit" class="text btn btn--submit login-form__button">
+            Login
+          </button>
+        </div>
+        <div class="login-form__footer">
+          <p class="text text--input login-form__forget">
+            Dont have and account?
+            <span class="text text--dark text--extrabold">Register</span>
+          </p>
+          <div class="socials">
+            <img src="assets/icons/facebook.svg" alt="facebook" />
+            <img src="assets/icons/whatsapp.svg" alt="whatsapp" />
+            <img src="assets/icons/telegram.svg" alt="telegram" />
+          </div>
+        </div>
+      </form>
+
+      <div class="login-image">
+        <img src="assets/images/login.png" alt="login-image" />
+      </div>
+    </main>
+  </body>
+</html>
