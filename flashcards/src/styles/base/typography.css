@@ -1,0 +1,108 @@
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: var(--fw-extrabold);
+  font-family: "Inter";
+}
+
+.text {
+  font-size: 16px;
+  font-weight: var(--fw-normal);
+  font-family: "Inter";
+  color: var(--primary-color);
+}
+
+.text-title {
+  font-size: 44px;
+  font-weight: var(--fw-extrabold);
+}
+
+.text-description {
+  font-size: 96px;
+  font-weight: var(--fw-extrabold);
+}
+
+.text--light {
+  color: var(--light-color);
+}
+
+.text--dark {
+  color: var(--title-color);
+}
+
+.text--input {
+  font-weight: var(--fw-light);
+  color: var(--dark-color);
+}
+
+.text--sm {
+  font-size: 20px;
+  font-weight: var(--fw-extrabold);
+}
+
+.text--md {
+  font-size: 22px;
+  font-weight: var(--fw-semibold);
+}
+
+.text--lg {
+  font-size: 24px;
+  font-weight: var(--fw-semibold);
+}
+
+.text--xl {
+  font-size: 26px;
+  font-weight: var(--fw-normal);
+}
+
+.text--xxl {
+  font-size: 32px;
+  font-weight: var(--fw-extrabold);
+}
+
+.text--semibold {
+  font-weight: var(--fw-semibold);
+}
+
+.text--extrabold {
+  font-weight: var(--fw-extrabold);
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--uppercase {
+  text-transform: uppercase;
+}
+
+.text--capitalize {
+  text-transform: capitalize;
+}
+
+.text--shadow {
+  text-shadow: 0px 4px 4px var(--shadow-color);
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../../assets/fonts/Inter-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../assets/fonts/Inter-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../../assets/fonts/Inter-Light.ttf") format("truetype");
+}
