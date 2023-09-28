@@ -69,4 +69,4 @@ List of features need to work on:
 
 ## Reference
 
-- Pattern structure [here](https://gist.github.com/rveitch/84cea9650092119527bc)
+- Pattern structure applies to styles folder [here](https://gist.github.com/rveitch/84cea9650092119527bc)
