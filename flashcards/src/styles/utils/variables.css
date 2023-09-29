@@ -1,0 +1,25 @@
+:root {
+  /* Font               */
+  --primary-font: "Inter";
+  /* End font           */
+
+  /* Sizing             */
+  --fw-extrabold: 700;
+  --fw-semibold: 600;
+  --fw-normal: 500;
+  --fw-light: 400;
+  /* End sizing         */
+
+  /* Color              */
+  --primary-color: #3b82f6;
+  --secondary-color: #60a5fa;
+  --error-color: #ff0000;
+  --success-color: #0c7040;
+  --light-color: #f8fafc;
+  --dark-color: #000000;
+  --title-color: #1a1a1a;
+  --overlay-color: #00000096;
+  --shadow-color: #00000040;
+  --background-color: #afb3ff;
+  /* End color          */
+}
