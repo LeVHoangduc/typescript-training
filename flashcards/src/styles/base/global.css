@@ -1,0 +1,21 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.border-primary {
+  border: 1px solid var(--primary-color);
+}
+
+.border-avatar {
+  border: 4px solid #ffffff70;
+}
