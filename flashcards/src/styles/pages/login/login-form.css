@@ -26,11 +26,6 @@
   outline: none;
 }
 
-.login-form__input + p {
-  padding-top: 10px;
-  visibility: hidden;
-}
-
 .login-form__button {
   width: 100%;
   margin-top: 22px;
@@ -42,6 +37,11 @@
   flex-direction: column;
   align-items: center;
   padding-top: 54px;
+}
+
+.error-message {
+  padding-top: 10px;
+  visibility: hidden;
 }
 
 .socials {
