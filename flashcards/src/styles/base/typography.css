@@ -40,12 +40,12 @@ h1 {
 
 .text--sm {
   font-size: 20px;
-  font-weight: var(--fw-extrabold);
+  font-weight: var(--fw-normal);
 }
 
 .text--md {
   font-size: 22px;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-normal);
 }
 
 .text--lg {
