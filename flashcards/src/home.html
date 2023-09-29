@@ -4,48 +4,88 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/images/logo.png" type="image/png" />
     <link rel="stylesheet" href="styles/main.css" />
     <title>Flashcards</title>
   </head>
   <body>
-    <section class="flashcards">
-      <h2 class="text text--lg">Flashcards</h2>
-      <div class="flashcards__wrapper">
-        <div class="flashcards__header">
-          <p class="text text--md text--light flashcards__option">My flashcards</p>
-          <p class="text text--md text--light flashcards__option flashcards__add">Add flashcards</p>
+    <header class="main-header">
+        <div class="header__content container">
+          <h1 class="text text--xxl text--light text--shadow">Flashcards.com</h1>
+          <div class="header__information">
+            <div class="header__search">
+              <img src="assets/icons/search.svg" alt="search" class="header__search__icon" />
+              <input
+                type="text"
+                placeholder="search"
+                class="text text--xl text--capitalize header__search__input"
+              />
+            </div>
+            <div class="border-avatar header__user">
+              <img src="assets/images/user.png" alt="user" class="header__user__avatar" />
+            </div>
+          </div>
         </div>
-        <ul class="flashcards__list">
-          <!-- TODO: this section will be render by template -->
-          <li class="flashcards__item">
-            <img src="assets/images/flashcards.png" alt="flashcards" />
-            <p class="text text--sm text--light text--center flashcards__name">English</p>
-          </li>
-          <li class="flashcards__item">
-            <img src="assets/images/flashcards.png" alt="flashcards" />
-            <p class="text text--sm text--light text--center flashcards__name">English</p>
-          </li>
-          <li class="flashcards__item">
-            <img src="assets/images/flashcards.png" alt="flashcards" />
-            <p class="text text--sm text--light text--center flashcards__name">English</p>
-          </li>
-          <li class="flashcards__item">
-            <img src="assets/images/flashcards.png" alt="flashcards" />
-            <p class="text text--sm text--light text--center flashcards__name">English</p>
-          </li>
-        </ul>
+      </header>
+  
+      <main class="container">
+        <section class="profile">
+          <h2 class="text text--lg">My Profile</h2>
+          <div class="profile__content">
+            <div class="profile__upload">
+              <!-- <img src="" alt="" /> -->
+            </div>
+            <div class="border-avatar profile__avatar">
+              <img src="assets/images/user.png" alt="user" />
+            </div>
+            <div class="profile__information">
+              <p class="text text--xxl text--light profile__name">John Doe</p>
+              <button type="button" class="btn text profile__button">Create Flashcard</button>
+            </div>
+          </div>
+        </section>
+  
+        <section class="flashcards">
+          <h2 class="text text--lg">Flashcards</h2>
+          <div class="flashcards__wrapper">
+            <div class="flashcards__header">
+              <p class="text text--md text--light flashcards__option">My flashcards</p>
+              <p class="text text--md text--light flashcards__option flashcards__add">
+                Add flashcards
+              </p>
+            </div>
+            <ul class="flashcards__list">
+              <li class="flashcards__item">
+                <img src="assets/images/flashcards.png" alt="flashcards" />
+                <p class="text text--sm text--light text--center flashcards__name">English</p>
+              </li>
+              <li class="flashcards__item">
+                <img src="assets/images/flashcards.png" alt="flashcards" />
+                <p class="text text--sm text--light text--center flashcards__name">English</p>
+              </li>
+              <li class="flashcards__item">
+                <img src="assets/images/flashcards.png" alt="flashcards" />
+                <p class="text text--sm text--light text--center flashcards__name">English</p>
+              </li>
+              <li class="flashcards__item">
+                <img src="assets/images/flashcards.png" alt="flashcards" />
+                <p class="text text--sm text--light text--center flashcards__name">English</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+  
+      <div class="modal-detail">
+        <p class="text text--light text--description modal-detail__content">mugger</p>
+  
+        <div class="modal-detail__buttons">
+          <button type="button" class="btn btn--action modal-detail__button__edit">Edit</button>
+          <button type="button" class="btn btn--action modal-detail__button__delete">Delete</button>
+        </div>
       </div>
-    </section>
-
-    <div class="modal-detail">
-      <p class="text text--light text--description modal-detail__content">mugger</p>
-      <div class="modal-detail__buttons">
-        <button type="button" class="btn btn--action modal-detail__button__edit">Edit</button>
-        <button type="button" class="btn btn--action modal-detail__button__delete">Delete</button>
-      </div>
-    </div>
-
-    <form class="modal-card">
+  
+      <form class="modal-card">
         <p class="text text--title modal-card__title">Create your card</p>
         <div class="row modal-card__content">
           <div class="col-6 modal-card__inputs">
