@@ -44,5 +44,52 @@
         <button type="button" class="btn btn--action modal-detail__button__delete">Delete</button>
       </div>
     </div>
+
+    <form class="modal-card">
+        <p class="text text--title modal-card__title">Create your card</p>
+        <div class="row modal-card__content">
+          <div class="col-6 modal-card__inputs">
+            <label for="language" class="text text--extrabold">Select language*</label>
+            <select name="language" id="language" class="text text--capitalize input-wrapper modal-card__select">
+              <!-- TODO: render selection-->
+            </select>
+          </div>
+          <div class="col-6 modal-card__inputs">
+            <label for="type" class="text text--extrabold">Type*</label>
+            <select name="type" id="type" class="text input-wrapper modal-card__select">
+              <option value="noun" selected class="text text--capitalize">Noun</option>
+              <option value="verb" class="text text--capitalize">Verb</option>
+              <option value="adjective" class="text text--capitalize">Adjective</option>
+              <option value="adverb" class="text text--capitalize">Adverb</option>
+            </select>
+          </div>
+          <div class="col-6 modal-card__inputs">
+            <label for="word" class="text text--extrabold">Word*</label>
+            <span class="input-wrapper">
+              <input type="text" name="word" id="word" placeholder="Word" class="text modal-card__input" />
+            </span>
+            <p class="text text--sm error-message">error</p>
+          </div>
+          <div class="col-6 modal-card__inputs">
+            <label for="translation" class="text text--extrabold">Translation*</label>
+           <span class="input-wrapper">
+            <input type="text" name="translation" id="translation" placeholder="Translation" class="text modal-card__input" />
+           </span>
+            <p class="text text--sm error-message">error</p>
+          </div>
+          <div class="col-12 modal-card__inputs">
+            <label for="description" class="text text--extrabold">Description*</label>
+           <span class="input-wrapper">
+            <input type="text" id="description" name="description" placeholder="Description" class="text modal-card__input"></input>
+           </span>
+            <p class="text text--sm error-message">error</p>
+          </div>
+        </div>
+        <div class="modal-card__footer">
+          <button type="submit" name="btnSave" class="btn btn--submit modal-card__create">
+            Create
+          </button>
+        </div>
+      </form>
   </body>
 </html>
