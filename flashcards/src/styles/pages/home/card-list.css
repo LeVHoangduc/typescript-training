@@ -1,0 +1,38 @@
+.card-list {
+  width: 100%;
+  margin-top: 20px;
+  padding: 25px;
+  border-radius: 16px;
+  background-color: var(--primary-color);
+}
+
+.card-list__title {
+  padding-bottom: 20px;
+}
+
+.card-list__table {
+  width: 100%;
+}
+
+.card-list__header {
+  padding: 10px;
+  background-color: var(--light-color);
+  border-radius: 5px;
+}
+
+.card-list__content {
+  padding: 15px 10px;
+  border-bottom: 1px solid var(--light-color);
+  cursor: pointer;
+}
+
+.card-list__content:hover {
+  opacity: 0.8;
+}
+
+.card-list__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}

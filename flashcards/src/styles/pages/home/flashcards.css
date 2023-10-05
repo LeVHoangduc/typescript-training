@@ -3,9 +3,10 @@
 }
 
 .flashcards__wrapper {
-  height: 445px;
+  position: relative;
+  height: 440px;
   margin-top: 38px;
-  padding: 27px 35px;
+  padding: 27px 35px 0 35px;
   border-radius: 16px;
   background-color: var(--primary-color);
 }
@@ -22,6 +23,26 @@
   cursor: pointer;
 }
 
+.flashcards__item {
+  position: relative;
+  cursor: pointer;
+}
+
+.flashcards__item:hover {
+  opacity: 0.8;
+}
+
+.flashcards__item:hover .flashcards__delete {
+  visibility: visible;
+}
+
+.flashcards__delete {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  visibility: hidden;
+}
+
 .flashcards__option:hover {
   color: var(--primary-color);
   background-color: var(--light-color);
@@ -30,10 +51,38 @@
 .flashcards__list {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
   padding-top: 50px;
+  overflow: hidden;
 }
 
 .flashcards__name {
   padding-top: 15px;
+}
+
+.slide-buttons {
+  position: absolute;
+  top: 90%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.slide-buttons:hover {
+  opacity: 0.8;
+}
+
+#prev-slide {
+  left: 43%;
+}
+
+#next-slide {
+  right: 43%;
+}
+
+.slide-buttons.inactive {
+  opacity: 0.6;
+}
+
+.slide-buttons.inactive:hover,
+.slide-buttons.inactive:hover {
+  cursor: not-allowed;
 }

@@ -1,6 +1,6 @@
 :root {
   /* Font               */
-  --primary-font: "Inter";
+  --primary-font: 'Inter';
   /* End font           */
 
   /* Sizing             */
@@ -20,6 +20,6 @@
   --title-color: #1a1a1a;
   --overlay-color: #00000096;
   --shadow-color: #00000040;
-  --background-color: #afb3ff;
+  --background-color: #007ec730;
   /* End color          */
 }

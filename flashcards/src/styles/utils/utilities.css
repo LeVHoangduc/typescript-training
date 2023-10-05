@@ -1,0 +1,7 @@
+.border-primary {
+  border: 1px solid var(--primary-color);
+}
+
+.border-avatar {
+  border: 4px solid #ffffff70;
+}
