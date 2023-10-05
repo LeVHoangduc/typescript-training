@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="assets/images/logo.png" type="image/png" />
     <link rel="stylesheet" href="styles/main.css" />
     <title>Flashcards</title>
   </head>
@@ -54,8 +53,10 @@
               Add flashcards
             </p>
           </div>
+          <img src="assets/icons/left.svg" alt="left" id="prev-slide" class="slide-buttons" />
           <ul class="flashcards__list">
             <li class="flashcards__item">
+              <img src="assets/icons/remove.svg" alt="remove" class="flashcards__delete" />
               <img src="assets/images/flashcards.png" alt="flashcards" />
               <p class="text text--sm text--light text--center flashcards__name">English</p>
             </li>
@@ -72,7 +73,42 @@
               <p class="text text--sm text--light text--center flashcards__name">English</p>
             </li>
           </ul>
+          <img src="assets/icons/right.svg" alt="right" id="next-slide" class="slide-buttons" />
         </div>
+      </section>
+
+      <section class="card-list">
+        <p class="text text--lg text--light card-list__title">English Flashcards</p>
+        <table class="card-list__table">
+          <thead>
+            <tr class="row card-list__header">
+              <th class="text text--semibold col-3">Word</th>
+              <th class="text text--semibold col-3">Type</th>
+              <th class="text text--semibold col-3">Translation</th>
+              <th class="text text--semibold col-3">Action</th>
+            </tr>
+          </thead>
+          <tbody class="card-list__body">
+            <tr class="row card-list__content">
+              <td class="text text--light text--center col-3">Hello</td>
+              <td class="text text--light text--center col-3">Noun</td>
+              <td class="text text--light text--center col-3">Xin Chào</td>
+              <td class="text text--light col-3 card-list__buttons">
+                <img src="assets/icons/edit.svg" alt="edit" />
+                <img src="assets/icons/delete.svg" alt="delete" />
+              </td>
+            </tr>
+            <tr class="row card-list__content">
+              <td class="text text--light text--center col-3">Hello</td>
+              <td class="text text--light text--center col-3">Noun</td>
+              <td class="text text--light text--center col-3">Xin Chào</td>
+              <td class="text text--light col-3 card-list__buttons">
+                <img src="assets/icons/edit.svg" alt="edit" />
+                <img src="assets/icons/delete.svg" alt="delete" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </main>
 
@@ -85,6 +121,106 @@
       </div>
     </div>
 
-    <script type="module" src="./javascripts/main.js"></script>
+    <!-- modal add card -->
+    <form class="modal-card">
+      <p class="text text--title modal-card__title">Create your card</p>
+      <div class="row modal-card__content">
+        <div class="col-6 modal-card__inputs">
+          <label for="language" class="text text--extrabold">Select language*</label>
+          <select
+            name="language"
+            id="language"
+            class="text text--capitalize input-wrapper modal-card__select"
+          >
+            <!-- TODO: render selection-->
+          </select>
+        </div>
+        <div class="col-6 modal-card__inputs">
+          <label for="type" class="text text--extrabold">Type*</label>
+          <select name="type" id="type" class="text input-wrapper modal-card__select">
+            <option value="noun" selected class="text text--capitalize">Noun</option>
+            <option value="verb" class="text text--capitalize">Verb</option>
+            <option value="adjective" class="text text--capitalize">Adjective</option>
+            <option value="adverb" class="text text--capitalize">Adverb</option>
+          </select>
+        </div>
+        <div class="col-6 modal-card__inputs">
+          <label for="word" class="text text--extrabold">Word*</label>
+          <span class="input-wrapper">
+            <input
+              type="text"
+              name="word"
+              id="word"
+              placeholder="Word"
+              class="text modal-card__input"
+            />
+          </span>
+          <p class="text text--sm error-message">error</p>
+        </div>
+        <div class="col-6 modal-card__inputs">
+          <label for="translation" class="text text--extrabold">Translation*</label>
+          <span class="input-wrapper">
+            <input
+              type="text"
+              name="translation"
+              id="translation"
+              placeholder="Translation"
+              class="text modal-card__input"
+            />
+          </span>
+          <p class="text text--sm error-message">error</p>
+        </div>
+        <div class="col-12 modal-card__inputs">
+          <label for="description" class="text text--extrabold">Description</label>
+          <span class="input-wrapper">
+            <input
+              type="text"
+              id="description"
+              name="description"
+              placeholder="Description"
+              class="text modal-card__input"
+            />
+          </span>
+          <p class="text text--sm error-message">error</p>
+        </div>
+      </div>
+      <div class="modal-card__footer">
+        <button type="submit" name="btnSave" class="btn btn--submit modal-card__create">
+          Create
+        </button>
+      </div>
+    </form>
+
+    <!-- modal add language -->
+    <form class="modal-flashcards">
+      <p class="text text--title">Create your flashcards</p>
+      <div class="modal-flashcards__inputs">
+        <label for="flashcards" class="text text--extrabold">Language*</label>
+        <span class="input-wrapper">
+          <input
+            type="text"
+            id="flashcards"
+            name="description"
+            placeholder="Flashcards"
+            class="text modal-flashcards__input"
+          />
+        </span>
+        <p class="text error-message">error</p>
+      </div>
+      <div class="modal-flashcards__footer">
+        <button type="submit" name="btnSave" class="btn btn--submit modal-flashcards__create">
+          Create
+        </button>
+      </div>
+    </form>
+
+    <!-- Start toast -->
+    <div class="toast">
+      <div class="toast__icon"></div>
+      <p class="text text--md text--light toast__message">Add card successfully</p>
+    </div>
+    <div class="overlay"></div>
+
+    <script type="module" src="./typescripts/main.ts"></script>
   </body>
 </html>
