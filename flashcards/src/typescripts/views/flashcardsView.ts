@@ -8,9 +8,13 @@ class FlashcardsView {
   private flashcardslistEl: HTMLElement
   private slideButtonsEl: NodeListOf<Element>
 
+  private titleEl: HTMLElement
+
   constructor() {
     this.flashcardslistEl = document.querySelector('.flashcards__list')!
     this.slideButtonsEl = document.querySelectorAll('.slide-buttons')!
+
+    this.titleEl = document.querySelector('.card-list__title')!
   }
 
   //----- EVENT LISTENER -----//
@@ -28,6 +32,9 @@ class FlashcardsView {
 
       // Pass the selected category to the loadCards function.
       flashcardsCurrent = flashcardsEl?.textContent!.trim() as string
+
+      // set title
+      this.titleEl.textContent = `${flashcardsCurrent} flashcards`
 
       loadCards(flashcardsCurrent)
     })

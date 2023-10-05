@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -78,7 +78,9 @@
       </section>
 
       <section class="card-list">
-        <p class="text text--lg text--light card-list__title">English Flashcards</p>
+        <p class="text text--lg text--light text--capitalize card-list__title">
+          English Flashcards
+        </p>
         <table class="card-list__table">
           <thead>
             <tr class="row card-list__header">
@@ -211,6 +213,19 @@
         <button type="submit" name="btnSave" class="btn btn--submit modal-flashcards__create">
           Create
         </button>
+      </div>
+    </form>
+
+    <!-- modal confirm      -->
+    <form class="modal-confirm">
+      <p class="modal-confirm__message text text--lg text--center">
+        Do you want to delete language
+      </p>
+      <div class="modal-confirm__buttons">
+        <button type="submit" name="delete" class="btn btn--action modal-confirm__delete">
+          Yes
+        </button>
+        <button type="button" name="cancel" class="btn btn--action btn--cancel">Cancel</button>
       </div>
     </form>
 
