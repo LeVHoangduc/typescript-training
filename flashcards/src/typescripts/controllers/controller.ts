@@ -4,8 +4,8 @@ import Service from '../services/service'
 import View from '../views/view'
 
 class Controller {
-  service: Service
-  view: View
+  private service: Service
+  private view: View
 
   /**
    * Constructor of Controller object
@@ -20,7 +20,9 @@ class Controller {
   init = async (): Promise<void> => {
     await this.service.init()
     this.initFlashcardsView()
+
     this.initModalFlashcardsCardView()
+    this.initModalConfirm()
 
     this.initOverLay()
   }
@@ -32,21 +34,35 @@ class Controller {
     this.view.flashcardsView.createSlider()
 
     this.view.flashcardsView.addEventShowCard(this.loadCards)
+    this.view.flashcardsView.addEventDeleteFlashcards(this.openModalConfirm)
+  }
+
+  //-----      CARD CONTROLLER       -----//
+
+  initCardView = () => {}
+
+  //-----      MODAL CONTROLLER      -----//
+
+  initModalConfirm = () => {
+    this.view.modalConfirmView.addEventConfirm(
+      this.deleteFlashcards,
+      this.loadFlashcards,
+      this.resetCards
+      // this.loadCards(utilities.categoryCurrent)
+    )
   }
 
   initModalFlashcardsCardView = () => {
     this.view.modalFlashcardsView.addEventOpenFormListener()
     this.view.modalFlashcardsView.addEventAddFlashcards(this.saveFlashcards, this.loadFlashcards)
   }
-
-  //----- CARD CONTROLLER          -----//
-  initCardView = () => {}
-
-  //----- OVERLAY CONTROLLER          -----//
+  //-----     OVERLAY CONTROLLER     -----//
 
   initOverLay = () => {
     this.view.overlayView.addEventClickOutSide()
   }
+
+  //-----     FLASHCARDS METHODS     -----//
 
   /**
    * Method to save a flashcards
@@ -63,11 +79,25 @@ class Controller {
     }
   }
 
+  /**
+   * Method to delete a language card by its ID.
+   * @param {string} id - The ID of the language card to be deleted.
+   */
+  deleteFlashcards = async (id: string) => {
+    try {
+      await this.service.flashcardsService.deleteFlashcards(id)
+      console.log('done')
+    } catch (error) {
+      console.log('error')
+    }
+  }
   getFlashcards = () => this.service.flashcardsService.getFlashcards()
 
   loadFlashcards = () => {
     this.view.flashcardsView.renderFlashcardsView(this.getFlashcards)
   }
+
+  //-----      CARDS METHODS         -----//
 
   getCardList = () => this.service.cardService.getCardList()
 
@@ -79,6 +109,14 @@ class Controller {
   loadCards = (category: string = DefaultValues.Category) => {
     // view receive category and render as follow category
     this.view.cardView.renderCardList(this.getCardList, category)
+  }
+
+  //-----      MODALS METHODS         -----//
+
+  openModalConfirm = (button: HTMLElement) => this.view.modalConfirmView.openModalConfirm(button)
+
+  resetCards = () => {
+    this.view.cardView.resetCards()
   }
 }
 

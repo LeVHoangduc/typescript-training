@@ -5,7 +5,7 @@ class Template {
   constructor() {}
 
   static renderLanguage = (flashcards: IFlashcards) =>
-    ` <li class="flashcards__item data-id="${flashcards.id}" >
+    ` <li class="flashcards__item" data-id="${flashcards.id}" type="flashcards" >
       <img src="${require('../../assets/icons/remove.svg')}" alt="remove" class="flashcards__delete" />
       <img src="${require('../../assets/images/flashcards.png')}" alt="flashcards" />
       <p class="text text--sm text--light text--center flashcards__name">${

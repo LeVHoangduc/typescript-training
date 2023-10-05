@@ -17,7 +17,7 @@ class ApiService<T> {
    * Method to return an array of object list
    * @returns {Array}
    */
-  getList = (): Promise<T[]> => {
+  protected getList = (): Promise<T[]> => {
     return this.sendRequest<T[]>(`${this.path}`, ApiRequest.Get)
   }
 
@@ -27,8 +27,8 @@ class ApiService<T> {
    * @return {Promise<Object>} A promise that resolves to the retrieved data.
    */
 
-  getDetail = (id: number): Promise<T> => {
-    return this.sendRequest<T>(`${this.path}${id}`, ApiRequest.Get)
+  protected getDetail = (id: number): Promise<T> => {
+    return this.sendRequest<T>(`${this.path}/${id}`, ApiRequest.Get)
   }
 
   /**
@@ -36,8 +36,8 @@ class ApiService<T> {
    * @param {Object} data
    * @returns {Promise<Object>} response from server.
    */
-  postItem = (data: T, id?: number): void => {
-    this.sendRequest(`${this.path}${id ? id : ''}`, ApiRequest.Post, data)
+  protected postItem = async (data: T, id?: number): Promise<void> => {
+    await this.sendRequest(`${this.path}/${id ? id : ''}`, ApiRequest.Post, data)
   }
 
   /**
@@ -45,8 +45,8 @@ class ApiService<T> {
    * @param {String} id
    * @returns {Promise<Object>} response from server.
    */
-  deleteItem = (id: number): void => {
-    this.sendRequest(`${this.path}${id}`, ApiRequest.Delete)
+  protected deleteItem = async (id: string): Promise<void> => {
+    await this.sendRequest(`${this.path}/${id}`, ApiRequest.Delete)
   }
 
   /**
@@ -57,7 +57,7 @@ class ApiService<T> {
    * @return {Promise} A promise that resolves to the server response data.
    * @throws {Error} If the request was not successful.
    */
-  sendRequest = async <T>(path: string, method: string, body?: T): Promise<T> => {
+  protected sendRequest = async <T>(path: string, method: string, body?: T): Promise<T> => {
     const url = `${this.baseUrl}${path}`
     const response: Response = await fetch(url, {
       method,

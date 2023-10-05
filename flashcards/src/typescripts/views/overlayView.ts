@@ -8,13 +8,17 @@ export interface IOverlayView {
 
 class OverlayView {
   error: Error
-  overlayEL: HTMLElement
-  formFlashcardsEl: HTMLFormElement
+  private overlayEL: HTMLElement
+  private formFlashcardsEl: HTMLFormElement
+  private confirmFormEl: HTMLFormElement
+
   constructor() {
     this.error = new Error()
 
-    this.overlayEL = document.querySelector('.overlay')!
     this.formFlashcardsEl = document.querySelector('.modal-flashcards')!
+    this.confirmFormEl = document.querySelector('.modal-confirm')!
+
+    this.overlayEL = document.querySelector('.overlay')!
   }
 
   //----- EVENT LISTENER -----//
@@ -30,6 +34,8 @@ class OverlayView {
 
   closeForm = () => {
     this.formFlashcardsEl.classList.remove('open')
+    this.confirmFormEl.classList.remove('open')
+
     this.overlayEL.classList.remove('open')
   }
 

@@ -1,15 +1,19 @@
-import { DefaultValues } from '../enums/enums'
+import { DataSources, DefaultValues } from '../enums/enums'
 import CardModel, { ICard } from '../models/cardModel'
 import Template from '../templates/templates'
 
 type cardList = () => CardModel[]
 
 class CardView {
-  cardListEl: HTMLElement
-  inputEl: HTMLElement
+  private cardListEl: HTMLElement
+  private inputEl: HTMLElement
+  private titleEl: HTMLElement
+
   constructor() {
     this.cardListEl = document.querySelector('.card-list__body')!
     this.inputEl = document.querySelector('.header__search__input')!
+
+    this.titleEl = document.querySelector('.card-list__title')!
   }
 
   //----- RENDERING -----//
@@ -23,8 +27,6 @@ class CardView {
   renderCardList = (cardList: cardList, category: string) => {
     // Show empty or loading effect
     const cardListData = cardList()
-    console.log(cardListData)
-    console.log(category)
 
     // Clear existing card elements before loading new data
     this.cardListEl.innerHTML = DefaultValues.EmptyString
@@ -49,6 +51,12 @@ class CardView {
     if (this.cardListEl) {
       this.cardListEl.innerHTML += cardTemplate
     }
+  }
+
+  //----- METHODS -----//
+  resetCards = () => {
+    this.titleEl.textContent = DataSources.flashcards
+    this.cardListEl.innerHTML = DefaultValues.EmptyString
   }
 }
 

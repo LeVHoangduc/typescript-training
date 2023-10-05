@@ -3,6 +3,7 @@ import Template from '../templates/templates'
 
 type getFlashcardsList = () => FlashcardsModel[]
 type loadCards = (category?: string) => void
+type openModalConfirm = (button: HTMLElement) => void
 
 class FlashcardsView {
   private flashcardslistEl: HTMLElement
@@ -10,11 +11,15 @@ class FlashcardsView {
 
   private titleEl: HTMLElement
 
+  private confirmFormEl: HTMLFormElement
+
   constructor() {
     this.flashcardslistEl = document.querySelector('.flashcards__list')!
     this.slideButtonsEl = document.querySelectorAll('.slide-buttons')!
 
     this.titleEl = document.querySelector('.card-list__title')!
+
+    this.confirmFormEl = document.querySelector('.modal-confirm')!
   }
 
   //----- EVENT LISTENER -----//
@@ -40,23 +45,50 @@ class FlashcardsView {
     })
   }
 
-  // addEventDeleteLanguage = () => {
-  //   this.flashcardslistEl.addEventListener('click', e => {
-  //     const btnDelete = e.target.closest('.language__item .language__delete')
+  addEventDeleteFlashcards = (openModalConfirm: openModalConfirm) => {
+    this.flashcardslistEl.addEventListener('click', e => {
+      const btnDelete = (e.target as HTMLElement).closest(
+        '.flashcards__item .flashcards__delete'
+      ) as HTMLElement
 
-  //     // For get data-id of the language will be removed
-  //     const languageItemEl = btnDelete?.parentElement
+      // For get data-id of the language will be removed
+      const flashcardsDeleteEl = btnDelete?.parentElement
 
-  //     // If the user clicks in delete button, it will execute the delete
-  //     // Avoid to missing event listener with show cards
-  //     if (languageItemEl) {
-  //       this.confirmFormEl.setAttribute('data-id', languageItemEl.getAttribute('data-id'))
-  //       this.confirmFormEl.setAttribute('type', languageItemEl.getAttribute('type'))
+      // If the user clicks in delete button, it will execute the delete
+      // Avoid to missing event listener with show cards
+      if (flashcardsDeleteEl) {
+        const id = flashcardsDeleteEl.getAttribute('data-id') as string
+        const type = flashcardsDeleteEl.getAttribute('type') as string
 
-  //       this.openConfirmDelete(btnDelete)
-  //     }
-  //   })
-  // }
+        this.confirmFormEl.setAttribute('data-id', id)
+        this.confirmFormEl.setAttribute('type', type)
+
+        openModalConfirm(btnDelete)
+      }
+    })
+  }
+
+  //----- RENDERING -----//
+
+  renderFlashcardsView = (getFlashcardsList: getFlashcardsList) => {
+    const flashcardsList: FlashcardsModel[] = getFlashcardsList()
+    console.log(flashcardsList)
+
+    this.flashcardslistEl.innerHTML = ''
+
+    flashcardsList.forEach((flashcards: FlashcardsModel) => {
+      this.renderFlashcards(flashcards)
+    })
+  }
+
+  renderFlashcards = (flashcards: FlashcardsModel) => {
+    const languageTemplate = Template.renderLanguage(flashcards)
+
+    // Append languageTemplate to the language list element.
+    if (this.flashcardslistEl) this.flashcardslistEl.innerHTML += languageTemplate
+  }
+
+  //----- METHOD -----//
 
   createSlider = () => {
     this.slideButtonsEl.forEach(button => {
@@ -80,26 +112,6 @@ class FlashcardsView {
         })
       })
     })
-  }
-
-  //----- RENDERING -----//
-
-  renderFlashcardsView = (getFlashcardsList: getFlashcardsList) => {
-    const flashcardsList: FlashcardsModel[] = getFlashcardsList()
-    console.log(flashcardsList)
-
-    this.flashcardslistEl.innerHTML = ''
-
-    flashcardsList.forEach((flashcards: FlashcardsModel) => {
-      this.renderFlashcards(flashcards)
-    })
-  }
-
-  renderFlashcards = (flashcards: FlashcardsModel) => {
-    const languageTemplate = Template.renderLanguage(flashcards)
-
-    // Append languageTemplate to the language list element.
-    if (this.flashcardslistEl) this.flashcardslistEl.innerHTML += languageTemplate
   }
 }
 

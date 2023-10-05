@@ -15,3 +15,9 @@ export const path = {
   flashcards: '/flashcards',
   card: '/card',
 }
+
+export const DataSources = {
+  user: 'user',
+  card: 'card',
+  flashcards: 'flashcards',
+}

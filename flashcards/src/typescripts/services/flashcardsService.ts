@@ -34,6 +34,17 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
       console.log('in model', this.flashcards)
     }
   }
+
+  /**
+   * Method to delete a flashcards based on its ID.
+   * @param {String} flashcardsID - The ID of flashcards to be deleted.
+   * @returns {Promise<Boolean>} - A promise that resolves with the result of the deletion.
+   */
+  deleteFlashcards = async (flashcardsID: string): Promise<void> => {
+    await this.deleteItem(flashcardsID)
+
+    this.flashcards = this.flashcards.filter(flashcards => flashcards.id != flashcardsID)
+  }
 }
 
 export default FLashcardsService
