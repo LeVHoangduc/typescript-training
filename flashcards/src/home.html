@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/images/logo.png" type="image/png" />
     <link rel="stylesheet" href="styles/main.css" />
     <title>Flashcards</title>
   </head>
@@ -31,9 +32,7 @@
       <section class="profile">
         <h2 class="text text--lg">My Profile</h2>
         <div class="profile__content">
-          <div class="profile__upload">
-            <img src="assets/images/user.png" alt="upload-image" />
-          </div>
+          <div class="profile__upload"></div>
           <div class="border-avatar profile__avatar">
             <img src="assets/images/user.png" alt="user" />
           </div>
@@ -54,7 +53,6 @@
             </p>
           </div>
           <ul class="flashcards__list">
-            <!-- TODO: this section will be render by template -->
             <li class="flashcards__item">
               <img src="assets/images/flashcards.png" alt="flashcards" />
               <p class="text text--sm text--light text--center flashcards__name">English</p>
@@ -75,5 +73,16 @@
         </div>
       </section>
     </main>
+
+    <div class="modal-detail">
+      <p class="text text--light text--description modal-detail__content">mugger</p>
+
+      <div class="modal-detail__buttons">
+        <button type="button" class="btn btn--action modal-detail__button__edit">Edit</button>
+        <button type="button" class="btn btn--action modal-detail__button__delete">Delete</button>
+      </div>
+    </div>
+
+    <script type="module" src="./javascripts/main.js"></script>
   </body>
 </html>

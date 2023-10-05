@@ -1,0 +1,29 @@
+.modal-detail {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  display: none;
+  width: 90%;
+  height: 568px;
+  background: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 16px;
+  box-shadow: 0px 4px 4px 0px var(--shadow-color);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.modal-detail__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+}
+
+.modal-detail__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  height: 20%;
+}
