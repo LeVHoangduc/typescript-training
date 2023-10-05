@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -22,7 +22,7 @@
               name="email"
               class="text text--input login-form__input border-primary"
             />
-            <p>error</p>
+            <p class="error-message">error</p>
           </div>
           <div class="login-form__inputs">
             <label for="password" class="text text--input">Password:</label>
@@ -32,11 +32,9 @@
               name="password"
               class="text text--input login-form__input border-primary"
             />
-            <p>error</p>
+            <p class="error-message">error</p>
           </div>
-          <button type="submit" class="text btn btn--submit login-form__button">
-            Login
-          </button>
+          <button type="submit" class="text btn btn--submit login-form__button">Login</button>
         </div>
         <div class="login-form__footer">
           <p class="text text--input login-form__forget">
@@ -55,5 +53,11 @@
         <img src="assets/images/login.png" alt="login-image" />
       </div>
     </main>
+
+    <!-- Start toast -->
+    <div class="toast">
+      <div class="toast__icon"></div>
+      <p class="text text--md text--light toast__message">Add card successfully</p>
+    </div>
   </body>
 </html>
