@@ -1,0 +1,43 @@
+{
+  "card": [
+    {
+      "id": "6427b07c-c8ef-46e8-9b85-239580ca3qr5",
+      "flashcards": "english",
+      "type": "noun",
+      "word": "buncha",
+      "translation": "xin chao"
+    },
+    {
+      "id": "6427b07c-c8ef-46e8-9b85-239580ca3qr5",
+      "flashcards": "korea",
+      "type": "noun",
+      "word": "dasdas",
+      "translation": "xin chao"
+    },
+    {
+      "id": "6427b07c-c8ef-46e8-9b85-239580ca3qr5",
+      "flashcards": "laos",
+      "type": "noun",
+      "word": "11232",
+      "translation": "xin chao"
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "6427b07c-c8ef-46e8-9b85-239580ca3ad2",
+      "flashcards": "korea"
+    },
+    {
+      "id": "d8b3e6ea-695b-4cb7-9628-9f98d1291dec",
+      "flashcards": "laos"
+    },
+    {
+      "id": "69e3c0b7-1fad-482b-908d-214d5d753827",
+      "flashcards": "france"
+    },
+    {
+      "id": "c4755a77-ec50-4ba2-81fd-d0571cea3c42",
+      "flashcards": "english"
+    }
+  ]
+}
