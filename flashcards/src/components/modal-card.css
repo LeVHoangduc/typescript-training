@@ -1,0 +1,41 @@
+.modal-card {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  padding: 40px;
+  background-color: var(--light-color);
+  border-radius: 16px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.modal-card__title {
+  padding-left: 45px;
+}
+
+.modal-card__content {
+  gap: 20px;
+  padding-top: 28px;
+}
+
+.modal-card__inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-card__input {
+  width: 100%;
+  background-color: transparent;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.modal-card__input::placeholder {
+  color: var(--primary-color);
+}
+
+.modal-card__create {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 16px;
+}
