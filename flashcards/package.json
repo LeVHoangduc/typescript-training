@@ -1,0 +1,23 @@
+{
+  "name": "typescript-prepare",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/home.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "rm -rf dist && rm -rf .parcel-cache && parcel ./src/*.html --no-cache --no-source-maps --dist-dir dist",
+    "build": "rm -rf dist && rm -rf .parcel-cache && parcel build ./src/*.html --no-cache --no-source-maps --dist-dir dist",
+    "format": "prettier --write \"src/**/(*.tsx|*.ts|*.css|*.scss|*html)\""
+  },
+  "author": "Duc Le",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.0.2",
+    "parcel": "^2.9.3",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "json-server": "^0.17.3",
+    "uuid": "^9.0.0"
+  }
+}
