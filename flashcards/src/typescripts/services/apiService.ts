@@ -36,8 +36,8 @@ class ApiService<T> {
    * @param {Object} data
    * @returns {Promise<Object>} response from server.
    */
-  protected postItem = async (data: T, id?: number): Promise<void> => {
-    await this.sendRequest(`${this.path}/${id ? id : ''}`, ApiRequest.Post, data)
+  protected postItem = async (data: T): Promise<void> => {
+    await this.sendRequest(`${this.path}`, ApiRequest.Post, data)
   }
 
   /**

@@ -25,12 +25,13 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
     const isExit = flashcardsList.some(
       flashcardsData => flashcardsData.flashcards === newFLashcards.flashcards
     )
+
     if (!isExit) {
       // post new flashcards to database
       this.postItem(newFLashcards)
 
       // add new flashcards to model
-      this.flashcards.push(new FlashcardsModel(flashcardsData))
+      this.flashcards.push(newFLashcards)
       console.log('in model', this.flashcards)
     }
   }
