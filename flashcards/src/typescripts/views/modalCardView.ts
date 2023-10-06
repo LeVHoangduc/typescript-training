@@ -3,6 +3,8 @@ import { ICard } from '../models/cardModel'
 import ValidationForm, { fieldCheck } from '../validation/validationForm'
 import Error from './errorView'
 
+type saveCard = (cardData: ICard) => Promise<void>
+type loadCards = (category?: string) => void
 class ModalCardView {
   private validationForm: ValidationForm
   private error: Error
@@ -29,7 +31,7 @@ class ModalCardView {
    * @param {Function} saveCard - Promise indicating successful card addition.
    * @param {Function} loadCards - Renders cards after successful addition.
    */
-  addEventSubmission = (saveCard, loadCards) => {
+  addEventSubmission = (saveCard: saveCard, loadCards: loadCards) => {
     this.cardFormEl?.addEventListener('submit', async e => {
       e.preventDefault()
 
@@ -45,8 +47,6 @@ class ModalCardView {
 
       // Validate form inputs
       const inputCheck = this.validationForm.validationCard(cardData) as fieldCheck[]
-
-      console.log(inputCheck)
 
       const isValidation = this.isValidation(inputCheck)
 

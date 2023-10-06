@@ -11,6 +11,7 @@ class FlashcardsView {
 
   private titleEl: HTMLElement
 
+  private cardFormEl: HTMLFormElement
   private confirmFormEl: HTMLFormElement
 
   constructor() {
@@ -19,6 +20,7 @@ class FlashcardsView {
 
     this.titleEl = document.querySelector('.card-list__title')!
 
+    this.cardFormEl = document.querySelector('.modal-card')!
     this.confirmFormEl = document.querySelector('.modal-confirm')!
   }
 
@@ -51,7 +53,7 @@ class FlashcardsView {
         '.flashcards__item .flashcards__delete'
       ) as HTMLElement
 
-      // For get data-id of the language will be removed
+      // For get data-id of flashcards will be removed
       const flashcardsDeleteEl = btnDelete?.parentElement
 
       // If the user clicks in delete button, it will execute the delete
@@ -82,10 +84,14 @@ class FlashcardsView {
   }
 
   renderFlashcards = (flashcards: FlashcardsModel) => {
-    const languageTemplate = Template.renderLanguage(flashcards)
+    const flashcardsTemplate = Template.renderFlashcards(flashcards)
+    const flashcardsSelectTemplate = Template.renderSelectFlashcards(flashcards)
 
-    // Append languageTemplate to the language list element.
-    if (this.flashcardslistEl) this.flashcardslistEl.innerHTML += languageTemplate
+    // Append flashcardsTemplate to flashcards element.
+    if (this.flashcardslistEl) this.flashcardslistEl.innerHTML += flashcardsTemplate
+
+    // Append languageSelectTemplate to the modal card element.
+    if (this.cardFormEl) this.cardFormEl.flashcards.innerHTML += flashcardsSelectTemplate
   }
 
   //----- METHOD -----//

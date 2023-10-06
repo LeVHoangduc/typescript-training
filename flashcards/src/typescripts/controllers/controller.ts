@@ -1,4 +1,5 @@
 import { DefaultValues } from '../enums/enums'
+import { ICard } from '../models/cardModel'
 import FlashcardsModel, { IFlashcards } from '../models/flashcardsModels'
 import Service from '../services/service'
 import View from '../views/view'
@@ -98,6 +99,7 @@ class Controller {
       console.log('error')
     }
   }
+
   getFlashcards = () => this.service.flashcardsService.getFlashcards()
 
   loadFlashcards = () => {
@@ -106,7 +108,14 @@ class Controller {
 
   //-----      CARDS METHODS         -----//
 
-  saveCard = () => {}
+  saveCard = async (cardData: ICard): Promise<void> => {
+    try {
+      await this.service.cardService.saveCard(cardData)
+      console.log('success')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   getCardList = () => this.service.cardService.getCardList()
 

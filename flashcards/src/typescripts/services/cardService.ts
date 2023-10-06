@@ -1,5 +1,5 @@
 import { path } from '../enums/enums'
-import CardModel from '../models/cardModel'
+import CardModel, { ICard } from '../models/cardModel'
 import ApiService from './apiService'
 
 class CardService extends ApiService<CardModel> {
@@ -16,6 +16,13 @@ class CardService extends ApiService<CardModel> {
   }
 
   getCardList = (): CardModel[] => this.cards
+
+  saveCard = async (cardData: ICard): Promise<void> => {
+    const newCard = new CardModel(cardData)
+
+    await this.postItem(newCard)
+    this.cards.push(newCard)
+  }
 }
 
 export default CardService

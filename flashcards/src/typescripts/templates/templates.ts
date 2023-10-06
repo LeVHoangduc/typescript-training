@@ -4,7 +4,7 @@ import { IFlashcards } from '../models/flashcardsModels'
 class Template {
   constructor() {}
 
-  static renderLanguage = (flashcards: IFlashcards) =>
+  static renderFlashcards = (flashcards: IFlashcards) =>
     ` <li class="flashcards__item" data-id="${flashcards.id}" type="flashcards" >
       <img src="${require('../../assets/icons/remove.svg')}" alt="remove" class="flashcards__delete" />
       <img src="${require('../../assets/images/flashcards.png')}" alt="flashcards" />
@@ -25,6 +25,8 @@ class Template {
       </td>
       </tr>
     `
+  static renderSelectFlashcards = (flashcards: IFlashcards) =>
+    ` <option value="${flashcards.flashcards}" class="text text--capitalize">${flashcards.flashcards}</option>`
 }
 
 export default Template
