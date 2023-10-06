@@ -1,7 +1,11 @@
 import { DataSources } from '../enums/enums'
+import { utilities } from '../helpers/utilities'
 
-type deleteFlashcards = (flashcardsID: string) => Promise<void>
+type deleteFlashcards = (id: string) => Promise<void>
 type loadFlashcards = () => void
+type loadCards = (category?: string) => void
+type deleteCard = (id: string) => Promise<void>
+type resetCards = () => void
 
 class ModalConfirm {
   private confirmFormEl: HTMLFormElement
@@ -28,20 +32,26 @@ class ModalConfirm {
   addEventConfirm = (
     deleteFlashcards: deleteFlashcards,
     loadFlashcards: loadFlashcards,
-    resetCards
+    deleteCard: deleteCard,
+    loadCards: loadCards,
+    resetCards: resetCards
   ) => {
     this.confirmFormEl.addEventListener('submit', async e => {
       e.preventDefault()
 
-      let id = this.confirmFormEl.getAttribute('data-id')
+      let id = this.confirmFormEl.getAttribute('data-id') as string
       let type = this.confirmFormEl.getAttribute('type')
 
       // Send id to database
-      if (id && type === DataSources.flashcards) {
+      if (type === DataSources.flashcards) {
         await deleteFlashcards(id)
 
         loadFlashcards()
         resetCards()
+      } else {
+        await deleteCard(id)
+
+        loadCards(utilities.getCategoryCurrent())
       }
       this.closeForm()
     })
@@ -52,25 +62,17 @@ class ModalConfirm {
   }
 
   // ---- METHOD ---- //
+
   /**
-   * Opens a confirmation dialog for language deletion.
-   * @param {Element} button - Button element that triggered the deletion request.
+   * Opens a confirmation dialog for flashcards or card deletion.
+   * @param itemDelete - Identify the item is deleted
+   * @param type  - Get the type (e.g., "card", "flashcards")
    */
-  openModalConfirm = (button: HTMLElement) => {
-    // Get the type (e.g., "card", "flashcards")
-    const type = button.parentElement?.getAttribute('type')
+  openModalConfirm = (itemDelete: string, type: string) => {
+    this.confirmFormEl.classList.add('open')
+    this.confirmMessageEl.textContent = `Do you want to delete ${itemDelete} ${type}`
 
-    // get flashcards to be removed
-    const flashcardsName = button.parentElement?.textContent
-
-    if (flashcardsName) {
-      const flashcards = flashcardsName.charAt(0).toUpperCase() + flashcardsName.slice(1)
-
-      this.confirmFormEl.classList.add('open')
-      this.confirmMessageEl.textContent = `Do you want to delete ${flashcards} ${type}`
-
-      this.overlayEl.classList.add('open')
-    }
+    this.overlayEl.classList.add('open')
   }
 
   closeForm = () => {

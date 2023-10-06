@@ -56,7 +56,11 @@
 }
 
 .flashcards__name {
+  max-width: 283px;
   padding-top: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .slide-buttons {

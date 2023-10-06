@@ -26,6 +26,12 @@
   cursor: pointer;
 }
 
+.card-word {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .card-list__content:hover {
   opacity: 0.8;
 }

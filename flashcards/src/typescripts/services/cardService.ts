@@ -19,9 +19,15 @@ class CardService extends ApiService<CardModel> {
 
   saveCard = async (cardData: ICard): Promise<void> => {
     const newCard = new CardModel(cardData)
-
     await this.postItem(newCard)
+
     this.cards.push(newCard)
+  }
+
+  deleteCard = async (id: string): Promise<void> => {
+    await this.deleteItem(id)
+
+    this.cards = this.cards.filter(card => card.id !== id)
   }
 }
 

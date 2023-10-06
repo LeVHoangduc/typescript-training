@@ -16,12 +16,14 @@ class Template {
   static renderCard = (card: ICard) =>
     `
       <tr class="row card-list__content">
-      <td class="text text--light text--center col-3">${card.word}</td>
+      <td class="text text--light text--center col-3 card-word">${card.word}</td>
       <td class="text text--light text--center col-3">${card.type}</td>
       <td class="text text--light text--center col-3">${card.translation}</td>
-      <td class="text text--light col-3 card-list__buttons">
-        <img src="${require('../../assets/icons/edit.svg')}" alt="edit" />
-        <img src="${require('../../assets/icons/delete.svg')}" alt="delete" />
+      <td class="text text--light col-3 card-list__buttons" data-id="${card.id}" item="${
+        card.word
+      }" type="card">
+        <img src="${require('../../assets/icons/edit.svg')}" class="card-edit" alt="edit" />
+        <img src="${require('../../assets/icons/delete.svg')}" class="card-delete" alt="delete" />
       </td>
       </tr>
     `

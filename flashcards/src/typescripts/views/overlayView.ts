@@ -34,6 +34,15 @@ class OverlayView {
     })
   }
 
+  addEventCloseFormListener = () => {
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        this.resetForm()
+        this.closeForm()
+      }
+    })
+  }
+
   //----- METHOD -----//
 
   closeForm = () => {

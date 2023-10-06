@@ -1,9 +1,10 @@
+import { DefaultValues } from '../enums/enums'
 import FlashcardsModel from '../models/flashcardsModels'
 import Template from '../templates/templates'
 
 type getFlashcardsList = () => FlashcardsModel[]
 type loadCards = (category?: string) => void
-type openModalConfirm = (button: HTMLElement) => void
+type openModalConfirm = (itemDelete: string, type: string) => void
 
 class FlashcardsView {
   private flashcardslistEl: HTMLElement
@@ -25,6 +26,7 @@ class FlashcardsView {
   }
 
   //----- EVENT LISTENER -----//
+
   /**
    * Method to add an event listener to language items to show the modal card.
    * @param {Function} loadCards - Function to load cards.
@@ -65,7 +67,9 @@ class FlashcardsView {
         this.confirmFormEl.setAttribute('data-id', id)
         this.confirmFormEl.setAttribute('type', type)
 
-        openModalConfirm(btnDelete)
+        const itemDelete = flashcardsDeleteEl.textContent as string
+
+        openModalConfirm(itemDelete, type)
       }
     })
   }
@@ -76,7 +80,8 @@ class FlashcardsView {
     const flashcardsList: FlashcardsModel[] = getFlashcardsList()
     console.log(flashcardsList)
 
-    this.flashcardslistEl.innerHTML = ''
+    this.flashcardslistEl.innerHTML = DefaultValues.EmptyString
+    this.cardFormEl.flashcards.innerHTML = DefaultValues.EmptyString
 
     flashcardsList.forEach((flashcards: FlashcardsModel) => {
       this.renderFlashcards(flashcards)

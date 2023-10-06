@@ -1,4 +1,5 @@
 import { DefaultValues } from '../enums/enums'
+import { utilities } from '../helpers/utilities'
 import { ICard } from '../models/cardModel'
 import FlashcardsModel, { IFlashcards } from '../models/flashcardsModels'
 import Service from '../services/service'
@@ -21,6 +22,7 @@ class Controller {
   init = async (): Promise<void> => {
     await this.service.init()
     this.initFlashcardsView()
+    this.initCardView()
 
     this.initModalFlashcardsCardView()
     this.initModalCardView()
@@ -41,7 +43,10 @@ class Controller {
 
   //-----      CARD CONTROLLER       -----//
 
-  initCardView = () => {}
+  initCardView = () => {
+    // this.loadCards()
+    // this.view.cardView.addEventDeleteListener(this.openModalConfirm)
+  }
 
   //-----      MODAL CONTROLLER      -----//
 
@@ -49,8 +54,9 @@ class Controller {
     this.view.modalConfirmView.addEventConfirm(
       this.deleteFlashcards,
       this.loadFlashcards,
+      this.deleteCard,
+      this.loadCards,
       this.resetCards
-      // this.loadCards(utilities.categoryCurrent)
     )
   }
 
@@ -68,6 +74,7 @@ class Controller {
 
   initOverLay = () => {
     this.view.overlayView.addEventClickOutSide()
+    this.view.overlayView.addEventCloseFormListener()
   }
 
   //-----     FLASHCARDS METHODS     -----//
@@ -117,6 +124,18 @@ class Controller {
     }
   }
 
+  /**
+   * Method to delete a card by its ID.
+   * @param {string} id - The ID of the card to be deleted.
+   */
+  deleteCard = async (id: string) => {
+    try {
+      await this.service.cardService.deleteCard(id)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   getCardList = () => this.service.cardService.getCardList()
 
   /**
@@ -126,12 +145,19 @@ class Controller {
    */
   loadCards = (category: string = DefaultValues.Category) => {
     // view receive category and render as follow category
+
     this.view.cardView.renderCardList(this.getCardList, category)
+
+    // Save category after loadCards to using when delete card
+    utilities.saveCategoryCurrent(category)
+
+    this.view.cardView.addEventDeleteListener(this.openModalConfirm)
   }
 
   //-----      MODALS METHODS         -----//
 
-  openModalConfirm = (button: HTMLElement) => this.view.modalConfirmView.openModalConfirm(button)
+  openModalConfirm = (itemDelete: string, type: string) =>
+    this.view.modalConfirmView.openModalConfirm(itemDelete, type)
 
   resetCards = () => {
     this.view.cardView.resetCards()

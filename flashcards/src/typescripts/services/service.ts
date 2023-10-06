@@ -11,8 +11,8 @@ class Service {
   }
 
   init = async (): Promise<void> => {
-    this.cardService.init()
     await this.flashcardsService.init()
+    await this.cardService.init()
   }
 }
 

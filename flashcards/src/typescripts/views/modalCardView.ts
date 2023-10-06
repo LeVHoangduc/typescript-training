@@ -86,7 +86,7 @@ class ModalCardView {
   }
 
   resetForm = () => {
-    const inputs = document.querySelectorAll('.modal-card__input')
+    const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('.modal-card__input')
 
     inputs.forEach(input => {
       const inputEl = input.parentElement as HTMLElement
@@ -94,7 +94,7 @@ class ModalCardView {
 
       this.error.clearError(inputEl, errorEl)
 
-      input.textContent = DefaultValues.EmptyString
+      input.value = DefaultValues.EmptyString
     })
   }
 

@@ -3,17 +3,50 @@ import CardModel, { ICard } from '../models/cardModel'
 import Template from '../templates/templates'
 
 type cardList = () => CardModel[]
+type openModalConfirm = (itemDelete: string, type: string) => void
 
 class CardView {
   private cardListEl: HTMLElement
+  private cardContentEl: NodeListOf<Element>
+
   private inputEl: HTMLElement
   private titleEl: HTMLElement
 
+  private confirmFormEl: HTMLFormElement
+
   constructor() {
     this.cardListEl = document.querySelector('.card-list__body')!
-    this.inputEl = document.querySelector('.header__search__input')!
 
+    this.inputEl = document.querySelector('.header__search__input')!
     this.titleEl = document.querySelector('.card-list__title')!
+
+    this.confirmFormEl = document.querySelector('.modal-confirm')!
+  }
+
+  //----- EVENT LISTENER -----//
+
+  addEventDeleteListener = (openModalConfirm: openModalConfirm) => {
+    this.cardContentEl = document.querySelectorAll('.card-list__content')!
+
+    this.cardContentEl.forEach(card => {
+      card.addEventListener('click', e => {
+        const btnDeleteEl = (e.target as HTMLElement).closest('.card-delete')
+
+        if (btnDeleteEl) {
+          const itemDelete = btnDeleteEl?.parentElement?.getAttribute('item') as string
+
+          const id = btnDeleteEl?.parentElement?.getAttribute('data-id') as string
+          const type = btnDeleteEl?.parentElement?.getAttribute('type') as string
+
+          this.confirmFormEl.setAttribute('data-id', id)
+          this.confirmFormEl.setAttribute('type', type)
+
+          console.log(itemDelete, type)
+
+          openModalConfirm(itemDelete, type)
+        }
+      })
+    })
   }
 
   //----- RENDERING -----//
@@ -24,9 +57,9 @@ class CardView {
    * @param {String} category - The category of cards to be rendered.
    * @returns {Boolean} - Returns true when rendering is complete.
    */
-  renderCardList = (cardList: cardList, category: string) => {
+  renderCardList = (getCardList: cardList, category: string) => {
     // Show empty or loading effect
-    const cardListData = cardList()
+    const cardListData = getCardList()
 
     // Clear existing card elements before loading new data
     this.cardListEl.innerHTML = DefaultValues.EmptyString
@@ -54,6 +87,7 @@ class CardView {
   }
 
   //----- METHODS -----//
+
   resetCards = () => {
     this.titleEl.textContent = DataSources.flashcards
     this.cardListEl.innerHTML = DefaultValues.EmptyString
