@@ -22,6 +22,7 @@ class Controller {
     this.initFlashcardsView()
 
     this.initModalFlashcardsCardView()
+    this.initModalCardView()
     this.initModalConfirm()
 
     this.initOverLay()
@@ -55,6 +56,12 @@ class Controller {
   initModalFlashcardsCardView = () => {
     this.view.modalFlashcardsView.addEventOpenFormListener()
     this.view.modalFlashcardsView.addEventAddFlashcards(this.saveFlashcards, this.loadFlashcards)
+  }
+
+  initModalCardView = () => {
+    this.view.modalCardView.addEventOpenFormListener()
+    this.view.modalCardView.addEventCloseFormListener()
+    this.view.modalCardView.addEventSubmission(this.saveCard, this.loadCards)
   }
   //-----     OVERLAY CONTROLLER     -----//
 
@@ -98,6 +105,8 @@ class Controller {
   }
 
   //-----      CARDS METHODS         -----//
+
+  saveCard = () => {}
 
   getCardList = () => this.service.cardService.getCardList()
 

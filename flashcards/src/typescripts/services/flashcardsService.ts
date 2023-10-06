@@ -32,7 +32,6 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
 
       // add new flashcards to model
       this.flashcards.push(newFLashcards)
-      console.log('in model', this.flashcards)
     }
   }
 

@@ -53,7 +53,7 @@ class ModalFlashcardsView {
       }
 
       // Return a field result of check with regex
-      const inputCheck: fieldCheck = this.validationForm.validationFlashcards()
+      const inputCheck = this.validationForm.validationFlashcards(flashcardsData)
 
       // Show error or pass in UI and performs save()
       const isValidation: boolean = this.isValidation(inputCheck)
@@ -90,9 +90,9 @@ class ModalFlashcardsView {
   isValidation: isValidation = (inputCheck: fieldCheck): boolean => {
     let isValid = true
 
-    const inputEl = this.formFlashcardsEl.flashcards.parentElement
+    const inputEl: HTMLElement = this.formFlashcardsEl.flashcards.parentElement
 
-    const errorEl = inputEl.nextElementSibling
+    const errorEl = inputEl.nextElementSibling as HTMLElement
 
     if (inputCheck.isValid) this.error.clearError(inputEl, errorEl)
     else {

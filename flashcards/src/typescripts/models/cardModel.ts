@@ -1,5 +1,6 @@
+import { v4 as uuidv4 } from 'uuid'
 export interface ICard {
-  id: number
+  id?: string
   flashcards: string
   type: string
   word: string
@@ -8,7 +9,7 @@ export interface ICard {
 }
 
 class CardModel implements ICard {
-  id: number
+  id: string
   flashcards: string
   type: string
   word: string
@@ -16,7 +17,7 @@ class CardModel implements ICard {
   description?: string | undefined
 
   constructor(data: ICard) {
-    this.id = data.id
+    this.id = data.id ? data.id : uuidv4()
     this.flashcards = data.flashcards
     this.type = data.type
     this.word = data.word

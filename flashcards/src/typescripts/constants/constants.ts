@@ -37,4 +37,5 @@ export const SUCCESS_MESSAGE = {
  */
 export const REGEX = {
   FLASHCARDS: /^[^\d\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/,
+  CONTENT: /^.{1,128}$/,
 }

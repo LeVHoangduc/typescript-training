@@ -3,19 +3,23 @@ import Error from './errorView'
 export interface IOverlayView {
   error: Error
   overlayEL: HTMLElement
-  formFlashcardsEl: HTMLFormElement
+  flashcardsFormEl: HTMLFormElement
+  cardFormEl: HTMLFormElement
 }
 
 class OverlayView {
-  error: Error
+  private error: Error
   private overlayEL: HTMLElement
-  private formFlashcardsEl: HTMLFormElement
+
+  private flashcardsFormEl: HTMLFormElement
+  private cardFormEl: HTMLFormElement
   private confirmFormEl: HTMLFormElement
 
   constructor() {
     this.error = new Error()
 
-    this.formFlashcardsEl = document.querySelector('.modal-flashcards')!
+    this.flashcardsFormEl = document.querySelector('.modal-flashcards')!
+    this.cardFormEl = document.querySelector('.modal-card')!
     this.confirmFormEl = document.querySelector('.modal-confirm')!
 
     this.overlayEL = document.querySelector('.overlay')!
@@ -33,7 +37,8 @@ class OverlayView {
   //----- METHOD -----//
 
   closeForm = () => {
-    this.formFlashcardsEl.classList.remove('open')
+    this.flashcardsFormEl.classList.remove('open')
+    this.cardFormEl.classList.remove('open')
     this.confirmFormEl.classList.remove('open')
 
     this.overlayEL.classList.remove('open')
