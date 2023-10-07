@@ -22,3 +22,9 @@
   color: var(--error-color);
   visibility: visible;
 }
+
+.d-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

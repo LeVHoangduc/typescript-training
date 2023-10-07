@@ -26,6 +26,7 @@ class Controller {
 
     this.initModalFlashcardsCardView()
     this.initModalCardView()
+    this.initModalDetailView()
     this.initModalConfirm()
 
     this.initOverLay()
@@ -58,6 +59,8 @@ class Controller {
       this.loadCards,
       this.resetCards
     )
+
+    this.view.modalConfirmView.addEventCloseModalConfirm()
   }
 
   initModalFlashcardsCardView = () => {
@@ -69,6 +72,11 @@ class Controller {
     this.view.modalCardView.addEventOpenFormListener()
     this.view.modalCardView.addEventCloseFormListener()
     this.view.modalCardView.addEventSubmission(this.saveCard, this.loadCards)
+  }
+
+  initModalDetailView = () => {
+    this.view.modalDetailView.addEventOpenDetailListener(this.getCardDetail)
+    this.view.modalDetailView.addEventDeleteListener(this.openModalConfirm)
   }
   //-----     OVERLAY CONTROLLER     -----//
 
@@ -138,6 +146,15 @@ class Controller {
 
   getCardList = () => this.service.cardService.getCardList()
 
+  getCardDetail = (id: string) => {
+    try {
+      const data = this.service.cardService.getCardDetail(id) as ICard
+
+      return data as ICard
+    } catch (error) {
+      console.log(error)
+    }
+  }
   /**
    * Method to load cards based on a specific category.
    * @param {string} category - The category for which to load cards.

@@ -17,6 +17,13 @@ class CardService extends ApiService<CardModel> {
 
   getCardList = (): CardModel[] => this.cards
 
+  /**
+   * Method to retrieve detailed information for a specific card from the API.
+   * @param {string} id - The ID of the card to retrieve details for.
+   * @returns {Promise<Object>} A promise that resolves with the detailed card object.
+   */
+  getCardDetail = (id: string) => this.cards.find(card => card.id === id) as ICard
+
   saveCard = async (cardData: ICard): Promise<void> => {
     const newCard = new CardModel(cardData)
     await this.postItem(newCard)

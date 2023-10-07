@@ -43,8 +43,8 @@ class ValidationForm {
     const cardCheck = {
       word: cardData.word,
       translation: cardData.translation,
+      description: cardData.description,
     }
-    console.log(cardCheck)
 
     for (const key in cardCheck) {
       const value = cardCheck[key]

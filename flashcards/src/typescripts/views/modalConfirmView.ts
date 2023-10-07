@@ -12,13 +12,17 @@ class ModalConfirm {
   private confirmMessageEl: HTMLElement
   private btnCancelEl: HTMLElement
 
+  private detailModalEl: HTMLElement
+
   private overlayEl: HTMLElement
+
   constructor() {
     this.confirmFormEl = document.querySelector('.modal-confirm')!
     this.confirmMessageEl = document.querySelector('.modal-confirm__message')!
 
     this.btnCancelEl = this.confirmFormEl?.cancel
 
+    this.detailModalEl = document.querySelector('.modal-detail')!
     this.overlayEl = document.querySelector('.overlay')!
   }
 
@@ -53,9 +57,11 @@ class ModalConfirm {
 
         loadCards(utilities.getCategoryCurrent())
       }
-      this.closeForm()
+      this.endForm()
     })
+  }
 
+  addEventCloseModalConfirm = () => {
     this.btnCancelEl.addEventListener('click', () => {
       this.closeForm()
     })
@@ -77,9 +83,23 @@ class ModalConfirm {
 
   closeForm = () => {
     this.confirmFormEl.classList.remove('open')
+
+    const isDetailModal = this.detailModalEl.classList.contains('open')
+
+    if (!isDetailModal) {
+      this.confirmFormEl.removeAttribute('data-id')
+      this.confirmFormEl.removeAttribute('type')
+
+      this.overlayEl.classList.remove('open')
+    }
+  }
+
+  endForm = () => {
     this.confirmFormEl.removeAttribute('data-id')
     this.confirmFormEl.removeAttribute('type')
+    this.confirmFormEl.classList.remove('open')
 
+    this.detailModalEl.classList.remove('open')
     this.overlayEl.classList.remove('open')
   }
 }
