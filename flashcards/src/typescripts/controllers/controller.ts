@@ -77,6 +77,11 @@ class Controller {
   initModalDetailView = () => {
     this.view.modalDetailView.addEventOpenDetailListener(this.getCardDetail)
     this.view.modalDetailView.addEventDeleteListener(this.openModalConfirm)
+    this.view.modalDetailView.addEventEditListener(
+      this.openModalCard,
+      this.getCardDetail,
+      this.setDataForm
+    )
   }
   //-----     OVERLAY CONTROLLER     -----//
 

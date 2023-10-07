@@ -4,6 +4,8 @@ import Error from './errorView'
 
 type getCardDetail = (id: string) => ICard | undefined
 type openModalConfirm = (itemDelete: string, type: string) => void
+type openModalCard = () => void
+type setDataForm = (card: ICard, id: string) => void
 
 class ModalDetailView {
   private error: Error
@@ -84,24 +86,29 @@ class ModalDetailView {
    * Method to add an event listener for the edit button.
    * @param {Function} getCardDetail - Function to fetch card details.
    */
-  //   addEventEditListener = getCardDetail => {
-  //     this.btnFormDetailEl.edit?.addEventListener('click', async e => {
-  //       e.preventDefault()
+  addEventEditListener = (
+    openModalCard: openModalCard,
+    getCardDetail: getCardDetail,
+    setDataForm: setDataForm
+  ) => {
+    this.btnEditEl.addEventListener('click', async e => {
+      e.preventDefault()
 
-  //       // Show the edit modal.
-  //       this.cardFormEl = document.querySelector('.modal-card')
-  //       this.cardFormEl.classList.add('open')
+      // Show the edit modal.
+      openModalCard()
 
-  //       const cardID = this.detailFormEl.getAttribute('data-id')
+      const cardID = this.detailModalEl.getAttribute('data-id')
 
-  //       // Fetch card details for editing.
-  //       const getCardID = await getCardDetail(cardID)
+      if (cardID) {
+        // Fetch card details for editing.
+        const getCardID = getCardDetail(cardID) as ICard
 
-  //       // Load current data into the edit form.
-  //       this.handleEdit(cardID, getCardID)
-  //       this.detailFormEl.classList.remove('open')
-  //     })
-  //   }
+        // Load current data into the edit form.
+        setDataForm(getCardID, cardID)
+        this.detailModalEl.classList.remove('open')
+      }
+    })
+  }
 
   //----- METHOD   -----//
 

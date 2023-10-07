@@ -69,14 +69,16 @@ class CardView {
           // Show the edit modal
           openCardForm()
 
-          const cardID = btnEditEl.parentElement?.getAttribute('data-id') as string
+          const cardID = btnEditEl.parentElement?.getAttribute('data-id')
 
-          // Fetch card details for editing
-          const getCardID = getCardDetail(cardID) as ICard
+          if (cardID) {
+            // Fetch card details for editing
+            const getCardID = getCardDetail(cardID) as ICard
 
-          // Load current data into the edit form
-          setDataForm(getCardID, cardID)
-          this.detailModalEl.classList.remove('open')
+            // Load current data into the edit form
+            setDataForm(getCardID, cardID)
+            this.detailModalEl.classList.remove('open')
+          }
         }
       })
     })

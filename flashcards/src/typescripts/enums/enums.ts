@@ -1,8 +1,8 @@
 export const ApiRequest = {
-  Get: 'Get',
-  Post: 'Post',
-  Delete: 'Delete',
-  Patch: 'Patch',
+  Get: 'GET',
+  Post: 'POST',
+  Delete: 'DELETE',
+  Patch: 'PATCH',
 }
 
 export const DefaultValues = {

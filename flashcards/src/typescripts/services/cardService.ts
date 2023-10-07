@@ -33,6 +33,7 @@ class CardService extends ApiService<CardModel> {
 
   editCard = async (cardData: ICard): Promise<void> => {
     const card: CardModel = new CardModel(cardData)
+
     await this.editItem(card.id, card)
 
     this.cards = this.cards.map(item => {
