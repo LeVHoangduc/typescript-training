@@ -1,4 +1,4 @@
-import { DataSources, DefaultValues } from '../enums/enums'
+import { DataSources, DefaultValues, HTMLAttribute } from '../enums/enums'
 import { ICard } from '../models/cardModel'
 import ValidationForm, { fieldCheck } from '../validation/validationForm'
 import Error from './errorView'
@@ -10,6 +10,7 @@ class ModalCardView {
   private error: Error
 
   private cardFormEl: HTMLFormElement
+  private formTitleEl: HTMLElement
   private btnAddEl: HTMLElement
 
   private overlayEl: HTMLElement
@@ -19,6 +20,7 @@ class ModalCardView {
     this.error = new Error()
 
     this.cardFormEl = document.querySelector('.modal-card')!
+    this.formTitleEl = document.querySelector('.modal-card__title')!
     this.btnAddEl = document.querySelector('.profile__button')!
 
     this.overlayEl = document.querySelector('.overlay')!
@@ -63,9 +65,7 @@ class ModalCardView {
 
   addEventOpenFormListener = () => {
     this.btnAddEl.addEventListener('click', () => {
-      this.cardFormEl.removeAttribute('data-id')
-      this.cardFormEl.classList.add('open')
-      this.overlayEl.classList.add('open')
+      this.openForm()
     })
   }
 
@@ -79,6 +79,12 @@ class ModalCardView {
   }
 
   //----- METHOD -----//
+
+  openForm = () => {
+    this.cardFormEl.removeAttribute('data-id')
+    this.cardFormEl.classList.add('open')
+    this.overlayEl.classList.add('open')
+  }
 
   closeForm = () => {
     this.cardFormEl.classList.remove('open')
@@ -96,6 +102,20 @@ class ModalCardView {
 
       input.value = DefaultValues.EmptyString
     })
+  }
+
+  setDataForm = (card: ICard, cardId: string) => {
+    // Set data-id attribute to link modal-card with modal-detail
+    this.cardFormEl.setAttribute(HTMLAttribute.dataID, cardId)
+
+    // Populate form fields with card details
+    this.cardFormEl.flashcards.value = card.flashcards
+    this.cardFormEl.word.value = card.word
+    this.cardFormEl.type.value = card.type
+    this.cardFormEl.translation.value = card.translation
+    this.cardFormEl.description.value = card.description
+
+    this.formTitleEl.textContent = `Edit ${card.word} card`
   }
 
   /**

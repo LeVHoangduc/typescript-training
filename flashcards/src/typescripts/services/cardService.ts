@@ -24,11 +24,23 @@ class CardService extends ApiService<CardModel> {
    */
   getCardDetail = (id: string) => this.cards.find(card => card.id === id) as ICard
 
-  saveCard = async (cardData: ICard): Promise<void> => {
+  addCard = async (cardData: ICard): Promise<void> => {
     const newCard = new CardModel(cardData)
     await this.postItem(newCard)
 
     this.cards.push(newCard)
+  }
+
+  editCard = async (cardData: ICard): Promise<void> => {
+    const card: CardModel = new CardModel(cardData)
+    await this.editItem(card.id, card)
+
+    this.cards = this.cards.map(item => {
+      if (item.id === card.id) {
+        return card
+      }
+      return item
+    })
   }
 
   deleteCard = async (id: string): Promise<void> => {

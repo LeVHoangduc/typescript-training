@@ -4,6 +4,9 @@ import Template from '../templates/templates'
 
 type cardList = () => CardModel[]
 type openModalConfirm = (itemDelete: string, type: string) => void
+type openCardForm = () => void
+type setDataForm = (card: ICard, id: string) => void
+type getCardDetail = (id: string) => ICard | undefined
 
 class CardView {
   private cardListEl: HTMLElement
@@ -13,6 +16,7 @@ class CardView {
   private titleEl: HTMLElement
 
   private confirmFormEl: HTMLFormElement
+  private detailModalEl: HTMLElement
 
   constructor() {
     this.cardListEl = document.querySelector('.card-list__body')!
@@ -21,6 +25,7 @@ class CardView {
     this.titleEl = document.querySelector('.card-list__title')!
 
     this.confirmFormEl = document.querySelector('.modal-confirm')!
+    this.detailModalEl = document.querySelector('.modal-detail')!
   }
 
   //----- EVENT LISTENER -----//
@@ -41,9 +46,37 @@ class CardView {
           this.confirmFormEl.setAttribute('data-id', id)
           this.confirmFormEl.setAttribute('type', type)
 
-          console.log(itemDelete, type)
-
           openModalConfirm(itemDelete, type)
+        }
+      })
+    })
+  }
+
+  /**
+   * Method to add an event listener for the edit button.
+   * @param {Function} getCardDetail - Function to fetch card details.
+   */
+  addEventEditListener = (
+    openCardForm: openCardForm,
+    getCardDetail: getCardDetail,
+    setDataForm: setDataForm
+  ) => {
+    this.cardContentEl.forEach(card => {
+      card.addEventListener('click', e => {
+        const btnEditEl = (e.target as HTMLElement).closest('.card-edit')
+
+        if (btnEditEl) {
+          // Show the edit modal
+          openCardForm()
+
+          const cardID = btnEditEl.parentElement?.getAttribute('data-id') as string
+
+          // Fetch card details for editing
+          const getCardID = getCardDetail(cardID) as ICard
+
+          // Load current data into the edit form
+          setDataForm(getCardID, cardID)
+          this.detailModalEl.classList.remove('open')
         }
       })
     })

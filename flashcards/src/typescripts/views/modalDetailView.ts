@@ -105,22 +105,6 @@ class ModalDetailView {
 
   //----- METHOD   -----//
 
-  //   openConfirmDelete = () => {
-  // Get the type (e.g., "card", "language")
-  // const type = this.cardEl.getAttribute('type')
-
-  // Capitalize the language to be removed
-  //     const cardContent = this.cardEl.querySelector('.card__term').textContent
-  //     const card = cardContent.charAt(0).toUpperCase() + cardContent.slice(1)
-
-  //     this.confirmFormEl.classList.add('open')
-  //     this.confirmMessageEl.textContent = `Do you want to delete ${card} ${type}`
-  //     this.confirmFormEl.classList.add('open')
-  //     this.detailFormEl.classList.remove('open')
-
-  //     this.overlayEl.classList.add('open')
-  //   }
-
   /**
    * Handle the editing of a card's details.
    * @param {string} cardId - The ID of the card being edited.

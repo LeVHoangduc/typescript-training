@@ -21,3 +21,7 @@ export const DataSources = {
   card: 'card',
   flashcards: 'flashcards',
 }
+
+export const HTMLAttribute = {
+  dataID: 'data-id',
+}

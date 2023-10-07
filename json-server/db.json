@@ -20,6 +20,28 @@
       "type": "noun",
       "word": "11232",
       "translation": "xin chao"
+    },
+    {
+      "id": "e2a9edbe-1962-461b-8b1b-8ea6c7dcb45d",
+      "flashcards": "france",
+      "type": "verb",
+      "word": "Ni Hao Ma sa dsads",
+      "translation": "das"
+    },
+    {
+      "id": "c1109724-117d-450e-9a1a-3c9052984ec3",
+      "flashcards": "english",
+      "type": "noun",
+      "word": "das",
+      "translation": "dsada"
+    },
+    {
+      "id": "459b049f-6866-4efe-95a3-a6da9b820451",
+      "flashcards": "france",
+      "type": "noun",
+      "word": "đasa",
+      "translation": "đasa",
+      "description": "đasadasad"
     }
   ],
   "flashcards": [
@@ -38,6 +60,14 @@
     {
       "id": "c4755a77-ec50-4ba2-81fd-d0571cea3c42",
       "flashcards": "english"
+    },
+    {
+      "id": "62039274-e1e1-485f-a722-a473027ca700",
+      "flashcards": "dasd"
+    },
+    {
+      "id": "532ec32d-bc4b-4038-8944-5d1a51e8084d",
+      "flashcards": "bunn"
     }
   ]
 }

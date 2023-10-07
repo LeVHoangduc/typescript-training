@@ -41,6 +41,14 @@ class ApiService<T> {
   }
 
   /**
+   * Send PATCH HTTP request.
+   * @param {String} id
+   */
+  protected editItem = async (id: string, data: T): Promise<void> => {
+    await this.sendRequest<T>(`${this.path}/${id}`, ApiRequest.Patch, data)
+  }
+
+  /**
    * Send DELETE HTTP request.
    * @param {String} id
    * @returns {Promise<Object>} response from server.

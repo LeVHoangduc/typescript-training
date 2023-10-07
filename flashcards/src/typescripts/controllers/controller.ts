@@ -124,11 +124,18 @@ class Controller {
   //-----      CARDS METHODS         -----//
 
   saveCard = async (cardData: ICard): Promise<void> => {
-    try {
-      await this.service.cardService.saveCard(cardData)
-      console.log('success')
-    } catch (error) {
-      console.log(error)
+    if (cardData.id) {
+      try {
+        await this.service.cardService.editCard(cardData)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      try {
+        await this.service.cardService.addCard(cardData)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -169,6 +176,11 @@ class Controller {
     utilities.saveCategoryCurrent(category)
 
     this.view.cardView.addEventDeleteListener(this.openModalConfirm)
+    this.view.cardView.addEventEditListener(
+      this.openModalCard,
+      this.getCardDetail,
+      this.setDataForm
+    )
   }
 
   //-----      MODALS METHODS         -----//
@@ -176,6 +188,13 @@ class Controller {
   openModalConfirm = (itemDelete: string, type: string) =>
     this.view.modalConfirmView.openModalConfirm(itemDelete, type)
 
+  openModalCard = () => {
+    this.view.modalCardView.openForm()
+  }
+
+  setDataForm = (card: ICard, id: string) => {
+    this.view.modalCardView.setDataForm(card, id)
+  }
   resetCards = () => {
     this.view.cardView.resetCards()
   }
