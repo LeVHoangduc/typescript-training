@@ -1,12 +1,10 @@
 .login {
-  display: flex;
-  justify-content: space-around;
   padding-top: 108px;
 }
 
 .login-form {
-  min-width: 365px;
   padding-top: 114px;
+  grid-column: 2/6;
 }
 
 .login-form__body {
@@ -29,7 +27,6 @@
 .login-form__button {
   width: 100%;
   margin-top: 22px;
-  padding: 8px 160px;
 }
 
 .login-form__footer {
@@ -37,6 +34,16 @@
   flex-direction: column;
   align-items: center;
   padding-top: 54px;
+}
+
+.login-image {
+  grid-column: 7/13;
+}
+
+.login-img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .socials {
