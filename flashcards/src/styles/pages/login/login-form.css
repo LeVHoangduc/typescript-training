@@ -14,11 +14,11 @@
 .login-form__inputs {
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  padding-top: 10px;
 }
 
 .login-form__input {
-  margin-top: 11px;
+  margin-top: 5px;
   padding: 6px 10px;
   border-radius: 50px;
   outline: none;

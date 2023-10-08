@@ -119,7 +119,15 @@ class Controller {
     this.view.overlayView.addEventEscapeListener()
   }
   //-----     USER METHODS           -----//
-  isValidUser = (user: IUser) => this.service.userService.isValidUser(user)
+  isValidUser = (user: IUser) => {
+    const isUser = this.service.userService.isValidUser(user)
+
+    if (!isUser) {
+      console.log('error')
+    }
+
+    return isUser
+  }
 
   //-----     FLASHCARDS METHODS     -----//
 

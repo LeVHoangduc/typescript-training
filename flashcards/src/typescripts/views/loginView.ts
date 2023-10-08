@@ -26,7 +26,6 @@ class LoginView {
    * @param {Function} isValidUSer Check if User exists in database
    */
   addEventLoginListener = (isValidUSer: isValidUser) => {
-    console.log('init')
     this.buttonEl?.addEventListener('click', async e => {
       e.preventDefault()
 

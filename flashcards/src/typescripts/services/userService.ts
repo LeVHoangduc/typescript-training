@@ -12,7 +12,6 @@ class UserService extends ApiService<UserModel> {
   }
 
   init = async (): Promise<void> => {
-    console.log('hello')
     const data = await this.getList()
     this.users = data.map(user => new UserModel(user))
   }
