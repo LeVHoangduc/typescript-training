@@ -1,3 +1,4 @@
+import { Action, HTMLAttribute, Status } from '../enums/enums'
 import Error from './errorView'
 
 type resetCardForm = () => void
@@ -42,7 +43,7 @@ class OverlayView {
     resetCardForm: resetCardForm
   ) => {
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
+      if (e.key === Action.Escape) {
         resetFlashcardsForm()
         resetCardForm()
         this.closeForm()
@@ -57,20 +58,19 @@ class OverlayView {
     //   this.confirmFormEl.removeAttribute('data-id')
     // }
 
-    this.flashcardsFormEl.classList.remove('open')
-    this.cardFormEl.classList.remove('open')
-    // this.cardFormEl.btnReturn.classList.remove('active')
-    this.confirmFormEl.classList.remove('open')
+    this.flashcardsFormEl.classList.remove(Status.Open)
+    this.cardFormEl.classList.remove(Status.Open)
+    this.confirmFormEl.classList.remove(Status.Open)
 
-    this.detailModalEl.classList.remove('open')
-    this.overlayEl.classList.remove('open')
+    this.detailModalEl.classList.remove(Status.Open)
+    this.overlayEl.classList.remove(Status.Open)
 
-    const isEditDetailModal = this.detailModalEl.getAttribute('isEdit')
+    const isEditDetailModal = this.detailModalEl.getAttribute(HTMLAttribute.IsEdit)
 
     if (isEditDetailModal === 'on') {
-      this.detailModalEl.removeAttribute('isEdit')
-      this.detailModalEl.classList.add('open')
-      this.overlayEl.classList.add('open')
+      this.detailModalEl.removeAttribute(HTMLAttribute.IsEdit)
+      this.detailModalEl.classList.add(Status.Open)
+      this.overlayEl.classList.add(Status.Open)
     }
   }
 }

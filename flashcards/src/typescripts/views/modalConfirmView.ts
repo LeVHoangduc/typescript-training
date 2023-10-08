@@ -1,4 +1,4 @@
-import { DataSources } from '../enums/enums'
+import { DataSources, HTMLAttribute, Status } from '../enums/enums'
 import { utilities } from '../helpers/utilities'
 
 type deleteFlashcards = (id: string) => Promise<void>
@@ -43,8 +43,8 @@ class ModalConfirm {
     this.confirmFormEl.addEventListener('submit', async e => {
       e.preventDefault()
 
-      let id = this.confirmFormEl.getAttribute('data-id') as string
-      let type = this.confirmFormEl.getAttribute('type')
+      let id = this.confirmFormEl.getAttribute(HTMLAttribute.DataID) as string
+      let type = this.confirmFormEl.getAttribute(HTMLAttribute.Type)
 
       // Send id to database
       if (type === DataSources.Flashcards) {
@@ -75,32 +75,32 @@ class ModalConfirm {
    * @param type  - Get the type (e.g., "card", "flashcards")
    */
   openModalConfirm = (itemDelete: string, type: string) => {
-    this.confirmFormEl.classList.add('open')
+    this.confirmFormEl.classList.add(Status.Open)
     this.confirmMessageEl.textContent = `Do you want to delete ${itemDelete} ${type}`
 
-    this.overlayEl.classList.add('open')
+    this.overlayEl.classList.add(Status.Open)
   }
 
   closeForm = () => {
-    this.confirmFormEl.classList.remove('open')
+    this.confirmFormEl.classList.remove(Status.Open)
 
-    const isDetailModal = this.detailModalEl.classList.contains('open')
+    const isDetailModal = this.detailModalEl.classList.contains(Status.Open)
 
     if (!isDetailModal) {
-      this.confirmFormEl.removeAttribute('data-id')
-      this.confirmFormEl.removeAttribute('type')
+      this.confirmFormEl.removeAttribute(HTMLAttribute.DataID)
+      this.confirmFormEl.removeAttribute(HTMLAttribute.Type)
 
-      this.overlayEl.classList.remove('open')
+      this.overlayEl.classList.remove(Status.Open)
     }
   }
 
   endForm = () => {
-    this.confirmFormEl.removeAttribute('data-id')
-    this.confirmFormEl.removeAttribute('type')
-    this.confirmFormEl.classList.remove('open')
+    this.confirmFormEl.removeAttribute(HTMLAttribute.DataID)
+    this.confirmFormEl.removeAttribute(HTMLAttribute.Type)
+    this.confirmFormEl.classList.remove(Status.Open)
 
-    this.detailModalEl.classList.remove('open')
-    this.overlayEl.classList.remove('open')
+    this.detailModalEl.classList.remove(Status.Open)
+    this.overlayEl.classList.remove(Status.Open)
   }
 }
 

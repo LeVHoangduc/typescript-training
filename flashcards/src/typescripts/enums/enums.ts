@@ -24,15 +24,22 @@ export const DataSources = {
 
 export const HTMLAttribute = {
   DataID: 'data-id',
+  Type: 'type',
+  Item: 'item',
+  IsEdit: 'isEdit',
 }
 
 export const Status = {
   Active: 'active',
-  IsEdit: 'isEdit',
+  Inactive: 'inactive',
   Open: 'open',
+  Error: 'error',
+  On: 'on',
 }
 
 export const Action = {
   Update: 'Update',
   Create: 'Create',
+  Previous: 'prev-slide',
+  Escape: 'Escape',
 }

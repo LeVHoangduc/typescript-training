@@ -1,4 +1,4 @@
-import { DataSources, DefaultValues } from '../enums/enums'
+import { DataSources, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
 import CardModel, { ICard } from '../models/cardModel'
 import Template from '../templates/templates'
 
@@ -38,13 +38,13 @@ class CardView {
         const btnDeleteEl = (e.target as HTMLElement).closest('.card-delete')
 
         if (btnDeleteEl) {
-          const itemDelete = btnDeleteEl?.parentElement?.getAttribute('item') as string
+          const itemDelete = btnDeleteEl?.parentElement?.getAttribute(HTMLAttribute.Item) as string
 
-          const id = btnDeleteEl?.parentElement?.getAttribute('data-id') as string
-          const type = btnDeleteEl?.parentElement?.getAttribute('type') as string
+          const id = btnDeleteEl?.parentElement?.getAttribute(HTMLAttribute.DataID) as string
+          const type = btnDeleteEl?.parentElement?.getAttribute(HTMLAttribute.Type) as string
 
-          this.confirmFormEl.setAttribute('data-id', id)
-          this.confirmFormEl.setAttribute('type', type)
+          this.confirmFormEl.setAttribute(HTMLAttribute.DataID, id)
+          this.confirmFormEl.setAttribute(HTMLAttribute.Type, type)
 
           openModalConfirm(itemDelete, type)
         }
@@ -69,7 +69,7 @@ class CardView {
           // Show the edit modal
           openCardForm()
 
-          const cardID = btnEditEl.parentElement?.getAttribute('data-id')
+          const cardID = btnEditEl.parentElement?.getAttribute(HTMLAttribute.DataID)
 
           if (cardID) {
             // Fetch card details for editing
@@ -77,7 +77,7 @@ class CardView {
 
             // Load current data into the edit form
             setDataForm(getCardID, cardID)
-            this.detailModalEl.classList.remove('open')
+            this.detailModalEl.classList.remove(Status.Open)
           }
         }
       })

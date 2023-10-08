@@ -1,3 +1,5 @@
+import { Status } from '../enums/enums'
+
 class Error {
   constructor() {}
 
@@ -8,9 +10,9 @@ class Error {
    * @param {String} message - The error message to be shown.
    */
   showError(inputEl: HTMLElement, errorEl: HTMLElement, message: string): void {
-    inputEl.classList.add('error')
+    inputEl.classList.add(Status.Error)
     errorEl.textContent = message
-    errorEl.classList.add('active')
+    errorEl.classList.add(Status.Active)
   }
 
   /**
@@ -19,8 +21,8 @@ class Error {
    * @param {HTMLElement} errorEl - The element is showing the error message.
    */
   clearError(inputEl: HTMLElement, errorEl: HTMLElement): void {
-    if (inputEl.classList.contains('error')) inputEl.classList.remove('error')
-    if (errorEl.classList.contains('active')) errorEl.classList.remove('active')
+    if (inputEl.classList.contains(Status.Error)) inputEl.classList.remove(Status.Error)
+    if (errorEl.classList.contains(Status.Active)) errorEl.classList.remove(Status.Active)
   }
 }
 

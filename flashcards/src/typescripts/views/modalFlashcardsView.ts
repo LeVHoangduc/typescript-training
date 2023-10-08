@@ -1,4 +1,4 @@
-import { DefaultValues } from '../enums/enums'
+import { DefaultValues, Status } from '../enums/enums'
 import { IFlashcards } from '../models/flashcardsModels'
 import ValidationForm, { fieldCheck } from '../validation/validationForm'
 import Error from './errorView'
@@ -32,8 +32,8 @@ class ModalFlashcardsView {
   addEventOpenFormListener = () => {
     this.addFlashcards.addEventListener('click', e => {
       e.preventDefault()
-      this.formFlashcardsEl.classList.add('open')
-      this.overlayEl.classList.add('open')
+      this.formFlashcardsEl.classList.add(Status.Open)
+      this.overlayEl.classList.add(Status.Open)
     })
   }
 
@@ -45,7 +45,7 @@ class ModalFlashcardsView {
     const btnSave = this.formFlashcardsEl.btnSave
     // const btnCancel = this.formFlashcardsEl.btnCancel
 
-    btnSave.addEventListener('click', async e => {
+    btnSave.addEventListener('click', async (e: MouseEvent) => {
       e.preventDefault()
 
       const flashcardsData: IFlashcards = {
@@ -78,8 +78,8 @@ class ModalFlashcardsView {
   }
 
   closeForm = () => {
-    this.formFlashcardsEl.classList.remove('open')
-    this.overlayEl.classList.remove('open')
+    this.formFlashcardsEl.classList.remove(Status.Open)
+    this.overlayEl.classList.remove(Status.Open)
   }
 
   /**

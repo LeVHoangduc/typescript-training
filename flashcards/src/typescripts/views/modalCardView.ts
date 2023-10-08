@@ -1,4 +1,4 @@
-import { DataSources, DefaultValues, HTMLAttribute } from '../enums/enums'
+import { Action, DataSources, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
 import { ICard } from '../models/cardModel'
 import ValidationForm, { fieldCheck } from '../validation/validationForm'
 import Error from './errorView'
@@ -45,7 +45,7 @@ class ModalCardView {
 
       // Prepare card data for submission
       const cardData: ICard = {
-        id: this.cardFormEl.getAttribute('data-id')!,
+        id: this.cardFormEl.getAttribute(HTMLAttribute.DataID)!,
         flashcards: this.cardFormEl.flashcards.value,
         word: this.cardFormEl.word.value,
         type: this.cardFormEl.type.value,
@@ -78,7 +78,7 @@ class ModalCardView {
 
   addEventCloseFormListener = () => {
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
+      if (e.key === Action.Escape) {
         this.resetCardForm()
         this.closeCardForm()
       }
@@ -95,25 +95,25 @@ class ModalCardView {
   //----- METHOD -----//
 
   openForm = () => {
-    this.cardFormEl.removeAttribute('data-id')
-    this.cardFormEl.classList.add('open')
-    this.overlayEl.classList.add('open')
+    this.cardFormEl.removeAttribute(HTMLAttribute.DataID)
+    this.cardFormEl.classList.add(Status.Open)
+    this.overlayEl.classList.add(Status.Open)
   }
 
   closeCardForm = () => {
-    this.cardFormEl.classList.remove('open')
-    this.cardFormReturnEl.classList.remove('active')
+    this.cardFormEl.classList.remove(Status.Open)
+    this.cardFormReturnEl.classList.remove(Status.Active)
 
-    this.overlayEl.classList.remove('open')
+    this.overlayEl.classList.remove(Status.Open)
 
     // If card form is opened from detail modal
     // When closing card form, the detail modal will be open for UX.
-    const isEditDetailModal = this.detailModalEl.getAttribute('isEdit')
+    const isEditDetailModal = this.detailModalEl.getAttribute(HTMLAttribute.IsEdit)
 
-    if (isEditDetailModal === 'on') {
-      this.detailModalEl.removeAttribute('isEdit')
-      this.detailModalEl.classList.add('open')
-      this.overlayEl.classList.add('open')
+    if (isEditDetailModal === Status.On) {
+      this.detailModalEl.removeAttribute(HTMLAttribute.IsEdit)
+      this.detailModalEl.classList.add(Status.Open)
+      this.overlayEl.classList.add(Status.Open)
     }
   }
 
@@ -130,8 +130,8 @@ class ModalCardView {
     })
 
     this.cardFormTitleEl.textContent = `Create your card`
-    this.cardFormReturnEl.classList.remove('active')
-    this.btnCreateEl.textContent = `Create`
+    this.cardFormReturnEl.classList.remove(Status.Active)
+    this.btnCreateEl.textContent = Action.Create
   }
 
   // Method to receive the card data for loading it to card form
@@ -147,8 +147,8 @@ class ModalCardView {
     this.cardFormEl.description.value = card.description
 
     this.cardFormTitleEl.textContent = `Edit ${card.word} card`
-    this.btnCreateEl.textContent = 'Update'
-    this.cardFormReturnEl.classList.add('active')
+    this.btnCreateEl.textContent = Action.Update
+    this.cardFormReturnEl.classList.add(Status.Active)
   }
 
   /**

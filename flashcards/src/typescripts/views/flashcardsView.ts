@@ -1,4 +1,4 @@
-import { DefaultValues } from '../enums/enums'
+import { Action, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
 import FlashcardsModel from '../models/flashcardsModels'
 import Template from '../templates/templates'
 
@@ -61,11 +61,11 @@ class FlashcardsView {
       // If the user clicks in delete button, it will execute the delete
       // Avoid to missing event listener with show cards
       if (flashcardsDeleteEl) {
-        const id = flashcardsDeleteEl.getAttribute('data-id') as string
-        const type = flashcardsDeleteEl.getAttribute('type') as string
+        const id = flashcardsDeleteEl.getAttribute(HTMLAttribute.DataID) as string
+        const type = flashcardsDeleteEl.getAttribute(HTMLAttribute.Type) as string
 
-        this.confirmFormEl.setAttribute('data-id', id)
-        this.confirmFormEl.setAttribute('type', type)
+        this.confirmFormEl.setAttribute(HTMLAttribute.DataID, id)
+        this.confirmFormEl.setAttribute(HTMLAttribute.Type, type)
 
         const itemDelete = flashcardsDeleteEl.textContent as string
 
@@ -104,7 +104,7 @@ class FlashcardsView {
   createSlider = () => {
     this.slideButtonsEl.forEach(button => {
       button.addEventListener('click', () => {
-        const direction = button.id === 'prev-slide' ? -1 : 1
+        const direction = button.id === Action.Previous ? -1 : 1
         const clientWidthCurrent = this.flashcardslistEl.clientWidth
         const scrollAmount = clientWidthCurrent * direction
 
@@ -114,12 +114,12 @@ class FlashcardsView {
 
         this.flashcardslistEl.addEventListener('scroll', () => {
           this.flashcardslistEl.scrollLeft <= 0
-            ? this.slideButtonsEl[0].classList.add('inactive')
-            : this.slideButtonsEl[0].classList.remove('inactive')
+            ? this.slideButtonsEl[0].classList.add(Status.Inactive)
+            : this.slideButtonsEl[0].classList.remove(Status.Inactive)
 
           this.flashcardslistEl.scrollLeft >= maxScrollLeft
-            ? this.slideButtonsEl[1].classList.add('inactive')
-            : this.slideButtonsEl[1].classList.remove('inactive')
+            ? this.slideButtonsEl[1].classList.add(Status.Inactive)
+            : this.slideButtonsEl[1].classList.remove(Status.Inactive)
         })
       })
     })

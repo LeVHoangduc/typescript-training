@@ -1,4 +1,4 @@
-import { DataSources } from '../enums/enums'
+import { DataSources, HTMLAttribute, Status } from '../enums/enums'
 import { ICard } from '../models/cardModel'
 import Error from './errorView'
 
@@ -52,18 +52,18 @@ class ModalDetailView {
       if (!isCardEl) {
         // Get card data and populate the detail form.
         const cardEl = (e.target as HTMLElement).closest('.card-list__content') as HTMLElement
-        const cardData = getCardDetail(cardEl.getAttribute('data-id') as string) as ICard
+        const cardData = getCardDetail(cardEl.getAttribute(HTMLAttribute.DataID) as string) as ICard
 
-        this.confirmFormEl.setAttribute('data-id', cardData.id as string)
+        this.confirmFormEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
 
         // Load data to detail form
-        this.detailModalEl.setAttribute('data-id', cardData.id as string)
+        this.detailModalEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
 
         this.wordEl.textContent = `${cardData.word}`
         this.description.textContent = `${cardData.description}`
 
-        this.detailModalEl.classList.add('open')
-        this.overlayEl.classList.add('open')
+        this.detailModalEl.classList.add(Status.Open)
+        this.overlayEl.classList.add(Status.Open)
       }
     })
   }
@@ -96,7 +96,7 @@ class ModalDetailView {
       // Show the modal card for editing.
       openModalCard()
 
-      const cardID = this.detailModalEl.getAttribute('data-id')
+      const cardID = this.detailModalEl.getAttribute(HTMLAttribute.DataID)
 
       if (cardID) {
         // Get card details for editing.
@@ -104,9 +104,9 @@ class ModalDetailView {
 
         // Load current data into the edit form.
         setDataForm(getCardID, cardID)
-        this.detailModalEl.classList.remove('open')
+        this.detailModalEl.classList.remove(Status.Open)
         // Set status is editing for modal detail
-        this.detailModalEl.setAttribute('isEdit', 'on')
+        this.detailModalEl.setAttribute(HTMLAttribute.IsEdit, Status.On)
       }
     })
   }
