@@ -1,4 +1,4 @@
-import { path } from '../enums/enums'
+import { Path } from '../enums/enums'
 import FlashcardsModel, { IFlashcards } from '../models/flashcardsModels'
 import ApiService from './apiService'
 
@@ -6,7 +6,7 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
   flashcards: FlashcardsModel[]
 
   constructor() {
-    super(path.Flashcards)
+    super(Path.Flashcards)
   }
 
   init = async (): Promise<void> => {

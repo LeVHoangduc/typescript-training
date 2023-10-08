@@ -11,7 +11,7 @@ export const DefaultValues = {
   Category: 'english',
 }
 
-export const path = {
+export const Path = {
   Flashcards: '/flashcards',
   Card: '/card',
 }

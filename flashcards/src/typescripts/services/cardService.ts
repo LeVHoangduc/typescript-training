@@ -1,4 +1,4 @@
-import { path } from '../enums/enums'
+import { Path } from '../enums/enums'
 import CardModel, { ICard } from '../models/cardModel'
 import ApiService from './apiService'
 
@@ -6,7 +6,7 @@ class CardService extends ApiService<CardModel> {
   private cards: CardModel[]
 
   constructor() {
-    super(path.Card)
+    super(Path.Card)
     this.init()
   }
 
