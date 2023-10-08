@@ -10,8 +10,11 @@ class ModalCardView {
   private error: Error
 
   private cardFormEl: HTMLFormElement
-  private formTitleEl: HTMLElement
+  private detailModalEl: HTMLElement
+  private cardFormTitleEl: HTMLElement
+  private cardFormReturnEl: HTMLElement
   private btnAddEl: HTMLElement
+  private btnCreateEl: HTMLElement
 
   private overlayEl: HTMLElement
 
@@ -20,8 +23,11 @@ class ModalCardView {
     this.error = new Error()
 
     this.cardFormEl = document.querySelector('.modal-card')!
-    this.formTitleEl = document.querySelector('.modal-card__title')!
+    this.detailModalEl = document.querySelector('.modal-detail')!
+    this.cardFormTitleEl = document.querySelector('.modal-card__title')!
+    this.cardFormReturnEl = document.querySelector('.modal-card__return')!
     this.btnAddEl = document.querySelector('.profile__button')!
+    this.btnCreateEl = document.querySelector('.modal-card__create')!
 
     this.overlayEl = document.querySelector('.overlay')!
   }
@@ -57,12 +63,13 @@ class ModalCardView {
 
         loadCards(cardData.flashcards)
 
-        this.resetForm()
-        this.closeForm()
+        this.resetCardForm()
+        this.closeCardForm()
       }
     })
   }
 
+  // add event listener to add button for show card form
   addEventOpenFormListener = () => {
     this.btnAddEl.addEventListener('click', () => {
       this.openForm()
@@ -72,9 +79,16 @@ class ModalCardView {
   addEventCloseFormListener = () => {
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        this.resetForm()
-        this.closeForm()
+        this.resetCardForm()
+        this.closeCardForm()
       }
+    })
+  }
+
+  addEventReturnFormListener = () => {
+    this.cardFormReturnEl.addEventListener('click', () => {
+      this.resetCardForm()
+      this.closeCardForm()
     })
   }
 
@@ -86,12 +100,24 @@ class ModalCardView {
     this.overlayEl.classList.add('open')
   }
 
-  closeForm = () => {
+  closeCardForm = () => {
     this.cardFormEl.classList.remove('open')
+    this.cardFormReturnEl.classList.remove('active')
+
     this.overlayEl.classList.remove('open')
+
+    // If card form is opened from detail modal
+    // When closing card form, the detail modal will be open for UX.
+    const isEditDetailModal = this.detailModalEl.getAttribute('isEdit')
+
+    if (isEditDetailModal === 'on') {
+      this.detailModalEl.removeAttribute('isEdit')
+      this.detailModalEl.classList.add('open')
+      this.overlayEl.classList.add('open')
+    }
   }
 
-  resetForm = () => {
+  resetCardForm = () => {
     const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('.modal-card__input')
 
     inputs.forEach(input => {
@@ -102,11 +128,16 @@ class ModalCardView {
 
       input.value = DefaultValues.EmptyString
     })
+
+    this.cardFormTitleEl.textContent = `Create your card`
+    this.cardFormReturnEl.classList.remove('active')
+    this.btnCreateEl.textContent = `Create`
   }
 
+  // Method to receive the card data for loading it to card form
   setDataForm = (card: ICard, cardId: string) => {
     // Set data-id attribute to link modal-card with modal-detail
-    this.cardFormEl.setAttribute(HTMLAttribute.dataID, cardId)
+    this.cardFormEl.setAttribute(HTMLAttribute.DataID, cardId)
 
     // Populate form fields with card details
     this.cardFormEl.flashcards.value = card.flashcards
@@ -115,7 +146,9 @@ class ModalCardView {
     this.cardFormEl.translation.value = card.translation
     this.cardFormEl.description.value = card.description
 
-    this.formTitleEl.textContent = `Edit ${card.word} card`
+    this.cardFormTitleEl.textContent = `Edit ${card.word} card`
+    this.btnCreateEl.textContent = 'Update'
+    this.cardFormReturnEl.classList.add('active')
   }
 
   /**

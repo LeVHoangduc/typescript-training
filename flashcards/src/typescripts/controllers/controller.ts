@@ -71,6 +71,7 @@ class Controller {
   initModalCardView = () => {
     this.view.modalCardView.addEventOpenFormListener()
     this.view.modalCardView.addEventCloseFormListener()
+    this.view.modalCardView.addEventReturnFormListener()
     this.view.modalCardView.addEventSubmission(this.saveCard, this.loadCards)
   }
 
@@ -86,8 +87,8 @@ class Controller {
   //-----     OVERLAY CONTROLLER     -----//
 
   initOverLay = () => {
-    this.view.overlayView.addEventClickOutSide()
-    this.view.overlayView.addEventCloseFormListener()
+    this.view.overlayView.addEventClickOutSide(this.resetFlashcardsForm, this.resetCardForm)
+    this.view.overlayView.addEventCloseFormListener(this.resetFlashcardsForm, this.resetCardForm)
   }
 
   //-----     FLASHCARDS METHODS     -----//
@@ -200,8 +201,17 @@ class Controller {
   setDataForm = (card: ICard, id: string) => {
     this.view.modalCardView.setDataForm(card, id)
   }
+
   resetCards = () => {
     this.view.cardView.resetCards()
+  }
+
+  resetFlashcardsForm = () => {
+    this.view.modalFlashcardsView.resetFlashcardsForm()
+  }
+
+  resetCardForm = () => {
+    this.view.modalCardView.resetCardForm()
   }
 }
 

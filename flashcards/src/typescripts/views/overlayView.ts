@@ -1,8 +1,10 @@
 import Error from './errorView'
 
+type resetCardForm = () => void
+type resetFlashcardsForm = () => void
 class OverlayView {
   private error: Error
-  private overlayEL: HTMLElement
+  private overlayEl: HTMLElement
 
   private flashcardsFormEl: HTMLFormElement
   private cardFormEl: HTMLFormElement
@@ -19,22 +21,30 @@ class OverlayView {
 
     this.detailModalEl = document.querySelector('.modal-detail')!
 
-    this.overlayEL = document.querySelector('.overlay')!
+    this.overlayEl = document.querySelector('.overlay')!
   }
 
   //----- EVENT LISTENER -----//
 
-  addEventClickOutSide = () => {
-    this.overlayEL.addEventListener('click', () => {
-      this.resetForm()
+  addEventClickOutSide = (
+    resetFlashcardsForm: resetFlashcardsForm,
+    resetCardForm: resetCardForm
+  ) => {
+    this.overlayEl.addEventListener('click', () => {
+      resetFlashcardsForm()
+      resetCardForm()
       this.closeForm()
     })
   }
 
-  addEventCloseFormListener = () => {
+  addEventCloseFormListener = (
+    resetFlashcardsForm: resetFlashcardsForm,
+    resetCardForm: resetCardForm
+  ) => {
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        this.resetForm()
+        resetFlashcardsForm()
+        resetCardForm()
         this.closeForm()
       }
     })
@@ -43,25 +53,24 @@ class OverlayView {
   //----- METHOD -----//
 
   closeForm = () => {
-    if (this.detailModalEl) {
-      this.confirmFormEl.removeAttribute('data-id')
-    }
+    // if (this.detailModalEl) {
+    //   this.confirmFormEl.removeAttribute('data-id')
+    // }
 
     this.flashcardsFormEl.classList.remove('open')
     this.cardFormEl.classList.remove('open')
+    // this.cardFormEl.btnReturn.classList.remove('active')
     this.confirmFormEl.classList.remove('open')
 
     this.detailModalEl.classList.remove('open')
-    this.overlayEL.classList.remove('open')
-  }
+    this.overlayEl.classList.remove('open')
 
-  resetForm = () => {
-    // Remove if there is an error
-    const inputEl = document.querySelector('.modal-flashcards__input')!.parentElement
+    const isEditDetailModal = this.detailModalEl.getAttribute('isEdit')
 
-    if (inputEl) {
-      const errorEl = inputEl.nextElementSibling as HTMLElement
-      this.error.clearError(inputEl, errorEl)
+    if (isEditDetailModal === 'on') {
+      this.detailModalEl.removeAttribute('isEdit')
+      this.detailModalEl.classList.add('open')
+      this.overlayEl.classList.add('open')
     }
   }
 }

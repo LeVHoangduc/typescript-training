@@ -63,13 +63,17 @@ class ModalFlashcardsView {
 
         loadFlashcards()
 
-        this.resetForm()
+        this.resetFlashcardsForm()
         this.closeForm()
       }
     })
   }
 
-  resetForm = () => {
+  resetFlashcardsForm = () => {
+    const inputEl: HTMLElement = this.formFlashcardsEl.flashcards.parentElement
+    const errorEl = inputEl.nextElementSibling as HTMLElement
+
+    this.error.clearError(inputEl, errorEl)
     this.formFlashcardsEl.flashcards.value = DefaultValues.EmptyString
   }
 

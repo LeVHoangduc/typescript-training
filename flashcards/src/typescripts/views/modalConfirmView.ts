@@ -47,7 +47,7 @@ class ModalConfirm {
       let type = this.confirmFormEl.getAttribute('type')
 
       // Send id to database
-      if (type === DataSources.flashcards) {
+      if (type === DataSources.Flashcards) {
         await deleteFlashcards(id)
 
         loadFlashcards()

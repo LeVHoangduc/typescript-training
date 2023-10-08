@@ -56,14 +56,13 @@ class ModalDetailView {
 
         this.confirmFormEl.setAttribute('data-id', cardData.id as string)
 
-        // Populate data for form edit
+        // Load data to detail form
         this.detailModalEl.setAttribute('data-id', cardData.id as string)
 
         this.wordEl.textContent = `${cardData.word}`
         this.description.textContent = `${cardData.description}`
 
         this.detailModalEl.classList.add('open')
-
         this.overlayEl.classList.add('open')
       }
     })
@@ -78,7 +77,7 @@ class ModalDetailView {
 
       const cardEl = this.wordEl.textContent
 
-      if (cardEl) openModalConfirm(cardEl, DataSources.card)
+      if (cardEl) openModalConfirm(cardEl, DataSources.Card)
     })
   }
 
@@ -94,41 +93,23 @@ class ModalDetailView {
     this.btnEditEl.addEventListener('click', async e => {
       e.preventDefault()
 
-      // Show the edit modal.
+      // Show the modal card for editing.
       openModalCard()
 
       const cardID = this.detailModalEl.getAttribute('data-id')
 
       if (cardID) {
-        // Fetch card details for editing.
+        // Get card details for editing.
         const getCardID = getCardDetail(cardID) as ICard
 
         // Load current data into the edit form.
         setDataForm(getCardID, cardID)
         this.detailModalEl.classList.remove('open')
+        // Set status is editing for modal detail
+        this.detailModalEl.setAttribute('isEdit', 'on')
       }
     })
   }
-
-  //----- METHOD   -----//
-
-  /**
-   * Handle the editing of a card's details.
-   * @param {string} cardId - The ID of the card being edited.
-   * @param {Object} card - The card object containing details to populate the form with.
-   */
-  //   handleEdit = (cardId, card) => {
-  // Set data-id attribute to link modal-card with modal-detail
-  // this.cardFormEl.setAttribute('data-id', cardId)
-
-  // Populate form fields with card details
-  //     this.cardFormEl.language.value = card.language
-  //     this.cardFormEl.word.value = card.word
-  //     this.cardFormEl.type.value = card.type
-  //     this.cardFormEl.meaning.value = card.meaning
-  //     this.cardFormEl.description.value = card.description
-  //     this.cardFormEl.captionPhoto.value = card.captionPhoto
-  //   }
 }
 
 export default ModalDetailView

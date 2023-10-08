@@ -6,7 +6,7 @@ class CardService extends ApiService<CardModel> {
   private cards: CardModel[]
 
   constructor() {
-    super(path.card)
+    super(path.Card)
     this.init()
   }
 

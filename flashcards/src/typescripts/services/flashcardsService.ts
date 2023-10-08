@@ -6,7 +6,7 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
   flashcards: FlashcardsModel[]
 
   constructor() {
-    super(path.flashcards)
+    super(path.Flashcards)
   }
 
   init = async (): Promise<void> => {

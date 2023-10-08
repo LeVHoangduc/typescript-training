@@ -124,7 +124,7 @@ class CardView {
   //----- METHODS -----//
 
   resetCards = () => {
-    this.titleEl.textContent = DataSources.flashcards
+    this.titleEl.textContent = DataSources.Flashcards
     this.cardListEl.innerHTML = DefaultValues.EmptyString
   }
 }

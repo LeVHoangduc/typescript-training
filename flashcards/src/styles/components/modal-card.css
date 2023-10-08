@@ -11,8 +11,22 @@
   z-index: 1;
 }
 
+.modal-card__header {
+  display: flex;
+}
+
+.modal-card__return {
+  min-width: 48px;
+  height: 48px;
+  visibility: hidden;
+}
+
+.modal-card__return.active {
+  visibility: visible;
+}
+
 .modal-card__title {
-  padding-left: 45px;
+  padding-left: 10px;
 }
 
 .modal-card__content {

@@ -12,16 +12,27 @@ export const DefaultValues = {
 }
 
 export const path = {
-  flashcards: '/flashcards',
-  card: '/card',
+  Flashcards: '/flashcards',
+  Card: '/card',
 }
 
 export const DataSources = {
-  user: 'user',
-  card: 'card',
-  flashcards: 'flashcards',
+  User: 'user',
+  Card: 'card',
+  Flashcards: 'flashcards',
 }
 
 export const HTMLAttribute = {
-  dataID: 'data-id',
+  DataID: 'data-id',
+}
+
+export const Status = {
+  Active: 'active',
+  IsEdit: 'isEdit',
+  Open: 'open',
+}
+
+export const Action = {
+  Update: 'Update',
+  Create: 'Create',
 }
