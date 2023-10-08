@@ -1,5 +1,6 @@
 import CardView from './cardView'
 import FlashcardsView from './flashcardsView'
+import LoginView from './loginView'
 import ModalCardView from './modalCardView'
 import ModalConfirm from './modalConfirmView'
 import ModalDetailView from './modalDetailView'
@@ -17,7 +18,10 @@ class View {
   modalDetailView: ModalDetailView
   modalConfirmView: ModalConfirm
 
+  loginView: LoginView
+
   overlayView: OverlayView
+
   constructor() {
     this.flashcardsView = new FlashcardsView()
     this.cardView = new CardView()
@@ -27,6 +31,8 @@ class View {
     this.modalDetailView = new ModalDetailView()
     this.modalCardView = new ModalCardView()
     this.modalConfirmView = new ModalConfirm()
+
+    this.loginView = new LoginView()
 
     this.overlayView = new OverlayView()
   }

@@ -14,12 +14,21 @@ export const DefaultValues = {
 export const Path = {
   Flashcards: '/flashcards',
   Card: '/card',
+  User: '/user',
+  Home: 'home.html',
+  Root: '/',
+  Login: '/index.html',
 }
 
 export const DataSources = {
   User: 'user',
   Card: 'card',
   Flashcards: 'flashcards',
+}
+
+export const FieldNames = {
+  Email: 'email',
+  Password: 'password',
 }
 
 export const HTMLAttribute = {

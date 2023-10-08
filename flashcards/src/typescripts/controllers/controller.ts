@@ -1,7 +1,9 @@
-import { DefaultValues } from '../enums/enums'
+import { DataSources, DefaultValues, Path } from '../enums/enums'
+import { localStorageHelper } from '../helpers/localStorageHelper'
 import { utilities } from '../helpers/utilities'
-import CardModel, { ICard } from '../models/cardModel'
-import FlashcardsModel, { IFlashcards } from '../models/flashcardsModels'
+import { ICard } from '../models/cardModel'
+import { IFlashcards } from '../models/flashcardsModels'
+import { IUser } from '../models/userModel'
 import Service from '../services/service'
 import View from '../views/view'
 
@@ -19,17 +21,41 @@ class Controller {
     this.view = view
   }
 
-  init = async (): Promise<void> => {
+  //-----     LOGIN AND LOGOUT CONTROLLER     -----//
+
+  initLogin = async (): Promise<void> => {
+    const location = window.location.pathname
+
+    if (location === Path.Root || location === Path.Login) {
+      localStorageHelper.removeLocalStorage(DataSources.User)
+    }
     await this.service.init()
-    this.initFlashcardsView()
-    this.initSearchView()
+    this.initLoginView()
+  }
 
-    this.initModalFlashcardsCardView()
-    this.initModalCardView()
-    this.initModalDetailView()
-    this.initModalConfirm()
+  initLoginView = () => {
+    this.view.loginView.addEventLoginListener(this.isValidUser)
+  }
 
-    this.initOverLay()
+  // initLogout = () => {
+  //   this.view.logoutView.addEventLogOut()
+  // }
+
+  //-----       HOME CONTROLLER               -----//
+
+  initHome = async (): Promise<void> => {
+    if (utilities.saveStatusLogin()) {
+      await this.service.init()
+      this.initFlashcardsView()
+      this.initSearchView()
+
+      this.initModalFlashcardsCardView()
+      this.initModalCardView()
+      this.initModalDetailView()
+      this.initModalConfirm()
+
+      this.initOverLay()
+    }
   }
 
   //-----   FLASHCARDS CONTROLLER     -----//
@@ -92,6 +118,8 @@ class Controller {
     this.view.overlayView.addEventCloseFormListener(this.resetFlashcardsForm, this.resetCardForm)
     this.view.overlayView.addEventEscapeListener()
   }
+  //-----     USER METHODS           -----//
+  isValidUser = (user: IUser) => this.service.userService.isValidUser(user)
 
   //-----     FLASHCARDS METHODS     -----//
 

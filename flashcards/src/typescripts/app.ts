@@ -13,6 +13,7 @@ export class App {
    */
   start = async (): Promise<void> => {
     const controller: Controller = new Controller(new Service(), new View())
-    await controller.init()
+    await controller.initLogin()
+    await controller.initHome()
   }
 }

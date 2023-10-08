@@ -2,6 +2,13 @@
  * Message for the form validator.
  */
 export const MESSAGE = {
+  EMAIL_REQUIRED: 'The email is required',
+  INVALID_EMAIL: 'The email is invalid',
+
+  PASSWORD_REQUIRED: 'The password is required',
+  INVALID_PASSWORD:
+    'Must be 8 or more characters and contain at least 1 number and 1 special character',
+
   CONTENT_REQUIRED: 'The content is required',
   INVALID_CONTENT: 'The content is invalid!',
 
@@ -38,4 +45,7 @@ export const SUCCESS_MESSAGE = {
 export const REGEX = {
   FLASHCARDS: /^[^\d\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/,
   CONTENT: /^.{1,128}$/,
+
+  EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  PASSWORD: /^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
 }

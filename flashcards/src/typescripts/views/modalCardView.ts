@@ -1,4 +1,4 @@
-import { Action, DataSources, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
+import { Action, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
 import { ICard } from '../models/cardModel'
 import ValidationForm, { fieldCheck } from '../validation/validationForm'
 import Error from './errorView'
@@ -54,8 +54,7 @@ class ModalCardView {
       }
 
       // Validate form inputs
-      const inputCheck = this.validationForm.validationCard(cardData) as fieldCheck[]
-
+      const inputCheck = this.validationForm.validationCard(cardData)
       const isValidation = this.isValidation(inputCheck)
 
       if (isValidation) {
