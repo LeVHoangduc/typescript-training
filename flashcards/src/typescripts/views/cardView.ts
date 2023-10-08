@@ -3,7 +3,7 @@ import CardModel, { ICard } from '../models/cardModel'
 import Template from '../templates/templates'
 
 type cardList = () => CardModel[]
-type openModalConfirm = (itemDelete: string, type: string) => void
+type openConfirmModal = (itemDelete: string, type: string) => void
 type openCardForm = () => void
 type setDataForm = (card: ICard, id: string) => void
 type getCardDetail = (id: string) => ICard | undefined
@@ -12,7 +12,6 @@ class CardView {
   private cardListEl: HTMLElement
   private cardContentEl: NodeListOf<Element>
 
-  private inputEl: HTMLElement
   private titleEl: HTMLElement
 
   private confirmFormEl: HTMLFormElement
@@ -20,8 +19,6 @@ class CardView {
 
   constructor() {
     this.cardListEl = document.querySelector('.card-list__body')!
-
-    this.inputEl = document.querySelector('.header__search__input')!
     this.titleEl = document.querySelector('.card-list__title')!
 
     this.confirmFormEl = document.querySelector('.modal-confirm')!
@@ -30,7 +27,7 @@ class CardView {
 
   //----- EVENT LISTENER -----//
 
-  addEventDeleteListener = (openModalConfirm: openModalConfirm) => {
+  addEventDeleteListener = (openConfirmModal: openConfirmModal) => {
     this.cardContentEl = document.querySelectorAll('.card-list__content')!
 
     this.cardContentEl.forEach(card => {
@@ -46,7 +43,7 @@ class CardView {
           this.confirmFormEl.setAttribute(HTMLAttribute.DataID, id)
           this.confirmFormEl.setAttribute(HTMLAttribute.Type, type)
 
-          openModalConfirm(itemDelete, type)
+          openConfirmModal(itemDelete, type)
         }
       })
     })

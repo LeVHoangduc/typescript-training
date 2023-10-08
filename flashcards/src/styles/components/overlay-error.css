@@ -1,0 +1,12 @@
+.overlay-error {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.overlay-error.open {
+  display: block;
+}

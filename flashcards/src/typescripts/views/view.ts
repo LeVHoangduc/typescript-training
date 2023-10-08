@@ -5,10 +5,12 @@ import ModalConfirm from './modalConfirmView'
 import ModalDetailView from './modalDetailView'
 import ModalFlashcardsView from './modalFlashcardsView'
 import OverlayView from './overlayView'
+import SearchView from './searchView'
 
 class View {
   flashcardsView: FlashcardsView
   cardView: CardView
+  searchView: SearchView
 
   modalFlashcardsView: ModalFlashcardsView
   modalCardView: ModalCardView
@@ -19,6 +21,7 @@ class View {
   constructor() {
     this.flashcardsView = new FlashcardsView()
     this.cardView = new CardView()
+    this.searchView = new SearchView()
 
     this.modalFlashcardsView = new ModalFlashcardsView()
     this.modalDetailView = new ModalDetailView()

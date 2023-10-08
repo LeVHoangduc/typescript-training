@@ -34,6 +34,10 @@ h1 {
   color: var(--title-color);
 }
 
+.text--gray {
+  color: var(--overlay-color);
+}
+
 .text--input {
   font-weight: var(--fw-light);
   color: var(--dark-color);

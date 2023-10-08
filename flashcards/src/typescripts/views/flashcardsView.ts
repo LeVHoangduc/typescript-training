@@ -4,7 +4,7 @@ import Template from '../templates/templates'
 
 type getFlashcardsList = () => FlashcardsModel[]
 type loadCards = (category?: string) => void
-type openModalConfirm = (itemDelete: string, type: string) => void
+type openConfirmModal = (itemDelete: string, type: string) => void
 
 class FlashcardsView {
   private flashcardslistEl: HTMLElement
@@ -49,7 +49,7 @@ class FlashcardsView {
     })
   }
 
-  addEventDeleteFlashcards = (openModalConfirm: openModalConfirm) => {
+  addEventDeleteFlashcards = (openConfirmModal: openConfirmModal) => {
     this.flashcardslistEl.addEventListener('click', e => {
       const btnDelete = (e.target as HTMLElement).closest(
         '.flashcards__item .flashcards__delete'
@@ -69,7 +69,7 @@ class FlashcardsView {
 
         const itemDelete = flashcardsDeleteEl.textContent as string
 
-        openModalConfirm(itemDelete, type)
+        openConfirmModal(itemDelete, type)
       }
     })
   }

@@ -29,6 +29,16 @@ class Template {
     `
   static renderSelectFlashcards = (flashcards: IFlashcards) =>
     ` <option value="${flashcards.flashcards}" class="text text--capitalize">${flashcards.flashcards}</option>`
+
+  static renderSearchInformation = (card: ICard) =>
+    `<p class="text text--sm text--center search-content" data-id="${card.id}">${card.word}</p>`
+
+  static renderSearchError = () =>
+    ` <div class="d-flex-center search-error">
+        <img src="${require('../../assets/images/not-found.png')}" alt="not-found" />
+        <p class="text text--md text--gray text--semibold">Item not found</p>
+      </div>
+    `
 }
 
 export default Template

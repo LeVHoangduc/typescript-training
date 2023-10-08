@@ -27,6 +27,7 @@ export const HTMLAttribute = {
   Type: 'type',
   Item: 'item',
   IsEdit: 'isEdit',
+  IsSearch: 'isSearch',
 }
 
 export const Status = {

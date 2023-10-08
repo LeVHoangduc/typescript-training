@@ -74,7 +74,7 @@ class ModalConfirm {
    * @param itemDelete - Identify the item is deleted
    * @param type  - Get the type (e.g., "card", "flashcards")
    */
-  openModalConfirm = (itemDelete: string, type: string) => {
+  openConfirmModal = (itemDelete: string, type: string) => {
     this.confirmFormEl.classList.add(Status.Open)
     this.confirmMessageEl.textContent = `Do you want to delete ${itemDelete} ${type}`
 

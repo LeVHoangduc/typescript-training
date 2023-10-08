@@ -1,4 +1,4 @@
-import { Path } from '../enums/enums'
+import { DefaultValues, Path } from '../enums/enums'
 import CardModel, { ICard } from '../models/cardModel'
 import ApiService from './apiService'
 
@@ -48,6 +48,12 @@ class CardService extends ApiService<CardModel> {
     await this.deleteItem(id)
 
     this.cards = this.cards.filter(card => card.id !== id)
+  }
+
+  searchCard = (searchData: string) => {
+    const cardData = this.cards.filter(card => card.word.toLowerCase().includes(searchData))
+
+    return searchData === DefaultValues.EmptyString ? DefaultValues.EmptyArray : cardData
   }
 }
 

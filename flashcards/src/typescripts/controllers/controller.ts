@@ -1,6 +1,6 @@
 import { DefaultValues } from '../enums/enums'
 import { utilities } from '../helpers/utilities'
-import { ICard } from '../models/cardModel'
+import CardModel, { ICard } from '../models/cardModel'
 import FlashcardsModel, { IFlashcards } from '../models/flashcardsModels'
 import Service from '../services/service'
 import View from '../views/view'
@@ -22,7 +22,7 @@ class Controller {
   init = async (): Promise<void> => {
     await this.service.init()
     this.initFlashcardsView()
-    this.initCardView()
+    this.initSearchView()
 
     this.initModalFlashcardsCardView()
     this.initModalCardView()
@@ -32,24 +32,25 @@ class Controller {
     this.initOverLay()
   }
 
-  //----- FLASHCARDS CONTROLLER          -----//
+  //-----   FLASHCARDS CONTROLLER     -----//
 
   initFlashcardsView = () => {
     this.view.flashcardsView.renderFlashcardsView(this.getFlashcards)
     this.view.flashcardsView.createSlider()
 
     this.view.flashcardsView.addEventShowCard(this.loadCards)
-    this.view.flashcardsView.addEventDeleteFlashcards(this.openModalConfirm)
+    this.view.flashcardsView.addEventDeleteFlashcards(this.openConfirmModal)
   }
 
-  //-----      CARD CONTROLLER       -----//
-
-  initCardView = () => {
-    // this.loadCards()
-    // this.view.cardView.addEventDeleteListener(this.openModalConfirm)
+  //-----   SEARCH CONTROLLER         -----//
+  initSearchView = () => {
+    this.view.searchView.addEventSearchCardListener(this.searchCard)
+    this.view.searchView.addEventEnterListener(this.searchCard, this.openOverlayError)
+    this.view.searchView.addEventInputListener()
+    this.view.searchView.addEventClickCardListener(this.openDetailModal, this.closeOverlayError)
   }
 
-  //-----      MODAL CONTROLLER      -----//
+  //-----   MODAL CONTROLLER          -----//
 
   initModalConfirm = () => {
     this.view.modalConfirmView.addEventConfirm(
@@ -77,9 +78,9 @@ class Controller {
 
   initModalDetailView = () => {
     this.view.modalDetailView.addEventOpenDetailListener(this.getCardDetail)
-    this.view.modalDetailView.addEventDeleteListener(this.openModalConfirm)
+    this.view.modalDetailView.addEventDeleteListener(this.openConfirmModal)
     this.view.modalDetailView.addEventEditListener(
-      this.openModalCard,
+      this.openCardModal,
       this.getCardDetail,
       this.setDataForm
     )
@@ -89,6 +90,7 @@ class Controller {
   initOverLay = () => {
     this.view.overlayView.addEventClickOutSide(this.resetFlashcardsForm, this.resetCardForm)
     this.view.overlayView.addEventCloseFormListener(this.resetFlashcardsForm, this.resetCardForm)
+    this.view.overlayView.addEventEscapeListener()
   }
 
   //-----     FLASHCARDS METHODS     -----//
@@ -181,21 +183,30 @@ class Controller {
     // Save category after loadCards to using when delete card
     utilities.saveCategoryCurrent(category)
 
-    this.view.cardView.addEventDeleteListener(this.openModalConfirm)
+    this.view.cardView.addEventDeleteListener(this.openConfirmModal)
     this.view.cardView.addEventEditListener(
-      this.openModalCard,
+      this.openCardModal,
       this.getCardDetail,
       this.setDataForm
     )
   }
 
+  searchCard = (searchData: string): ICard[] => {
+    return this.service.cardService.searchCard(searchData)
+  }
+
   //-----      MODALS METHODS         -----//
 
-  openModalConfirm = (itemDelete: string, type: string) =>
-    this.view.modalConfirmView.openModalConfirm(itemDelete, type)
+  openConfirmModal = (itemDelete: string, type: string) => {
+    this.view.modalConfirmView.openConfirmModal(itemDelete, type)
+  }
 
-  openModalCard = () => {
+  openCardModal = () => {
     this.view.modalCardView.openForm()
+  }
+
+  openDetailModal = (card: HTMLElement) => {
+    this.view.modalDetailView.openDetailModal(this.getCardDetail, card)
   }
 
   setDataForm = (card: ICard, id: string) => {
@@ -212,6 +223,16 @@ class Controller {
 
   resetCardForm = () => {
     this.view.modalCardView.resetCardForm()
+  }
+
+  //-----      OVERLAY METHODS        -----//
+
+  openOverlayError = () => {
+    this.view.overlayView.openOverlayError()
+  }
+
+  closeOverlayError = () => {
+    this.view.overlayView.closeOverlayError()
   }
 }
 

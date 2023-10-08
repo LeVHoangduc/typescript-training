@@ -3,8 +3,8 @@ import { ICard } from '../models/cardModel'
 import Error from './errorView'
 
 type getCardDetail = (id: string) => ICard | undefined
-type openModalConfirm = (itemDelete: string, type: string) => void
-type openModalCard = () => void
+type openConfirmModal = (itemDelete: string, type: string) => void
+type openCardModal = () => void
 type setDataForm = (card: ICard, id: string) => void
 
 class ModalDetailView {
@@ -54,16 +54,7 @@ class ModalDetailView {
         const cardEl = (e.target as HTMLElement).closest('.card-list__content') as HTMLElement
         const cardData = getCardDetail(cardEl.getAttribute(HTMLAttribute.DataID) as string) as ICard
 
-        this.confirmFormEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
-
-        // Load data to detail form
-        this.detailModalEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
-
-        this.wordEl.textContent = `${cardData.word}`
-        this.description.textContent = `${cardData.description}`
-
-        this.detailModalEl.classList.add(Status.Open)
-        this.overlayEl.classList.add(Status.Open)
+        this.setDataDetailModal(cardData)
       }
     })
   }
@@ -71,13 +62,13 @@ class ModalDetailView {
   /**
    * Method to add an event listener to the delete button.
    */
-  addEventDeleteListener = (openModalConfirm: openModalConfirm) => {
+  addEventDeleteListener = (openConfirmModal: openConfirmModal) => {
     this.btnDeleteEl.addEventListener('click', e => {
       e.preventDefault()
 
       const cardEl = this.wordEl.textContent
 
-      if (cardEl) openModalConfirm(cardEl, DataSources.Card)
+      if (cardEl) openConfirmModal(cardEl, DataSources.Card)
     })
   }
 
@@ -86,7 +77,7 @@ class ModalDetailView {
    * @param {Function} getCardDetail - Function to fetch card details.
    */
   addEventEditListener = (
-    openModalCard: openModalCard,
+    openCardModal: openCardModal,
     getCardDetail: getCardDetail,
     setDataForm: setDataForm
   ) => {
@@ -94,7 +85,7 @@ class ModalDetailView {
       e.preventDefault()
 
       // Show the modal card for editing.
-      openModalCard()
+      openCardModal()
 
       const cardID = this.detailModalEl.getAttribute(HTMLAttribute.DataID)
 
@@ -109,6 +100,26 @@ class ModalDetailView {
         this.detailModalEl.setAttribute(HTMLAttribute.IsEdit, Status.On)
       }
     })
+  }
+
+  openDetailModal = (getCardDetail: getCardDetail, card: HTMLElement) => {
+    const cardData = getCardDetail(card.getAttribute(HTMLAttribute.DataID) as string) as ICard
+
+    this.setDataDetailModal(cardData)
+    this.detailModalEl.setAttribute(HTMLAttribute.IsSearch, Status.On)
+  }
+
+  setDataDetailModal = (cardData: ICard) => {
+    this.confirmFormEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
+
+    // Load data to detail form
+    this.detailModalEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
+
+    this.wordEl.textContent = `${cardData.word}`
+    this.description.textContent = `${cardData.description}`
+
+    this.detailModalEl.classList.add(Status.Open)
+    this.overlayEl.classList.add(Status.Open)
   }
 }
 
