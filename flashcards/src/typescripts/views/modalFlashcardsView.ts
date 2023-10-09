@@ -12,8 +12,9 @@ class ModalFlashcardsView {
   private validationForm: ValidationForm
   private error: Error
 
-  private addFlashcards: HTMLElement
   private formFlashcardsEl: HTMLFormElement
+  private addFlashcardsFormEl: HTMLElement
+  private closeFlashcardsFormEl: HTMLElement
 
   private overlayEl: HTMLElement
 
@@ -21,8 +22,9 @@ class ModalFlashcardsView {
     this.validationForm = new ValidationForm()
     this.error = new Error()
 
-    this.addFlashcards = document.querySelector('.flashcards__add')!
     this.formFlashcardsEl = document.querySelector('.modal-flashcards')!
+    this.addFlashcardsFormEl = document.querySelector('.flashcards__add')!
+    this.closeFlashcardsFormEl = document.querySelector('.modal-flashcards__close')!
 
     this.overlayEl = document.querySelector('.overlay')!
   }
@@ -30,10 +32,17 @@ class ModalFlashcardsView {
   // ---- EVENT LISTENER ---- //
 
   addEventOpenFormListener = () => {
-    this.addFlashcards.addEventListener('click', e => {
+    this.addFlashcardsFormEl.addEventListener('click', e => {
       e.preventDefault()
       this.formFlashcardsEl.classList.add(Status.Open)
       this.overlayEl.classList.add(Status.Open)
+    })
+  }
+
+  addEventCloseFormListener = () => {
+    this.closeFlashcardsFormEl.addEventListener('click', () => {
+      this.resetFlashcardsForm()
+      this.closeFlashcardsForm()
     })
   }
 
@@ -43,7 +52,6 @@ class ModalFlashcardsView {
    */
   addEventAddFlashcards = (saveFlashcards: saveFlashcards, loadFlashcards: loadFlashcards) => {
     const btnSave = this.formFlashcardsEl.btnSave
-    // const btnCancel = this.formFlashcardsEl.btnCancel
 
     btnSave.addEventListener('click', async (e: MouseEvent) => {
       e.preventDefault()
@@ -64,7 +72,7 @@ class ModalFlashcardsView {
         loadFlashcards()
 
         this.resetFlashcardsForm()
-        this.closeForm()
+        this.closeFlashcardsForm()
       }
     })
   }
@@ -77,7 +85,7 @@ class ModalFlashcardsView {
     this.formFlashcardsEl.flashcards.value = DefaultValues.EmptyString
   }
 
-  closeForm = () => {
+  closeFlashcardsForm = () => {
     this.formFlashcardsEl.classList.remove(Status.Open)
     this.overlayEl.classList.remove(Status.Open)
   }
@@ -95,7 +103,6 @@ class ModalFlashcardsView {
     let isValid = true
 
     const inputEl: HTMLElement = this.formFlashcardsEl.flashcards.parentElement
-
     const errorEl = inputEl.nextElementSibling as HTMLElement
 
     if (inputCheck.isValid) this.error.clearError(inputEl, errorEl)

@@ -52,9 +52,8 @@
         <h2 class="text text--lg">Flashcards</h2>
         <div class="flashcards__wrapper">
           <div class="flashcards__header">
-            <p class="text text--md text--light flashcards__option">My flashcards</p>
             <p class="text text--md text--light flashcards__option flashcards__add">
-              Add flashcards
+              Create flashcards
             </p>
           </div>
           <img src="assets/icons/left.svg" alt="left" id="prev-slide" class="slide-buttons" />
@@ -102,6 +101,7 @@
     </main>
 
     <div class="modal-detail">
+      <img src="assets/icons/close-light.svg" alt="close-form" class="modal-detail__close" />
       <p
         class="text text--light text--center text--detail text--capitalize d-flex-center modal-detail__content"
       >
@@ -124,6 +124,7 @@
       <div class="modal-card__header">
         <img src="assets/icons/back.svg" alt="back" class="modal-card__return" />
         <p class="text text--title modal-card__title">Create your card</p>
+        <img src="assets/icons/close-form.svg" alt="close" class="modal-card__close" />
       </div>
       <div class="row modal-card__content">
         <div class="col-6 modal-card__inputs">
@@ -194,7 +195,10 @@
 
     <!-- modal add language -->
     <form class="modal-flashcards">
-      <p class="text text--title">Create your flashcards</p>
+      <div class="modal-flashcards__header">
+        <p class="text text--title">Create your flashcards</p>
+        <img src="assets/icons/close-form.svg" alt="close-form" class="modal-flashcards__close" />
+      </div>
       <div class="modal-flashcards__inputs">
         <label for="flashcards" class="text text--extrabold">Language*</label>
         <span class="input-wrapper">

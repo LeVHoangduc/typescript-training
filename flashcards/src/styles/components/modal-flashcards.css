@@ -11,6 +11,11 @@
   z-index: 1;
 }
 
+.modal-flashcards__header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .modal-flashcards__inputs {
   padding-top: 28px;
 }
@@ -28,6 +33,14 @@
 
 .modal-flashcards__input::placeholder {
   color: var(--primary-color);
+}
+
+.modal-flashcards__close {
+  opacity: 0.5;
+}
+
+.modal-flashcards__close:hover {
+  opacity: 1;
 }
 
 .modal-flashcards__create {

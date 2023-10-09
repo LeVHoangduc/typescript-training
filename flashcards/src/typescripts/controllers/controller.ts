@@ -102,18 +102,21 @@ class Controller {
 
   initModalFlashcardsCardView = () => {
     this.view.modalFlashcardsView.addEventOpenFormListener()
+    this.view.modalFlashcardsView.addEventCloseFormListener()
     this.view.modalFlashcardsView.addEventAddFlashcards(this.saveFlashcards, this.loadFlashcards)
   }
 
   initModalCardView = () => {
     this.view.modalCardView.addEventOpenFormListener()
     this.view.modalCardView.addEventCloseFormListener()
+    this.view.modalCardView.addEventOnKeyPressCloseListener()
     this.view.modalCardView.addEventReturnFormListener()
     this.view.modalCardView.addEventSubmission(this.saveCard, this.loadCards)
   }
 
   initModalDetailView = () => {
     this.view.modalDetailView.addEventOpenDetailListener(this.getCardDetail)
+    this.view.modalDetailView.addEventCloseDetailListener()
     this.view.modalDetailView.addEventDeleteListener(this.openConfirmModal)
     this.view.modalDetailView.addEventEditListener(
       this.openCardModal,

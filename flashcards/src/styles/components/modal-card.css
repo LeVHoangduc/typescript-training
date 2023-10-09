@@ -12,13 +12,26 @@
 }
 
 .modal-card__header {
+  position: relative;
   display: flex;
+}
+
+.modal-card__close {
+  position: absolute;
+  right: 0;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.modal-card__close:hover {
+  opacity: 1;
 }
 
 .modal-card__return {
   min-width: 48px;
   height: 48px;
   visibility: hidden;
+  cursor: pointer;
 }
 
 .modal-card__return.active {
@@ -43,6 +56,10 @@
   width: 100%;
   background-color: transparent;
   border-bottom: 1px solid var(--primary-color);
+}
+
+.modal-card__select {
+  cursor: pointer;
 }
 
 .modal-card__input::placeholder {

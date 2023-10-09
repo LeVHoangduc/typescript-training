@@ -25,6 +25,17 @@
   word-break: break-all;
 }
 
+.modal-detail__close {
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  opacity: 0.5;
+}
+
+.modal-detail__close:hover {
+  opacity: 1;
+}
+
 .modal-detail__description {
   flex-basis: 20%;
   word-break: break-all;

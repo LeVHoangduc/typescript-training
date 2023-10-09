@@ -10,12 +10,14 @@ class ModalCardView {
   private error: Error
 
   private cardFormEl: HTMLFormElement
-  private detailModalEl: HTMLElement
   private cardFormTitleEl: HTMLElement
   private cardFormReturnEl: HTMLElement
-  private btnAddEl: HTMLElement
+  private cardFormCloseEl: HTMLElement
+
+  private btnOpenFormEl: HTMLElement
   private btnCreateEl: HTMLElement
 
+  private detailModalEl: HTMLElement
   private overlayEl: HTMLElement
 
   constructor() {
@@ -23,12 +25,14 @@ class ModalCardView {
     this.error = new Error()
 
     this.cardFormEl = document.querySelector('.modal-card')!
-    this.detailModalEl = document.querySelector('.modal-detail')!
     this.cardFormTitleEl = document.querySelector('.modal-card__title')!
     this.cardFormReturnEl = document.querySelector('.modal-card__return')!
-    this.btnAddEl = document.querySelector('.profile__button')!
+    this.cardFormCloseEl = document.querySelector('.modal-card__close')!
+
+    this.btnOpenFormEl = document.querySelector('.profile__button')!
     this.btnCreateEl = document.querySelector('.modal-card__create')!
 
+    this.detailModalEl = document.querySelector('.modal-detail')!
     this.overlayEl = document.querySelector('.overlay')!
   }
 
@@ -70,12 +74,19 @@ class ModalCardView {
 
   // add event listener to add button for show card form
   addEventOpenFormListener = () => {
-    this.btnAddEl.addEventListener('click', () => {
+    this.btnOpenFormEl.addEventListener('click', () => {
       this.openForm()
     })
   }
 
   addEventCloseFormListener = () => {
+    this.cardFormCloseEl.addEventListener('click', e => {
+      this.resetCardForm()
+      this.closeCardForm()
+    })
+  }
+
+  addEventOnKeyPressCloseListener = () => {
     document.addEventListener('keydown', e => {
       if (e.key === Action.Escape) {
         this.resetCardForm()

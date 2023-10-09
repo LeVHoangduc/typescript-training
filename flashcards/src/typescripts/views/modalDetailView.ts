@@ -1,6 +1,5 @@
 import { DataSources, HTMLAttribute, Status } from '../enums/enums'
 import { ICard } from '../models/cardModel'
-import Error from './errorView'
 
 type getCardDetail = (id: string) => ICard | undefined
 type openConfirmModal = (itemDelete: string, type: string) => void
@@ -8,8 +7,9 @@ type openCardModal = () => void
 type setDataForm = (card: ICard, id: string) => void
 
 class ModalDetailView {
-  private error: Error
   private detailModalEl: HTMLFormElement
+  private closeDetailModalEl: HTMLElement
+
   private btnDeleteEl: HTMLElement
   private btnEditEl: HTMLElement
 
@@ -21,19 +21,17 @@ class ModalDetailView {
   private overlayEl: HTMLElement
 
   constructor() {
-    this.error = new Error()
-
     this.detailModalEl = document.querySelector('.modal-detail')!
+    this.closeDetailModalEl = document.querySelector('.modal-detail__close')!
+
     this.btnDeleteEl = document.querySelector('.modal-detail__button__delete')!
     this.btnEditEl = document.querySelector('.modal-detail__button__edit')!
 
-    this.confirmFormEl = document.querySelector('.modal-confirm')!
-
-    this.wordEl = document.querySelector('.modal-detail__content')!
-    this.description = document.querySelector('.modal-detail__description')!
-
     this.cardListEl = document.querySelector('.card-list__body')!
+    this.description = document.querySelector('.modal-detail__description')!
+    this.wordEl = document.querySelector('.modal-detail__content')!
 
+    this.confirmFormEl = document.querySelector('.modal-confirm')!
     this.overlayEl = document.querySelector('.overlay')!
   }
 
@@ -56,6 +54,12 @@ class ModalDetailView {
 
         this.setDataDetailModal(cardData)
       }
+    })
+  }
+
+  addEventCloseDetailListener = () => {
+    this.closeDetailModalEl.addEventListener('click', () => {
+      this.closeDetailModal()
     })
   }
 
@@ -109,7 +113,13 @@ class ModalDetailView {
     this.detailModalEl.setAttribute(HTMLAttribute.IsSearch, Status.On)
   }
 
+  closeDetailModal = () => {
+    this.detailModalEl.classList.remove('open')
+    this.overlayEl.classList.remove('open')
+  }
+
   setDataDetailModal = (cardData: ICard) => {
+    // Load data-id to confirm form for deleting
     this.confirmFormEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
 
     // Load data to detail form
