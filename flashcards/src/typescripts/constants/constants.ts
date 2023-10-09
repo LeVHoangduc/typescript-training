@@ -17,8 +17,7 @@ export const MESSAGE = {
  * Message for alert the error while fetching or rendering.
  */
 export const ERROR_MESSAGE = {
-  LOGIN_VALIDATION: 'Login failed, please check your username or password',
-  INVALID_INFORMATION: 'Something maybe is wrong in your email or password!',
+  INVALID_INFORMATION: 'Please check your email or password for errors!',
 
   GET_FLASHCARDS: "Server error! Couldn't load flashcards",
   GET_CARD_LIST: "Server error! Couldn't load card list",
@@ -26,6 +25,8 @@ export const ERROR_MESSAGE = {
   EXIST_FLASHCARDS: 'Flashcards is exist',
 
   SERVER_ERROR: 'Server Error! Please try again later',
+
+  LOADING_ERROR: "Server Error! Couldn't load data",
 }
 
 /**

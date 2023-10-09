@@ -30,7 +30,7 @@ class Controller {
     if (location === Path.Root || location === Path.Login) {
       localStorageHelper.removeLocalStorage(DataSources.User)
     }
-    await this.service.init()
+    await this.initService()
     this.initLoginView()
   }
 
@@ -46,7 +46,7 @@ class Controller {
 
   initHome = async (): Promise<void> => {
     if (utilities.saveStatusLogin()) {
-      await this.service.init()
+      await this.initService()
       this.initFlashcardsView()
       this.initSearchView()
 
@@ -56,6 +56,15 @@ class Controller {
       this.initModalConfirm()
 
       this.initOverLay()
+    }
+  }
+
+  //-----   SERVICE CONTROLLER        -----//
+  initService = async (): Promise<void> => {
+    try {
+      await this.service.init()
+    } catch (error) {
+      this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.LOADING_ERROR)
     }
   }
 
@@ -124,7 +133,10 @@ class Controller {
     const isUser = this.service.userService.isValidUser(user)
 
     if (!isUser) {
-      console.log('error')
+      this.view.notificationView.showNotification(
+        RequestState.Failed,
+        ERROR_MESSAGE.INVALID_INFORMATION
+      )
     }
 
     return isUser
