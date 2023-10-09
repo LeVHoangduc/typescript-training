@@ -21,6 +21,16 @@ class Utilities {
 
     return isUserLogged ? true : false
   }
+
+  /**
+   * Delays execution asynchronously for the specified time.
+   * @param {number} time - The time to delay in milliseconds.
+   * @returns {Promise<void>} A promise that resolves after the specified delay time.
+   */
+  notificationDelay = (time: number): Promise<void> =>
+    new Promise(resolve => {
+      setTimeout(() => resolve(), time)
+    })
 }
 
 export const utilities = new Utilities()

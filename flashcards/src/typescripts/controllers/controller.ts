@@ -1,4 +1,5 @@
-import { DataSources, DefaultValues, Path } from '../enums/enums'
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/constants'
+import { DataSources, DefaultValues, Path, RequestState } from '../enums/enums'
 import { localStorageHelper } from '../helpers/localStorageHelper'
 import { utilities } from '../helpers/utilities'
 import { ICard } from '../models/cardModel'
@@ -138,24 +139,36 @@ class Controller {
    */
   saveFlashcards = async (flashcardsData: IFlashcards): Promise<void> => {
     try {
-      await this.service.flashcardsService.addFlashcards(flashcardsData)
+      const isAdd = await this.service.flashcardsService.addFlashcards(flashcardsData)
 
-      console.log('success')
+      isAdd
+        ? this.view.notificationView.showNotification(
+            RequestState.Failed,
+            ERROR_MESSAGE.EXIST_FLASHCARDS
+          )
+        : this.view.notificationView.showNotification(
+            RequestState.Success,
+            SUCCESS_MESSAGE.ADD_FLASHCARDS
+          )
     } catch (error) {
-      console.log('error')
+      this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
     }
   }
 
   /**
-   * Method to delete a language card by its ID.
-   * @param {string} id - The ID of the language card to be deleted.
+   * Method to delete flashcards by its ID.
+   * @param {string} id - The ID of the flashcards to be deleted.
    */
   deleteFlashcards = async (id: string) => {
     try {
       await this.service.flashcardsService.deleteFlashcards(id)
-      console.log('done')
+
+      this.view.notificationView.showNotification(
+        RequestState.Success,
+        SUCCESS_MESSAGE.DELETE_FLASHCARDS
+      )
     } catch (error) {
-      console.log('error')
+      this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
     }
   }
 
@@ -171,14 +184,18 @@ class Controller {
     if (cardData.id) {
       try {
         await this.service.cardService.editCard(cardData)
+
+        this.view.notificationView.showNotification(RequestState.Success, SUCCESS_MESSAGE.EDIT_CARD)
       } catch (error) {
-        console.log(error)
+        this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
       }
     } else {
       try {
         await this.service.cardService.addCard(cardData)
+
+        this.view.notificationView.showNotification(RequestState.Success, SUCCESS_MESSAGE.ADD_CARD)
       } catch (error) {
-        console.log(error)
+        this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
       }
     }
   }
@@ -190,22 +207,17 @@ class Controller {
   deleteCard = async (id: string) => {
     try {
       await this.service.cardService.deleteCard(id)
+
+      this.view.notificationView.showNotification(RequestState.Success, SUCCESS_MESSAGE.DELETE_CARD)
     } catch (error) {
-      console.log(error)
+      this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
     }
   }
 
   getCardList = () => this.service.cardService.getCardList()
 
-  getCardDetail = (id: string) => {
-    try {
-      const data = this.service.cardService.getCardDetail(id) as ICard
+  getCardDetail = (id: string) => this.service.cardService.getCardDetail(id)
 
-      return data as ICard
-    } catch (error) {
-      console.log(error)
-    }
-  }
   /**
    * Method to load cards based on a specific category.
    * @param {string} category - The category for which to load cards.
@@ -227,9 +239,7 @@ class Controller {
     )
   }
 
-  searchCard = (searchData: string): ICard[] => {
-    return this.service.cardService.searchCard(searchData)
-  }
+  searchCard = (searchData: string): ICard[] => this.service.cardService.searchCard(searchData)
 
   //-----      MODALS METHODS         -----//
 

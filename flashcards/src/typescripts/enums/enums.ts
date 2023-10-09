@@ -47,6 +47,11 @@ export const Status = {
   On: 'on',
 }
 
+export const RequestState = {
+  Success: 'success',
+  Failed: 'failed',
+}
+
 export const Action = {
   Update: 'Update',
   Create: 'Create',

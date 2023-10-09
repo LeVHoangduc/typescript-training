@@ -17,8 +17,8 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
 
   getFlashcards = (): FlashcardsModel[] => this.flashcards
 
-  addFlashcards = async (flashcardsData: IFlashcards): Promise<void> => {
-    const flashcardsList = await this.getList()
+  addFlashcards = async (flashcardsData: IFlashcards): Promise<boolean> => {
+    const flashcardsList = this.flashcards
 
     const newFLashcards = new FlashcardsModel(flashcardsData)
 
@@ -28,11 +28,13 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
 
     if (!isExit) {
       // post new flashcards to database
-      this.postItem(newFLashcards)
+      await this.postItem(newFLashcards)
 
       // add new flashcards to model
       this.flashcards.push(newFLashcards)
     }
+
+    return isExit
   }
 
   /**
