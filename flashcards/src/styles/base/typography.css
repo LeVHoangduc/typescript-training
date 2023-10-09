@@ -38,9 +38,17 @@ h1 {
   color: var(--overlay-color);
 }
 
+.text--transparent {
+  color: var(--transparent-color);
+}
+
 .text--input {
   font-weight: var(--fw-light);
   color: var(--dark-color);
+}
+
+.text--xs {
+  font-size: 14px;
 }
 
 .text--sm {

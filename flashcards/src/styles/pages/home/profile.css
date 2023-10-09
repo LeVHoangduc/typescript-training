@@ -11,9 +11,17 @@
 }
 
 .profile__upload {
+  flex-direction: column;
   height: 187px;
-  border-radius: 16px;
   background-color: var(--secondary-color);
+  border-radius: 16px;
+}
+
+.profile__image {
+  width: 134px;
+  height: 101px;
+  margin-bottom: 16px;
+  cursor: pointer;
 }
 
 .profile__avatar {
