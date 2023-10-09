@@ -23,9 +23,9 @@
   justify-content: center;
   align-items: center;
   gap: 15px;
-  width: 216px;
+  width: 70%;
   height: 60px;
-  padding-left: 27px;
+  padding: 0 15px 0 27px;
   border-radius: 30px;
   background: var(--light-color);
 }
@@ -68,7 +68,7 @@
   position: absolute;
   display: none;
   top: 100%;
-  min-width: 220px;
+  width: 70%;
   padding: 20px 20px;
   border-radius: 20px;
   background-color: var(--light-color);
