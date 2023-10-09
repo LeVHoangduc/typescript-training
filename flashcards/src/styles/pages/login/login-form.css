@@ -48,4 +48,14 @@
 
 .socials {
   padding-top: 32px;
+  cursor: pointer;
+}
+
+.register-link {
+  cursor: pointer;
+}
+
+.socials-icon:hover,
+.register-link:hover {
+  opacity: 0.7;
 }
