@@ -1,0 +1,47 @@
+.notification {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 15px 30px;
+  border-radius: 15px;
+
+  visibility: hidden;
+}
+
+.notification--failed {
+  background-color: var(--background-error-color);
+  border: 1px solid var(--error-color);
+  visibility: visible;
+}
+
+.notification--success {
+  background-color: var(--success-color);
+  border: 1px solid var(--shadow-color);
+  visibility: visible;
+}
+
+.notification--failed .notification__icon {
+  width: 40px;
+  height: 40px;
+  background-image: url('../../assets/icons/notification-failed.svg');
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+}
+
+.notification--failed .notification__message {
+  color: var(--error-color);
+}
+
+.notification--success .notification__icon {
+  width: 40px;
+  height: 40px;
+  background-image: url('../../assets/icons/notification-success.svg');
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+}

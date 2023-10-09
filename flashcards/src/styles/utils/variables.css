@@ -14,12 +14,13 @@
   --primary-color: #3b82f6;
   --secondary-color: #60a5fa;
   --error-color: #ff0000;
-  --success-color: #0c7040;
+  --success-color: #e3f2fd;
   --light-color: #f8fafc;
   --dark-color: #000000;
   --title-color: #1a1a1a;
   --overlay-color: #00000096;
   --shadow-color: #00000040;
   --background-color: #007ec730;
+  --background-error-color: #fcb0b3;
   /* End color          */
 }
