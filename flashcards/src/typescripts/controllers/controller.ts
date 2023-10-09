@@ -14,15 +14,15 @@ class Controller {
 
   /**
    * Constructor of Controller object
-   * @param {Service} service
-   * @param {View} view
+   * @param {Service} service - Manage all operations on users
+   * @param {View} view - Responsible for refreshing and changing the display screen
    */
   constructor(service: Service, view: View) {
     this.service = service
     this.view = view
   }
 
-  //-----     LOGIN AND LOGOUT CONTROLLER     -----//
+  //-----     LOGIN  CONTROLLER       -----//
 
   initLogin = async (): Promise<void> => {
     const location = window.location.pathname
@@ -38,12 +38,7 @@ class Controller {
     this.view.loginView.addEventLoginListener(this.isValidUser)
   }
 
-  initProfileView = () => {
-    this.view.profileView.addEventOpenProfileListener(this.openOverlaySecond)
-    this.view.profileView.addEventLogOutListener(this.closeOverlaySecond)
-  }
-
-  //-----       HOME CONTROLLER               -----//
+  //-----       HOME CONTROLLER       -----//
 
   initHome = async (): Promise<void> => {
     if (utilities.saveStatusLogin()) {
@@ -72,10 +67,16 @@ class Controller {
 
   //-----   FLASHCARDS CONTROLLER     -----//
 
+  initProfileView = () => {
+    this.view.profileView.addEventOpenProfileListener(this.openOverlaySecond)
+    this.view.profileView.addEventLogOutListener(this.closeOverlaySecond)
+  }
+
+  //-----   FLASHCARDS CONTROLLER     -----//
+
   initFlashcardsView = () => {
     this.view.flashcardsView.renderFlashcardsView(this.getFlashcards)
     this.view.flashcardsView.createSlider()
-
     this.view.flashcardsView.addEventShowCard(this.loadCards)
     this.view.flashcardsView.addEventDeleteFlashcards(this.openConfirmModal)
   }
@@ -84,8 +85,8 @@ class Controller {
   initSearchView = () => {
     this.view.searchView.addEventSearchCardListener(this.searchCard)
     this.view.searchView.addEventEnterListener(this.searchCard, this.openOverlaySecond)
-    this.view.searchView.addEventInputListener()
     this.view.searchView.addEventClickCardListener(this.openDetailModal, this.closeOverlaySecond)
+    this.view.searchView.addEventInputListener()
   }
 
   //-----   MODAL CONTROLLER          -----//
@@ -126,16 +127,26 @@ class Controller {
       this.setDataForm
     )
   }
-  //-----     OVERLAY CONTROLLER     -----//
 
+  //-----     OVERLAY CONTROLLER     -----//
   initOverLay = () => {
     this.view.overlayView.addEventClickOutSide(this.resetFlashcardsForm, this.resetCardForm)
     this.view.overlayView.addEventEscapeListener(this.resetFlashcardsForm, this.resetCardForm)
   }
+
   //-----     USER METHODS           -----//
+
+  /**
+   * Validates a user by checking if they are valid according to the UserService.
+   * If the user is not valid, a notification with an error message is displayed.
+   * @param {IUser} user - The user object to validate.
+   * @returns {boolean} Returns true if the user is valid; otherwise, returns false.
+   */
   isValidUser = (user: IUser) => {
+    // Check if the user is valid using the UserService.
     const isUser = this.service.userService.isValidUser(user)
 
+    // If the user is not valid, display an error notification.
     if (!isUser) {
       this.view.notificationView.showNotification(
         RequestState.Failed,
@@ -149,24 +160,29 @@ class Controller {
   //-----     FLASHCARDS METHODS     -----//
 
   /**
-   * Method to save a flashcards
-   * @param {Object} flashcardsData - The flashcards object to be saved.
-   * @returns {Promise<boolean>} - A Promise that resolves to true if add success, otherwise false.
+   * Method to save flashcards data.
+   * @param {IFlashcards} flashcardsData - The flashcards data to be saved.
+   * @returns {Promise<void>}  A Promise that resolves when the operation completes successfully.
    */
   saveFlashcards = async (flashcardsData: IFlashcards): Promise<void> => {
     try {
+      // Attempt to add the flashcards data using the FlashcardsService.
       const isAdd = await this.service.flashcardsService.addFlashcards(flashcardsData)
 
-      isAdd
-        ? this.view.notificationView.showNotification(
-            RequestState.Failed,
-            ERROR_MESSAGE.EXIST_FLASHCARDS
-          )
-        : this.view.notificationView.showNotification(
-            RequestState.Success,
-            SUCCESS_MESSAGE.ADD_FLASHCARDS
-          )
+      // Show a notification based on the result of the operation.
+      if (isAdd) {
+        this.view.notificationView.showNotification(
+          RequestState.Failed,
+          ERROR_MESSAGE.EXIST_FLASHCARDS
+        )
+      } else {
+        this.view.notificationView.showNotification(
+          RequestState.Success,
+          SUCCESS_MESSAGE.ADD_FLASHCARDS
+        )
+      }
     } catch (error) {
+      // Display an error notification in case of any exceptions.
       this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
     }
   }
@@ -196,21 +212,34 @@ class Controller {
 
   //-----      CARDS METHODS         -----//
 
+  /**
+   * Save or edit a card's data depending on whether it has an ID
+   * @param {ICard} cardData - The card data to be saved or edited
+   * @returns {Promise<void>}  A Promise that resolves when the operation completes
+   */
   saveCard = async (cardData: ICard): Promise<void> => {
     if (cardData.id) {
+      // If the card has an ID, it is edited.
       try {
+        // Attempt to edit the card using the CardService.
         await this.service.cardService.editCard(cardData)
 
+        // Show a success notification after editing the card.
         this.view.notificationView.showNotification(RequestState.Success, SUCCESS_MESSAGE.EDIT_CARD)
       } catch (error) {
+        // Display an error notification in case of any exceptions during editing.
         this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
       }
     } else {
+      // If the card does not have an ID, it is added as a new card.
       try {
+        // Attempt to add the card using the CardService.
         await this.service.cardService.addCard(cardData)
 
+        // Show a success notification after adding the new card.
         this.view.notificationView.showNotification(RequestState.Success, SUCCESS_MESSAGE.ADD_CARD)
       } catch (error) {
+        // Display an error notification in case of any exceptions during addition.
         this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
       }
     }
@@ -222,22 +251,30 @@ class Controller {
    */
   deleteCard = async (id: string) => {
     try {
+      // Attempt to delete the card using the CardService.
       await this.service.cardService.deleteCard(id)
 
+      // Show a success notification after deleting the card.
       this.view.notificationView.showNotification(RequestState.Success, SUCCESS_MESSAGE.DELETE_CARD)
     } catch (error) {
+      // Display an error notification in case of any exceptions during deletion.
       this.view.notificationView.showNotification(RequestState.Failed, ERROR_MESSAGE.SERVER_ERROR)
     }
   }
 
   getCardList = () => this.service.cardService.getCardList()
 
+  /**
+   * Retrieve card details by its ID.
+   * @param {string} id - The ID of the card to fetch details for.
+   * @returns {CardDetail}  A resolve to the card's details.
+   */
   getCardDetail = (id: string) => this.service.cardService.getCardDetail(id)
 
   /**
    * Method to load cards based on a specific category.
    * @param {string} category - The category for which to load cards.
-   * @returns {boolean} - Returns true if cards are successfully loaded, otherwise false.
+   * @returns {boolean}  Returns true if cards are successfully loaded, otherwise false.
    */
   loadCards = (category: string = DefaultValues.Category) => {
     // view receive category and render as follow category

@@ -1,4 +1,4 @@
-import { Action, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
+import { Action, DefaultValues, HTMLAttribute, KeyMap, Status } from '../enums/enums'
 import { ICard } from '../models/cardModel'
 import ValidationForm, { fieldCheck } from '../validation/validationForm'
 import Error from './errorView'
@@ -88,7 +88,7 @@ class ModalCardView {
 
   addEventOnKeyPressCloseListener = () => {
     document.addEventListener('keydown', e => {
-      if (e.key === Action.Escape) {
+      if (e.key === KeyMap.Escape) {
         this.resetCardForm()
         this.closeCardForm()
       }
@@ -117,7 +117,7 @@ class ModalCardView {
     this.overlayEl.classList.remove(Status.Open)
 
     // If card form is opened from detail modal
-    // When closing card form, the detail modal will be open for UX.
+    // When closing card form, the detail modal will be open for UX
     const isEditDetailModal = this.detailModalEl.getAttribute(HTMLAttribute.IsEdit)
 
     if (isEditDetailModal === Status.On) {

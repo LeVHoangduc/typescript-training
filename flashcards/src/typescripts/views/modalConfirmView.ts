@@ -29,9 +29,13 @@ class ModalConfirm {
   //----- EVENT LISTENER -----//
 
   /**
-   * Adds event listeners for the confirmation modal.
-   * @param {Function} deleteFlashcards - Function to delete a language.
-   * @param {Function} loadFlashcards - Function to update the language view.
+   * Adds an event listener to handle confirmation form submission for deleting flashcards or cards
+   *
+   * @param {Function} deleteFlashcards - Function to delete flashcards from the database
+   * @param {Function} loadFlashcards - Function to load flashcards after deletion
+   * @param {Function} deleteCard - Function to delete a card from the database
+   * @param {Function} loadCards - Function to load cards after card deletion
+   * @param {Function} resetCards - Function to reset card-related data
    */
   addEventConfirm = (
     deleteFlashcards: deleteFlashcards,
@@ -46,17 +50,23 @@ class ModalConfirm {
       let id = this.confirmFormEl.getAttribute(HTMLAttribute.DataID) as string
       let type = this.confirmFormEl.getAttribute(HTMLAttribute.Type)
 
-      // Send id to database
+      // Determine whether to delete flashcards or cards based on the type
       if (type === DataSources.Flashcards) {
+        // Delete flashcards from the database
         await deleteFlashcards(id)
 
+        // Load the updated flashcards and reset card-related data
         loadFlashcards()
         resetCards()
       } else {
+        // Delete a card from the database
         await deleteCard(id)
 
+        // Load cards for the current category
         loadCards(utilities.getCategoryCurrent())
       }
+
+      // Close the confirmation form
       this.endForm()
     })
   }
@@ -70,7 +80,7 @@ class ModalConfirm {
   // ---- METHOD ---- //
 
   /**
-   * Opens a confirmation dialog for flashcards or card deletion.
+   * Opens a confirmation dialog for flashcards or card deletion
    * @param itemDelete - Identify the item is deleted
    * @param type  - Get the type (e.g., "card", "flashcards")
    */

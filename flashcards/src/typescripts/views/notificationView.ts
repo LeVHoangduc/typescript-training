@@ -10,7 +10,7 @@ class NotificationView {
   }
 
   /**
-   * Display a notification message with a specific state and message.
+   * Display a notification message with a specific state and message
    * @param {string} state - The state of the notification ('success', 'error')
    * @param {string} message - The message content to be displayed in the notification
    */

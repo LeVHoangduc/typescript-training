@@ -33,8 +33,6 @@ export const ERROR_MESSAGE = {
  * Message for alert if the action be done successfully.
  */
 export const SUCCESS_MESSAGE = {
-  LOGIN_VALIDATION: 'Login successfully',
-
   ADD_CARD: 'Add card successfully',
   ADD_FLASHCARDS: 'Add flashcards successfully',
 

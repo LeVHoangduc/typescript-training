@@ -5,7 +5,6 @@ import Error from './errorView'
 
 type saveFlashcards = (flashcardsData: IFlashcards) => void
 type loadFlashcards = () => void
-
 type isValidation = (inputCheck: fieldCheck) => boolean
 
 class ModalFlashcardsView {
@@ -47,8 +46,9 @@ class ModalFlashcardsView {
   }
 
   /**
-   * Method to add an event listeners for saving and canceling the flashcards form.
-   * @param {Function} saveFlashcards - The function to save the flashcards data.
+   * Adds an event listener to handle the addition of new flashcards
+   * @param {Function} saveFlashcards - Function to save new flashcards
+   * @param {Function} loadFlashcards - Function to load flashcards after addition
    */
   addEventAddFlashcards = (saveFlashcards: saveFlashcards, loadFlashcards: loadFlashcards) => {
     const btnSave = this.formFlashcardsEl.btnSave
@@ -56,21 +56,25 @@ class ModalFlashcardsView {
     btnSave.addEventListener('click', async (e: MouseEvent) => {
       e.preventDefault()
 
+      // Extract flashcards data from the input field
       const flashcardsData: IFlashcards = {
         flashcards: this.formFlashcardsEl.flashcards.value.toLowerCase(),
       }
 
-      // Return a field result of check with regex
+      // Perform validation of the input data using a regular expression
       const inputCheck = this.validationForm.validationFlashcards(flashcardsData)
 
-      // Show error or pass in UI and performs save()
+      // Check whether validation passed and proceed accordingly
       const isValidation: boolean = this.isValidation(inputCheck)
 
       if (isValidation) {
+        // Save the new flashcards data to the database
         await saveFlashcards(flashcardsData)
 
+        // Load the updated list of flashcards
         loadFlashcards()
 
+        // Reset the flashcards form and close it
         this.resetFlashcardsForm()
         this.closeFlashcardsForm()
       }
@@ -97,7 +101,7 @@ class ModalFlashcardsView {
    *  isValid: true
    *  success: "Add flashcards successfully"
    * }
-   * @returns {Boolean} Whether the form is validated or not.
+   * @returns {Boolean} Whether the form is validated or not
    */
   isValidation: isValidation = (inputCheck: fieldCheck): boolean => {
     let isValid = true

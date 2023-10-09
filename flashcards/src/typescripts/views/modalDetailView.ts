@@ -77,8 +77,10 @@ class ModalDetailView {
   }
 
   /**
-   * Method to add an event listener for the edit button.
-   * @param {Function} getCardDetail - Function to fetch card details.
+   * Adds an event listener to handle the editing of a card.
+   * @param {Function} openCardModal - Function to open the card modal for editing.
+   * @param {Function} getCardDetail - Function to retrieve card details.
+   * @param {Function} setDataForm - Function to set data in the edit form for the card.
    */
   addEventEditListener = (
     openCardModal: openCardModal,
@@ -95,41 +97,57 @@ class ModalDetailView {
 
       if (cardID) {
         // Get card details for editing.
-        const getCardID = getCardDetail(cardID) as ICard
+        const cardDetails = getCardDetail(cardID) as ICard
 
-        // Load current data into the edit form.
-        setDataForm(getCardID, cardID)
+        // Load the current card data into the edit form.
+        setDataForm(cardDetails, cardID)
+
+        // Close the detail modal and set it to editing mode.
         this.detailModalEl.classList.remove(Status.Open)
-        // Set status is editing for modal detail
         this.detailModalEl.setAttribute(HTMLAttribute.IsEdit, Status.On)
       }
     })
   }
 
+  /**
+   * Opens the detail modal for a specific card and populates it with card details.
+   * @param {Function} getCardDetail - Function to retrieve card details.
+   * @param {HTMLElement} card - The card element for which to open the detail modal.
+   */
   openDetailModal = (getCardDetail: getCardDetail, card: HTMLElement) => {
+    // Retrieve card details based on the data-id attribute of the selected card.
     const cardData = getCardDetail(card.getAttribute(HTMLAttribute.DataID) as string) as ICard
 
+    // Populate the detail modal with the card data.
     this.setDataDetailModal(cardData)
+
+    // Set the status attribute to indicate that the detail modal is in search mode.
     this.detailModalEl.setAttribute(HTMLAttribute.IsSearch, Status.On)
+  }
+
+  /**
+   * Sets data for the detail modal by populating it with card details.
+   * @param {ICard} cardData - The card data to be displayed in the detail modal.
+   */
+  setDataDetailModal = (cardData: ICard) => {
+    // Load the data-id attribute for use in the confirmation form for deleting.
+    this.confirmFormEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
+
+    // Load the data-id attribute for the detail modal.
+    this.detailModalEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
+
+    // Populate the detail modal with card details.
+    this.wordEl.textContent = `${cardData.word}`
+    this.description.textContent = `${cardData.description}`
+
+    // Display the detail modal and overlay.
+    this.detailModalEl.classList.add(Status.Open)
+    this.overlayEl.classList.add(Status.Open)
   }
 
   closeDetailModal = () => {
     this.detailModalEl.classList.remove('open')
     this.overlayEl.classList.remove('open')
-  }
-
-  setDataDetailModal = (cardData: ICard) => {
-    // Load data-id to confirm form for deleting
-    this.confirmFormEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
-
-    // Load data to detail form
-    this.detailModalEl.setAttribute(HTMLAttribute.DataID, cardData.id as string)
-
-    this.wordEl.textContent = `${cardData.word}`
-    this.description.textContent = `${cardData.description}`
-
-    this.detailModalEl.classList.add(Status.Open)
-    this.overlayEl.classList.add(Status.Open)
   }
 }
 

@@ -17,6 +17,10 @@ class ProfileView {
 
   //----- EVENT LISTENER -----//
 
+  /**
+   * Adds an event listener to open the user profile
+   * @param {Function} openOverlaySecond - Function to open the second overlay
+   */
   addEventOpenProfileListener = (openOverlaySecond: openOverlaySecond) => {
     this.headerUserEl.addEventListener('click', () => {
       openOverlaySecond()
@@ -24,12 +28,19 @@ class ProfileView {
     })
   }
 
+  /**
+   * Adds an event listener to handle user logout
+   * @param {Function} closeOverlaySecond - Function to close the second overlay
+   */
   addEventLogOutListener = (closeOverlaySecond: closeOverlaySecond) => {
     this.logoutEl.addEventListener('click', () => {
       closeOverlaySecond()
       this.closeNavbar()
 
+      // Remove user data from local storage
       localStorageHelper.removeLocalStorage(DataSources.User)
+
+      // Redirect the user to the login page
       window.location.href = Path.Login
     })
   }

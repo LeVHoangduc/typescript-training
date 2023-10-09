@@ -27,22 +27,31 @@ class CardView {
 
   //----- EVENT LISTENER -----//
 
+  /**
+   * Attaches event listeners to handle delete button clicks within card content elements
+   * @param openConfirmModal - A function to open a confirmation modal dialog
+   */
   addEventDeleteListener = (openConfirmModal: openConfirmModal) => {
     this.cardContentEl = document.querySelectorAll('.card-list__content')!
 
     this.cardContentEl.forEach(card => {
+      // Add a click event listener to each card content element
       card.addEventListener('click', e => {
+        // Find the nearest ancestor with the class 'card-delete' to the clicked element
         const btnDeleteEl = (e.target as HTMLElement).closest('.card-delete')
 
+        // If a delete button element is found
         if (btnDeleteEl) {
+          // Extract values of relevant attributes from the parent element
           const itemDelete = btnDeleteEl?.parentElement?.getAttribute(HTMLAttribute.Item) as string
-
           const id = btnDeleteEl?.parentElement?.getAttribute(HTMLAttribute.DataID) as string
           const type = btnDeleteEl?.parentElement?.getAttribute(HTMLAttribute.Type) as string
 
+          // Set attributes on the confirmation form element
           this.confirmFormEl.setAttribute(HTMLAttribute.DataID, id)
           this.confirmFormEl.setAttribute(HTMLAttribute.Type, type)
 
+          // Trigger the provided openConfirmModal function with extracted data
           openConfirmModal(itemDelete, type)
         }
       })
@@ -50,8 +59,10 @@ class CardView {
   }
 
   /**
-   * Method to add an event listener for the edit button.
-   * @param {Function} getCardDetail - Function to fetch card details.
+   * Adds an event listener to handle edit button clicks within card content elements
+   * @param openCardForm - A function to open the card edit form
+   * @param getCardDetail - A function to fetch card details for editing
+   * @param setDataForm - A function to load current data into the edit form
    */
   addEventEditListener = (
     openCardForm: openCardForm,
@@ -59,13 +70,17 @@ class CardView {
     setDataForm: setDataForm
   ) => {
     this.cardContentEl.forEach(card => {
+      // Add a click event listener to each card content element
       card.addEventListener('click', e => {
+        // Find the nearest ancestor with the class 'card-edit' to the clicked element
         const btnEditEl = (e.target as HTMLElement).closest('.card-edit')
 
+        // If an edit button element is found
         if (btnEditEl) {
           // Show the edit modal
           openCardForm()
 
+          // Retrieve the card ID from the parent element's attribute
           const cardID = btnEditEl.parentElement?.getAttribute(HTMLAttribute.DataID)
 
           if (cardID) {
@@ -74,6 +89,8 @@ class CardView {
 
             // Load current data into the edit form
             setDataForm(getCardID, cardID)
+
+            // Close the detail modal if it's open
             this.detailModalEl.classList.remove(Status.Open)
           }
         }
@@ -84,30 +101,32 @@ class CardView {
   //----- RENDERING -----//
 
   /**
-   * Render the list of cards based on data from Models filtered by the specified category.
-   * @param {Function} cardList - A function that returns a Promise of card data.
-   * @param {String} category - The category of cards to be rendered.
-   * @returns {Boolean} - Returns true when rendering is complete.
+   * Renders a list of cards based on data from Models, filtered by the specified category
+   * @param getCardList - A function to retrieve the list of cards from Models
+   * @param category - The category of cards to be rendered
+   * @returns {Boolean}  Returns true when rendering is complete
    */
   renderCardList = (getCardList: cardList, category: string) => {
-    // Show empty or loading effect
+    // Retrieve card data, possibly showing an empty or loading effect
     const cardListData = getCardList()
 
-    // Clear existing card elements before loading new data
+    // Clear the existing card elements before loading new data
     this.cardListEl.innerHTML = DefaultValues.EmptyString
 
     // Filter and render cards based on the specified category
     const cards: ICard[] = cardListData.filter((card: ICard) => card.flashcards === category)
 
+    // Render each card in the filtered list
     cards.forEach(card => {
       this.renderCard(card)
     })
 
+    // Return true to indicate that rendering is complete
     return true
   }
 
   /**
-   * Render an individual card using a provided card object.
+   * Render an individual card using a provided card object
    * @param {Object} card - The card object containing information to be rendered.
    */
   renderCard = (card: ICard) => {

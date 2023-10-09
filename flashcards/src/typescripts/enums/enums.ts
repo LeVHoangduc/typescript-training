@@ -56,5 +56,9 @@ export const Action = {
   Update: 'Update',
   Create: 'Create',
   Previous: 'prev-slide',
+}
+
+export const KeyMap = {
   Escape: 'Escape',
+  Enter: 'Enter',
 }

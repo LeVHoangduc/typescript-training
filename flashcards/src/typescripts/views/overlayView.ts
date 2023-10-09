@@ -1,8 +1,8 @@
-import { Action, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
-import Error from './errorView'
+import { Action, DefaultValues, HTMLAttribute, KeyMap, Status } from '../enums/enums'
 
 type resetCardForm = () => void
 type resetFlashcardsForm = () => void
+
 class OverlayView {
   private overlayEl: HTMLElement
   private overlaySecondEl: HTMLElement
@@ -55,7 +55,7 @@ class OverlayView {
     resetCardForm: resetCardForm
   ) => {
     document.addEventListener('keydown', e => {
-      if (e.key === Action.Escape) {
+      if (e.key === KeyMap.Escape) {
         resetFlashcardsForm()
         resetCardForm()
         this.closeForm()
