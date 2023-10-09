@@ -35,7 +35,7 @@ h1 {
 }
 
 .text--gray {
-  color: var(--overlay-color);
+  color: var(--gray-color);
 }
 
 .text--transparent {
