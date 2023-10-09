@@ -3,6 +3,7 @@
   left: 50%;
   top: 50%;
   display: none;
+  max-width: 1140px;
   width: 90%;
   padding: 40px;
   background-color: var(--light-color);

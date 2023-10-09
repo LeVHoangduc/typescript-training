@@ -4,6 +4,7 @@
   top: 50%;
   display: none;
   width: 90%;
+  max-width: 1140px;
   padding: 40px;
   background-color: var(--light-color);
   border-radius: 16px;
