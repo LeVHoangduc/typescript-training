@@ -3,9 +3,9 @@ import { ICard } from '../models/cardModel'
 import Template from '../templates/templates'
 
 type searchCard = (searchData: string) => ICard[]
-type openOverlayError = () => void
+type openOverlaySecond = () => void
 type openDetailModal = (card: HTMLElement) => void
-type closeOverlayError = () => void
+type closeOverlaySecond = () => void
 
 class SearchView {
   private inputEl: HTMLInputElement
@@ -35,23 +35,23 @@ class SearchView {
     })
   }
 
-  addEventEnterListener = (searchCard: searchCard, openOverlayError: openOverlayError) => {
+  addEventEnterListener = (searchCard: searchCard, openOverlaySecond: openOverlaySecond) => {
     this.inputEl.addEventListener('keyup', e => {
       if (e.key === 'Enter') {
         this.handleSearchCard(searchCard)
-        openOverlayError()
+        openOverlaySecond()
       }
     })
   }
 
   addEventClickCardListener = (
     openDetailModal: openDetailModal,
-    closeOverlayError: closeOverlayError
+    closeOverlaySecond: closeOverlaySecond
   ) => {
     this.searchInformationEl.addEventListener('click', (e: Event) => {
       const cardContentEl = (e.target as HTMLElement).closest('.search-content') as HTMLElement
 
-      closeOverlayError()
+      closeOverlaySecond()
       openDetailModal(cardContentEl)
     })
   }

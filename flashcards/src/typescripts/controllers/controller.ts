@@ -38,9 +38,10 @@ class Controller {
     this.view.loginView.addEventLoginListener(this.isValidUser)
   }
 
-  // initLogout = () => {
-  //   this.view.logoutView.addEventLogOut()
-  // }
+  initProfileView = () => {
+    this.view.profileView.addEventOpenProfileListener(this.openOverlaySecond)
+    this.view.profileView.addEventLogOutListener(this.closeOverlaySecond)
+  }
 
   //-----       HOME CONTROLLER               -----//
 
@@ -56,6 +57,7 @@ class Controller {
       this.initModalConfirm()
 
       this.initOverLay()
+      this.initProfileView()
     }
   }
 
@@ -81,9 +83,9 @@ class Controller {
   //-----   SEARCH CONTROLLER         -----//
   initSearchView = () => {
     this.view.searchView.addEventSearchCardListener(this.searchCard)
-    this.view.searchView.addEventEnterListener(this.searchCard, this.openOverlayError)
+    this.view.searchView.addEventEnterListener(this.searchCard, this.openOverlaySecond)
     this.view.searchView.addEventInputListener()
-    this.view.searchView.addEventClickCardListener(this.openDetailModal, this.closeOverlayError)
+    this.view.searchView.addEventClickCardListener(this.openDetailModal, this.closeOverlaySecond)
   }
 
   //-----   MODAL CONTROLLER          -----//
@@ -128,8 +130,7 @@ class Controller {
 
   initOverLay = () => {
     this.view.overlayView.addEventClickOutSide(this.resetFlashcardsForm, this.resetCardForm)
-    this.view.overlayView.addEventCloseFormListener(this.resetFlashcardsForm, this.resetCardForm)
-    this.view.overlayView.addEventEscapeListener()
+    this.view.overlayView.addEventEscapeListener(this.resetFlashcardsForm, this.resetCardForm)
   }
   //-----     USER METHODS           -----//
   isValidUser = (user: IUser) => {
@@ -288,12 +289,12 @@ class Controller {
 
   //-----      OVERLAY METHODS        -----//
 
-  openOverlayError = () => {
-    this.view.overlayView.openOverlayError()
+  openOverlaySecond = () => {
+    this.view.overlayView.openOverlaySecond()
   }
 
-  closeOverlayError = () => {
-    this.view.overlayView.closeOverlayError()
+  closeOverlaySecond = () => {
+    this.view.overlayView.closeOverlaySecond()
   }
 }
 

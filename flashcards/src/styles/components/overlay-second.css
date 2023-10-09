@@ -1,4 +1,4 @@
-.overlay-error {
+.overlay-second {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,6 +7,6 @@
   display: none;
 }
 
-.overlay-error.open {
+.overlay-second.open {
   display: block;
 }

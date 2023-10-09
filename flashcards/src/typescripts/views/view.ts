@@ -1,13 +1,17 @@
-import CardView from './cardView'
 import FlashcardsView from './flashcardsView'
-import LoginView from './loginView'
-import ModalCardView from './modalCardView'
-import ModalConfirm from './modalConfirmView'
-import ModalDetailView from './modalDetailView'
-import ModalFlashcardsView from './modalFlashcardsView'
-import NotificationView from './notificationView'
-import OverlayView from './overlayView'
+import CardView from './cardView'
 import SearchView from './searchView'
+
+import ModalFlashcardsView from './modalFlashcardsView'
+import ModalCardView from './modalCardView'
+import ModalDetailView from './modalDetailView'
+import ModalConfirm from './modalConfirmView'
+
+import ProfileView from './profileView'
+import OverlayView from './overlayView'
+import NotificationView from './notificationView'
+
+import LoginView from './loginView'
 
 class View {
   flashcardsView: FlashcardsView
@@ -19,10 +23,11 @@ class View {
   modalDetailView: ModalDetailView
   modalConfirmView: ModalConfirm
 
-  loginView: LoginView
-
+  profileView: ProfileView
   overlayView: OverlayView
   notificationView: NotificationView
+
+  loginView: LoginView
 
   constructor() {
     this.flashcardsView = new FlashcardsView()
@@ -30,14 +35,15 @@ class View {
     this.searchView = new SearchView()
 
     this.modalFlashcardsView = new ModalFlashcardsView()
-    this.modalDetailView = new ModalDetailView()
     this.modalCardView = new ModalCardView()
+    this.modalDetailView = new ModalDetailView()
     this.modalConfirmView = new ModalConfirm()
 
-    this.loginView = new LoginView()
-
+    this.profileView = new ProfileView()
     this.overlayView = new OverlayView()
     this.notificationView = new NotificationView()
+
+    this.loginView = new LoginView()
   }
 }
 

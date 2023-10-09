@@ -4,9 +4,8 @@ import Error from './errorView'
 type resetCardForm = () => void
 type resetFlashcardsForm = () => void
 class OverlayView {
-  private error: Error
   private overlayEl: HTMLElement
-  private overlayErrorEl: HTMLElement
+  private overlaySecondEl: HTMLElement
 
   private flashcardsFormEl: HTMLFormElement
   private cardFormEl: HTMLFormElement
@@ -16,9 +15,9 @@ class OverlayView {
   private searchInformationEl: HTMLElement
   private searchInputEl: HTMLInputElement
 
-  constructor() {
-    this.error = new Error()
+  private navbarUserEl: HTMLElement
 
+  constructor() {
     this.flashcardsFormEl = document.querySelector('.modal-flashcards')!
     this.cardFormEl = document.querySelector('.modal-card')!
     this.confirmFormEl = document.querySelector('.modal-confirm')!
@@ -28,7 +27,9 @@ class OverlayView {
     this.searchInputEl = document.querySelector('.header__search__input')!
 
     this.overlayEl = document.querySelector('.overlay')!
-    this.overlayErrorEl = document.querySelector('.overlay-error')!
+    this.overlaySecondEl = document.querySelector('.overlay-second')!
+
+    this.navbarUserEl = document.querySelector('.header__navbar')!
   }
 
   //----- EVENT LISTENER -----//
@@ -43,12 +44,13 @@ class OverlayView {
       this.closeForm()
     })
 
-    this.overlayErrorEl.addEventListener('click', () => {
+    this.overlaySecondEl.addEventListener('click', () => {
+      this.closeNavbar()
       this.closeSearch()
     })
   }
 
-  addEventCloseFormListener = (
+  addEventEscapeListener = (
     resetFlashcardsForm: resetFlashcardsForm,
     resetCardForm: resetCardForm
   ) => {
@@ -57,14 +59,8 @@ class OverlayView {
         resetFlashcardsForm()
         resetCardForm()
         this.closeForm()
-      }
-    })
-  }
-
-  addEventEscapeListener = () => {
-    document.addEventListener('keydown', e => {
-      if (e.key === Action.Escape) {
         this.closeSearch()
+        this.closeOverlaySecond()
       }
     })
   }
@@ -72,15 +68,12 @@ class OverlayView {
   //----- METHOD -----//
 
   closeForm = () => {
-    // if (this.detailModalEl) {
-    //   this.confirmFormEl.removeAttribute('data-id')
-    // }
-
     this.flashcardsFormEl.classList.remove(Status.Open)
     this.cardFormEl.classList.remove(Status.Open)
     this.confirmFormEl.classList.remove(Status.Open)
 
     this.detailModalEl.classList.remove(Status.Open)
+    this.navbarUserEl.classList.remove(Status.Open)
     this.overlayEl.classList.remove(Status.Open)
 
     const isEditDetailModal = this.detailModalEl.getAttribute(HTMLAttribute.IsEdit)
@@ -94,22 +87,26 @@ class OverlayView {
 
     if (isSearchDetailModal === Status.On) {
       this.detailModalEl.removeAttribute(HTMLAttribute.IsSearch)
-      this.overlayErrorEl.classList.add(Status.Open)
+      this.overlaySecondEl.classList.add(Status.Open)
     }
   }
 
   closeSearch = () => {
-    this.searchInformationEl.classList.remove('open')
-    this.overlayErrorEl.classList.remove('open')
+    this.searchInformationEl.classList.remove(Status.Open)
+    this.overlaySecondEl.classList.remove(Status.Open)
     this.searchInputEl.value = DefaultValues.EmptyString
   }
 
-  openOverlayError = () => {
-    this.overlayErrorEl.classList.add('open')
+  closeNavbar = () => {
+    this.navbarUserEl.classList.remove(Status.Open)
   }
 
-  closeOverlayError = () => {
-    this.overlayErrorEl.classList.remove('open')
+  openOverlaySecond = () => {
+    this.overlaySecondEl.classList.add(Status.Open)
+  }
+
+  closeOverlaySecond = () => {
+    this.overlaySecondEl.classList.remove(Status.Open)
   }
 }
 
