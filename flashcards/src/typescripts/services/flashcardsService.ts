@@ -10,9 +10,10 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
   }
 
   init = async (): Promise<void> => {
-    const data = await this.getList()
-
-    this.flashcards = data.map(flashcard => new FlashcardsModel(flashcard))
+    try {
+      const data = await this.getList()
+      this.flashcards = data.map(flashcard => new FlashcardsModel(flashcard))
+    } catch (error) {}
   }
 
   getFlashcards = (): FlashcardsModel[] => this.flashcards
@@ -27,11 +28,13 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
     )
 
     if (!isExit) {
-      // post new flashcards to database
-      await this.postItem(newFLashcards)
+      try {
+        // post new flashcards to database
+        await this.postItem(newFLashcards)
 
-      // add new flashcards to model
-      this.flashcards.push(newFLashcards)
+        // add new flashcards to model
+        this.flashcards.push(newFLashcards)
+      } catch (error) {}
     }
 
     return isExit
@@ -43,9 +46,10 @@ class FLashcardsService extends ApiService<FlashcardsModel> {
    * @returns {Promise<Boolean>} - A promise that resolves with the result of the deletion.
    */
   deleteFlashcards = async (flashcardsID: string): Promise<void> => {
-    await this.deleteItem(flashcardsID)
-
-    this.flashcards = this.flashcards.filter(flashcards => flashcards.id != flashcardsID)
+    try {
+      await this.deleteItem(flashcardsID)
+      this.flashcards = this.flashcards.filter(flashcards => flashcards.id != flashcardsID)
+    } catch (error) {}
   }
 }
 

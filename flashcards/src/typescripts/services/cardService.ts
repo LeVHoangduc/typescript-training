@@ -11,8 +11,10 @@ class CardService extends ApiService<CardModel> {
   }
 
   init = async (): Promise<void> => {
-    const data = await this.getList()
-    this.cards = data.map(card => new CardModel(card))
+    try {
+      const data = await this.getList()
+      this.cards = data.map(card => new CardModel(card))
+    } catch (error) {}
   }
 
   getCardList = (): CardModel[] => this.cards
@@ -26,28 +28,34 @@ class CardService extends ApiService<CardModel> {
 
   addCard = async (cardData: ICard): Promise<void> => {
     const newCard = new CardModel(cardData)
-    await this.postItem(newCard)
+    try {
+      await this.postItem(newCard)
 
-    this.cards.push(newCard)
+      this.cards.push(newCard)
+    } catch (error) {}
   }
 
   editCard = async (cardData: ICard): Promise<void> => {
     const card: CardModel = new CardModel(cardData)
 
-    await this.editItem(card.id, card)
+    try {
+      await this.editItem(card.id, card)
 
-    this.cards = this.cards.map(item => {
-      if (item.id === card.id) {
-        return card
-      }
-      return item
-    })
+      this.cards = this.cards.map(item => {
+        if (item.id === card.id) {
+          return card
+        }
+        return item
+      })
+    } catch (error) {}
   }
 
   deleteCard = async (id: string): Promise<void> => {
-    await this.deleteItem(id)
+    try {
+      await this.deleteItem(id)
 
-    this.cards = this.cards.filter(card => card.id !== id)
+      this.cards = this.cards.filter(card => card.id !== id)
+    } catch (error) {}
   }
 
   searchCard = (searchData: string) => {
