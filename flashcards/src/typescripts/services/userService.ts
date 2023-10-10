@@ -12,10 +12,8 @@ class UserService extends ApiService<UserModel> {
   }
 
   init = async (): Promise<void> => {
-    try {
-      const data = await this.getList()
-      this.users = data.map(user => new UserModel(user))
-    } catch (error) {}
+    const data = await this.getList()
+    this.users = data.map(user => new UserModel(user))
   }
 
   getUserList = (): UserModel[] => this.users
