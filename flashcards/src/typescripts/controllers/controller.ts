@@ -44,6 +44,7 @@ class Controller {
     if (utilities.saveStatusLogin()) {
       await this.initService()
       this.initFlashcardsView()
+      this.initCardView()
       this.initSearchView()
 
       this.initModalFlashcardsCardView()
@@ -57,6 +58,7 @@ class Controller {
   }
 
   //-----   SERVICE CONTROLLER        -----//
+
   initService = async (): Promise<void> => {
     try {
       await this.service.init()
@@ -65,7 +67,7 @@ class Controller {
     }
   }
 
-  //-----   FLASHCARDS CONTROLLER     -----//
+  //-----   PROFILE CONTROLLER        -----//
 
   initProfileView = () => {
     this.view.profileView.addEventOpenProfileListener(this.openOverlaySecond)
@@ -81,7 +83,14 @@ class Controller {
     this.view.flashcardsView.addEventDeleteFlashcards(this.openConfirmModal)
   }
 
+  //-----   CARD CONTROLLER           -----//
+
+  initCardView = () => {
+    this.loadCards()
+  }
+
   //-----   SEARCH CONTROLLER         -----//
+
   initSearchView = () => {
     this.view.searchView.addEventSearchCardListener(this.searchCard)
     this.view.searchView.addEventEnterListener(this.searchCard, this.openOverlaySecond)
@@ -129,6 +138,7 @@ class Controller {
   }
 
   //-----     OVERLAY CONTROLLER     -----//
+
   initOverLay = () => {
     this.view.overlayView.addEventClickOutSide(this.resetFlashcardsForm, this.resetCardForm)
     this.view.overlayView.addEventEscapeListener(this.resetFlashcardsForm, this.resetCardForm)
