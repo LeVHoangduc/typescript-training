@@ -20,8 +20,6 @@
 .profile__image {
   width: 134px;
   height: 101px;
-  margin-bottom: 16px;
-  cursor: pointer;
 }
 
 .profile__avatar {
@@ -34,7 +32,7 @@
   background-color: var(--secondary-color);
 }
 
-.profile__avatar img {
+.profile__photo {
   position: absolute;
   top: 0;
   left: 0;
