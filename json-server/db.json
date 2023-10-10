@@ -21,63 +21,65 @@
       "id": "6427b07c-c8ef-46e8-9b85-239580ca3qr5",
       "flashcards": "korea",
       "type": "noun",
-      "word": "dasdas",
-      "translation": "xin chao"
+      "word": "안녕하세요",
+      "translation": "Hello",
+      "description": "It's used when meeting someone to say hello"
     },
     {
       "id": "6427b07c-c8ef-46e8-9b85-239580ca3qr5",
-      "flashcards": "laos",
+      "flashcards": "korea",
       "type": "noun",
-      "word": "11232",
-      "translation": "xin chao"
+      "word": "먹다 ",
+      "translation": "Eat",
+      "description": "It's used to describe the action of consuming food"
     },
     {
       "id": "e2a9edbe-1962-461b-8b1b-8ea6c7dcb45d",
-      "flashcards": "france",
-      "type": "verb",
-      "word": "Ni Hao Ma ",
-      "translation": "das",
-      "description": "mdjasdasmd"
+      "flashcards": "korea",
+      "type": "Noun",
+      "word": "사랑  ",
+      "translation": "Love",
+      "description": "It represents the deep emotional affection between people"
     },
     {
       "id": "c1109724-117d-450e-9a1a-3c9052984ec3",
       "flashcards": "english",
-      "type": "adverb",
-      "word": "HELLO",
-      "translation": "dsada",
-      "description": "undefined"
+      "type": "Noun ",
+      "word": "Hello",
+      "translation": "Xin chào",
+      "description": "Đây là cách thân thiện và lịch lãm để nói xin chào"
     },
     {
       "id": "459b049f-6866-4efe-95a3-a6da9b820451",
-      "flashcards": "france",
-      "type": "verb",
-      "word": "dasa",
-      "translation": "đasa",
-      "description": "đasadasad"
+      "flashcards": "english",
+      "type": "Noun",
+      "word": "Love",
+      "translation": "Tình yêu",
+      "description": "tình yêu đối với sở thích và đam mê"
     },
     {
       "id": "93e0bda3-17b2-49e4-b8ad-c6356fcf7e52",
-      "flashcards": "korea",
-      "type": "adjective",
-      "word": "Hello",
-      "translation": "dsad",
-      "description": "dasdas"
+      "flashcards": "france",
+      "type": "noun",
+      "word": "Bonjour",
+      "translation": "Hello",
+      "description": "It's used when meeting someone to say hello"
     },
     {
       "id": "25ae304b-88f3-4e55-8e9c-1b81b50c8985",
-      "flashcards": "english",
-      "type": "verb",
-      "word": "helli",
-      "translation": "dasda",
-      "description": "dsadas"
+      "flashcards": "france",
+      "type": "noun",
+      "word": "Amour",
+      "translation": "Love",
+      "description": "It represents the deep emotional affection between people"
     },
     {
       "id": "8e75a257-cb51-4e56-b042-51f84b15cfec",
-      "flashcards": "english",
-      "type": "adjective",
-      "word": "bunhello",
-      "translation": "dadas",
-      "description": "dada"
+      "flashcards": "spanish",
+      "type": "noun",
+      "word": "Hola",
+      "translation": "Hello",
+      "description": "It's used to greet someone in a friendly and welcoming manner"
     }
   ],
   "flashcards": [
@@ -87,7 +89,7 @@
     },
     {
       "id": "d8b3e6ea-695b-4cb7-9628-9f98d1291dec",
-      "flashcards": "laos"
+      "flashcards": "spanish"
     },
     {
       "id": "69e3c0b7-1fad-482b-908d-214d5d753827",
@@ -99,7 +101,7 @@
     },
     {
       "id": "473ee90f-982d-4796-b07a-4f5c64ddc01c",
-      "flashcards": "bun"
+      "flashcards": "china"
     }
   ]
 }
