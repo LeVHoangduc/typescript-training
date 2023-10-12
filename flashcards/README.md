@@ -41,7 +41,7 @@ List of features need to work on:
   - Show the card detail as a popup
 - Flashcards
   - Create flashcards
-  - Archive the language
+  - Archive flashcards
   - Filter cards follow flashcards
   - Delete flashcards
 
