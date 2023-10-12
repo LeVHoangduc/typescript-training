@@ -49,7 +49,7 @@ class ValidationForm {
 
     for (const key in cardCheck) {
       const value = cardCheck[key]
-      console.log(value)
+
       let isValidField = REGEX.CONTENT.test(value)
 
       if (value.trim() === DefaultValues.EmptyString) {
