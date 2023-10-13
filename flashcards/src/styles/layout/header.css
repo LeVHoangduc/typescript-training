@@ -3,6 +3,10 @@
   background-color: var(--primary-color);
 }
 
+.header__title {
+  cursor: pointer;
+}
+
 .header__content {
   display: flex;
   align-items: center;

@@ -1,5 +1,5 @@
-import { ApiRequest } from '../enums/enums'
 import API_BASE_URL from '../constants/api'
+import { ApiRequest } from '../enums/enums'
 
 class ApiService<T> {
   private baseUrl: string

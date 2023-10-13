@@ -1,4 +1,4 @@
-import { DefaultValues, Path } from '../enums/enums'
+import { Path } from '../enums/enums'
 import CardModel, { ICard } from '../models/cardModel'
 import ApiService from './apiService'
 
@@ -53,7 +53,7 @@ class CardService extends ApiService<CardModel> {
   searchCard = (searchData: string) => {
     const cardData = this.cards.filter(card => card.word.toLowerCase().includes(searchData))
 
-    return searchData === DefaultValues.EmptyString ? DefaultValues.EmptyArray : cardData
+    return searchData === DEFAULT_VALUES.EMPTY_STRING ? DEFAULT_VALUES.EMPTY_ARRAY : cardData
   }
 }
 

@@ -1,4 +1,5 @@
-import { DefaultValues, KeyMap } from '../enums/enums'
+import { DEFAULT_VALUES } from '../constants/defaultValues'
+import { KeyMap } from '../enums/enums'
 import { ICard } from '../models/cardModel'
 import Template from '../templates/templates'
 
@@ -35,7 +36,7 @@ class SearchView {
     this.inputEl.addEventListener('input', (e: Event) => {
       const typedValue: string = (e.target as HTMLInputElement).value
 
-      if (typedValue === DefaultValues.EmptyString) {
+      if (typedValue === DEFAULT_VALUES.EMPTY_STRING) {
         this.searchInformationEl.classList.remove('open')
       }
     })
@@ -84,7 +85,7 @@ class SearchView {
     this.renderFindCard(isCard)
 
     // Show the search information element if the input is not empty
-    if (data !== DefaultValues.EmptyString) {
+    if (data !== DEFAULT_VALUES.EMPTY_STRING) {
       this.searchInformationEl.classList.add('open')
     }
   }
@@ -95,7 +96,7 @@ class SearchView {
    */
   renderFindCard = (cards: ICard[]) => {
     // Clear the content of the search information element
-    this.searchInformationEl.innerHTML = DefaultValues.EmptyString
+    this.searchInformationEl.innerHTML = DEFAULT_VALUES.EMPTY_STRING
 
     // If no cards were found, render an error message
     if (cards.length === 0) {

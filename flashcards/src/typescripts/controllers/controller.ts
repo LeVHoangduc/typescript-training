@@ -1,5 +1,6 @@
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/constants'
-import { DataSources, DefaultValues, Path, RequestState } from '../enums/enums'
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/messages'
+import { DEFAULT_VALUES } from '../constants/defaultValues'
+import { DataSources, Path, RequestState } from '../enums/enums'
 import { localStorageHelper } from '../helpers/localStorageHelper'
 import { utilities } from '../helpers/utilities'
 import { ICard } from '../models/cardModel'
@@ -286,7 +287,7 @@ class Controller {
    * @param {string} category - The category for which to load cards.
    * @returns {boolean}  Returns true if cards are successfully loaded, otherwise false.
    */
-  loadCards = (category: string = DefaultValues.Category) => {
+  loadCards = (category: string = DEFAULT_VALUES.CATEGORY) => {
     // view receive category and render as follow category
 
     this.view.cardView.renderCardList(this.getCardList, category)

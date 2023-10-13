@@ -1,6 +1,7 @@
-import { DefaultValues, Path } from '../enums/enums'
+import { DEFAULT_VALUES } from '../constants/defaultValues'
+import { Path } from '../enums/enums'
 import { IUser } from '../models/userModel'
-import ValidationForm, { fieldCheck } from '../validation/validationForm'
+import ValidationForm, { fieldCheck } from '../validations/validationForm'
 import Error from './errorView'
 
 type isValidUser = (user: IUser) => boolean
@@ -52,8 +53,8 @@ class LoginView {
   //----- METHOD -----//
 
   resetLoginForm = () => {
-    this.loginFormEl.email.value = DefaultValues.EmptyString
-    this.loginFormEl.password.value = DefaultValues.EmptyString
+    this.loginFormEl.email.value = DEFAULT_VALUES.EMPTY_STRING
+    this.loginFormEl.password.value = DEFAULT_VALUES.EMPTY_STRING
   }
 
   /**

@@ -1,4 +1,5 @@
-import { Action, DefaultValues, HTMLAttribute, KeyMap, Status } from '../enums/enums'
+import { DEFAULT_VALUES } from '../constants/defaultValues'
+import { HTMLAttribute, KeyMap, Status } from '../enums/enums'
 
 type resetCardForm = () => void
 type resetFlashcardsForm = () => void
@@ -94,7 +95,7 @@ class OverlayView {
   closeSearch = () => {
     this.searchInformationEl.classList.remove(Status.Open)
     this.overlaySecondEl.classList.remove(Status.Open)
-    this.searchInputEl.value = DefaultValues.EmptyString
+    this.searchInputEl.value = DEFAULT_VALUES.EMPTY_STRING
   }
 
   closeNavbar = () => {

@@ -1,5 +1,6 @@
-import { REGEX, MESSAGE } from '../constants/constants'
-import { DefaultValues, FieldNames } from '../enums/enums'
+import { MESSAGE } from '../constants/messages'
+import { REGEX } from '../constants/regex'
+import { FieldNames } from '../enums/enums'
 import { ICard } from '../models/cardModel'
 import { IFlashcards } from '../models/flashcardsModels'
 import { IUser } from '../models/userModel'
@@ -20,7 +21,7 @@ class ValidationForm {
 
     let isValidField = REGEX.FLASHCARDS.test(flashcardsValue)
 
-    if (flashcardsValue.trim() === DefaultValues.EmptyString) {
+    if (flashcardsValue.trim() === DEFAULT_VALUES.EMPTY_STRING) {
       fieldCheck = {
         isValid: false,
         message: MESSAGE.CONTENT_REQUIRED,
@@ -52,7 +53,7 @@ class ValidationForm {
 
       let isValidField = REGEX.CONTENT.test(value)
 
-      if (value.trim() === DefaultValues.EmptyString) {
+      if (value.trim() === DEFAULT_VALUES.EMPTY_STRING) {
         fieldCheck.push({
           field: key,
           isValid: false,
@@ -86,8 +87,8 @@ class ValidationForm {
       const value = userCheck[key]
 
       let isValidField = true
-      let messageRequired = DefaultValues.EmptyString
-      let messageInvalid = DefaultValues.EmptyString
+      let messageRequired = DEFAULT_VALUES.EMPTY_STRING
+      let messageInvalid = DEFAULT_VALUES.EMPTY_STRING
 
       if (key === FieldNames.Email) {
         isValidField = REGEX.EMAIL.test(value)
@@ -100,7 +101,7 @@ class ValidationForm {
         messageInvalid = MESSAGE.INVALID_PASSWORD
       }
 
-      if (value.trim() === DefaultValues.EmptyString) {
+      if (value.trim() === DEFAULT_VALUES.EMPTY_STRING) {
         fieldCheck.push({
           field: key,
           isValid: false,

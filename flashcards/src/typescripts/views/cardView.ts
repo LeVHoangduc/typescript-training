@@ -1,4 +1,5 @@
-import { DataSources, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
+import { DEFAULT_VALUES } from '../constants/defaultValues'
+import { DataSources, HTMLAttribute, Status } from '../enums/enums'
 import CardModel, { ICard } from '../models/cardModel'
 import Template from '../templates/templates'
 
@@ -111,7 +112,7 @@ class CardView {
     const cardListData = getCardList()
 
     // Clear the existing card elements before loading new data
-    this.cardListEl.innerHTML = DefaultValues.EmptyString
+    this.cardListEl.innerHTML = DEFAULT_VALUES.EMPTY_STRING
 
     // Filter and render cards based on the specified category
     const cards: ICard[] = cardListData.filter((card: ICard) => card.flashcards === category)
@@ -141,7 +142,7 @@ class CardView {
 
   resetCards = () => {
     this.titleEl.textContent = DataSources.Flashcards
-    this.cardListEl.innerHTML = DefaultValues.EmptyString
+    this.cardListEl.innerHTML = DEFAULT_VALUES.EMPTY_STRING
   }
 }
 

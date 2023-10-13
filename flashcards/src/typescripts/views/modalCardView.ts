@@ -1,6 +1,7 @@
-import { Action, DefaultValues, HTMLAttribute, KeyMap, Status } from '../enums/enums'
+import { DEFAULT_VALUES } from './../constants/defaultValues'
+import { Action, HTMLAttribute, KeyMap, Status } from '../enums/enums'
 import { ICard } from '../models/cardModel'
-import ValidationForm, { fieldCheck } from '../validation/validationForm'
+import ValidationForm, { fieldCheck } from '../validations/validationForm'
 import Error from './errorView'
 
 type saveCard = (cardData: ICard) => Promise<void>
@@ -136,7 +137,7 @@ class ModalCardView {
 
       this.error.clearError(inputEl, errorEl)
 
-      input.value = DefaultValues.EmptyString
+      input.value = DEFAULT_VALUES.EMPTY_STRING
     })
 
     this.cardFormTitleEl.textContent = `Create your card`

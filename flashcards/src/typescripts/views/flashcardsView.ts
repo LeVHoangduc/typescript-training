@@ -1,4 +1,5 @@
-import { Action, DefaultValues, HTMLAttribute, Status } from '../enums/enums'
+import { DEFAULT_VALUES } from './../constants/defaultValues'
+import { Action, HTMLAttribute, Status } from '../enums/enums'
 import FlashcardsModel from '../models/flashcardsModels'
 import Template from '../templates/templates'
 
@@ -89,8 +90,8 @@ class FlashcardsView {
     const flashcardsList: FlashcardsModel[] = getFlashcardsList()
 
     // Clear the existing content in the flashcards list and card form
-    this.flashcardslistEl.innerHTML = DefaultValues.EmptyString
-    this.cardFormEl.flashcards.innerHTML = DefaultValues.EmptyString
+    this.flashcardslistEl.innerHTML = DEFAULT_VALUES.EMPTY_STRING
+    this.cardFormEl.flashcards.innerHTML = DEFAULT_VALUES.EMPTY_STRING
 
     flashcardsList.forEach((flashcards: FlashcardsModel) => {
       this.renderFlashcards(flashcards)

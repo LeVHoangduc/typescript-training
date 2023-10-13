@@ -1,64 +1,58 @@
-export const ApiRequest = {
-  Get: 'GET',
-  Post: 'POST',
-  Delete: 'DELETE',
-  Patch: 'PATCH',
+export enum ApiRequest {
+  Get = 'GET',
+  Post = 'POST',
+  Delete = 'DELETE',
+  Patch = 'PATCH',
 }
 
-export const DefaultValues = {
-  EmptyString: '',
-  EmptyArray: [],
-  Category: 'english',
+export enum Path {
+  Flashcards = '/flashcards',
+  Card = '/card',
+  User = '/user',
+  Home = 'home.html',
+  Root = '/',
+  Login = '/index.html',
 }
 
-export const Path = {
-  Flashcards: '/flashcards',
-  Card: '/card',
-  User: '/user',
-  Home: 'home.html',
-  Root: '/',
-  Login: '/index.html',
+export enum DataSources {
+  User = 'user',
+  Card = 'card',
+  Flashcards = 'flashcards',
 }
 
-export const DataSources = {
-  User: 'user',
-  Card: 'card',
-  Flashcards: 'flashcards',
+export enum FieldNames {
+  Email = 'email',
+  Password = 'password',
 }
 
-export const FieldNames = {
-  Email: 'email',
-  Password: 'password',
+export enum HTMLAttribute {
+  DataID = 'data-id',
+  Type = 'type',
+  Item = 'item',
+  IsEdit = 'isEdit',
+  IsSearch = 'isSearch',
 }
 
-export const HTMLAttribute = {
-  DataID: 'data-id',
-  Type: 'type',
-  Item: 'item',
-  IsEdit: 'isEdit',
-  IsSearch: 'isSearch',
+export enum Status {
+  Active = 'active',
+  Inactive = 'inactive',
+  Open = 'open',
+  Error = 'error',
+  On = 'on',
 }
 
-export const Status = {
-  Active: 'active',
-  Inactive: 'inactive',
-  Open: 'open',
-  Error: 'error',
-  On: 'on',
+export enum RequestState {
+  Success = 'success',
+  Failed = 'failed',
 }
 
-export const RequestState = {
-  Success: 'success',
-  Failed: 'failed',
+export enum Action {
+  Update = 'Update',
+  Create = 'Create',
+  Previous = 'prev-slide',
 }
 
-export const Action = {
-  Update: 'Update',
-  Create: 'Create',
-  Previous: 'prev-slide',
-}
-
-export const KeyMap = {
-  Escape: 'Escape',
-  Enter: 'Enter',
+export enum KeyMap {
+  Escape = 'Escape',
+  Enter = 'Enter',
 }

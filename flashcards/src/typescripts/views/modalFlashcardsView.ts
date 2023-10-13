@@ -1,6 +1,7 @@
-import { DefaultValues, Status } from '../enums/enums'
+import { DEFAULT_VALUES } from './../constants/defaultValues'
+import { Status } from './../enums/enums'
 import { IFlashcards } from '../models/flashcardsModels'
-import ValidationForm, { fieldCheck } from '../validation/validationForm'
+import ValidationForm, { fieldCheck } from '../validations/validationForm'
 import Error from './errorView'
 
 type saveFlashcards = (flashcardsData: IFlashcards) => void
@@ -86,7 +87,7 @@ class ModalFlashcardsView {
     const errorEl = inputEl.nextElementSibling as HTMLElement
 
     this.error.clearError(inputEl, errorEl)
-    this.formFlashcardsEl.flashcards.value = DefaultValues.EmptyString
+    this.formFlashcardsEl.flashcards.value = DEFAULT_VALUES.EMPTY_STRING
   }
 
   closeFlashcardsForm = () => {
